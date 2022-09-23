@@ -15,28 +15,12 @@ rule all:
     input:
         variant_count_files,
         rules.check_adequate_variant_counts.output.passed,
-        # antibody escape output
-        prob_escape_files,
-        expand(
-            rules.fit_polyclonal.output.pickle,
-            antibody_selection_group=antibody_selections["selection_group"].unique(),
-        ),
-        # functional effects of mutations output
-        func_score_files,
-        expand(
-            rules.fit_globalepistasis.output.muteffects_latent,
-            func_selection=func_selections["selection_name"],
-        ),
-        expand(
-            rules.fit_globalepistasis.output.muteffects_observed,
-            func_selection=func_selections["selection_name"],
-        ),
+        antibody_escape_files,
         (
             [config["muteffects_observed"], config["muteffects_latent"]]
             if len(func_selections)
             else []
         ),
-        # HTML documentation output
         config["docs"],
 
 
@@ -45,6 +29,7 @@ rule site_numbering_map:
     """Map sequential numbering of protein in experiments to standard reference."""
     input:
         prot=config["gene_sequence_protein"],
+        reference_site_regions=config["reference_site_regions"],
     output:
         reference="results/site_numbering/numbering_reference.fa",
         alignment="results/site_numbering/alignment.fa",
