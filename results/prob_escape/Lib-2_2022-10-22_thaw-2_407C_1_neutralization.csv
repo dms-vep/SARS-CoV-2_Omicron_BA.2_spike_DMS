@@ -1,0 +1,16 @@
+library,antibody_sample,no-antibody_sample,n_aa_substitutions,antibody_neut_standard_count,no-antibody_neut_standard_count,antibody_count,no-antibody_count,prob_escape_uncensored,prob_escape
+Lib-2,2022-10-22_thaw-2_antibody_407C_0.00129_1,2022-10-22_thaw-2_no-antibody_control_1,0,34560,41132,3380974,12156106,0.331,0.331
+Lib-2,2022-10-22_thaw-2_antibody_407C_0.00129_1,2022-10-22_thaw-2_no-antibody_control_1,1,34560,41132,4528381,16385459,0.3289,0.3289
+Lib-2,2022-10-22_thaw-2_antibody_407C_0.00129_1,2022-10-22_thaw-2_no-antibody_control_1,2,34560,41132,3574121,12941088,0.3287,0.3287
+Lib-2,2022-10-22_thaw-2_antibody_407C_0.00129_1,2022-10-22_thaw-2_no-antibody_control_1,3,34560,41132,1919055,6909863,0.3305,0.3305
+Lib-2,2022-10-22_thaw-2_antibody_407C_0.00129_1,2022-10-22_thaw-2_no-antibody_control_1,4,34560,41132,1283288,4379771,0.3487,0.3487
+Lib-2,2022-10-22_thaw-2_antibody_407C_0.00516_1,2022-10-22_thaw-2_no-antibody_control_1,0,43578,41132,2875401,12156106,0.2233,0.2233
+Lib-2,2022-10-22_thaw-2_antibody_407C_0.00516_1,2022-10-22_thaw-2_no-antibody_control_1,1,43578,41132,3944671,16385459,0.2272,0.2272
+Lib-2,2022-10-22_thaw-2_antibody_407C_0.00516_1,2022-10-22_thaw-2_no-antibody_control_1,2,43578,41132,3189171,12941088,0.2326,0.2326
+Lib-2,2022-10-22_thaw-2_antibody_407C_0.00516_1,2022-10-22_thaw-2_no-antibody_control_1,3,43578,41132,1785079,6909863,0.2438,0.2438
+Lib-2,2022-10-22_thaw-2_antibody_407C_0.00516_1,2022-10-22_thaw-2_no-antibody_control_1,4,43578,41132,1305549,4379771,0.2814,0.2814
+Lib-2,2022-10-22_thaw-2_antibody_407C_0.01548_1,2022-10-22_thaw-2_no-antibody_control_1,0,170730,41132,2196049,12156106,0.04352,0.04352
+Lib-2,2022-10-22_thaw-2_antibody_407C_0.01548_1,2022-10-22_thaw-2_no-antibody_control_1,1,170730,41132,3514853,16385459,0.05168,0.05168
+Lib-2,2022-10-22_thaw-2_antibody_407C_0.01548_1,2022-10-22_thaw-2_no-antibody_control_1,2,170730,41132,3317621,12941088,0.06176,0.06176
+Lib-2,2022-10-22_thaw-2_antibody_407C_0.01548_1,2022-10-22_thaw-2_no-antibody_control_1,3,170730,41132,2193664,6909863,0.07648,0.07648
+Lib-2,2022-10-22_thaw-2_antibody_407C_0.01548_1,2022-10-22_thaw-2_no-antibody_control_1,4,170730,41132,2176492,4379771,0.1197,0.1197
