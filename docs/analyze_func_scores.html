@@ -1,0 +1,1094 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Functional scores of variants for viral entry &#8212; Deep mutational scanning of SARS-CoV-2 Omicron BA.2 spike using a barcoded lentiviral platform  documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css" />
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Fit global epistasis models" href="fit_globalepistasis.html" />
+    <link rel="prev" title="Counts of variants" href="analyze_variant_counts.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+          
+
+          <div class="body" role="main">
+            
+  
+<style>
+/* CSS for nbsphinx extension */
+
+/* remove conflicting styling from Sphinx themes */
+div.nbinput.container div.prompt *,
+div.nboutput.container div.prompt *,
+div.nbinput.container div.input_area pre,
+div.nboutput.container div.output_area pre,
+div.nbinput.container div.input_area .highlight,
+div.nboutput.container div.output_area .highlight {
+    border: none;
+    padding: 0;
+    margin: 0;
+    box-shadow: none;
+}
+
+div.nbinput.container > div[class*=highlight],
+div.nboutput.container > div[class*=highlight] {
+    margin: 0;
+}
+
+div.nbinput.container div.prompt *,
+div.nboutput.container div.prompt * {
+    background: none;
+}
+
+div.nboutput.container div.output_area .highlight,
+div.nboutput.container div.output_area pre {
+    background: unset;
+}
+
+div.nboutput.container div.output_area div.highlight {
+    color: unset;  /* override Pygments text color */
+}
+
+/* avoid gaps between output lines */
+div.nboutput.container div[class*=highlight] pre {
+    line-height: normal;
+}
+
+/* input/output containers */
+div.nbinput.container,
+div.nboutput.container {
+    display: -webkit-flex;
+    display: flex;
+    align-items: flex-start;
+    margin: 0;
+    width: 100%;
+}
+@media (max-width: 540px) {
+    div.nbinput.container,
+    div.nboutput.container {
+        flex-direction: column;
+    }
+}
+
+/* input container */
+div.nbinput.container {
+    padding-top: 5px;
+}
+
+/* last container */
+div.nblast.container {
+    padding-bottom: 5px;
+}
+
+/* input prompt */
+div.nbinput.container div.prompt pre {
+    color: #307FC1;
+}
+
+/* output prompt */
+div.nboutput.container div.prompt pre {
+    color: #BF5B3D;
+}
+
+/* all prompts */
+div.nbinput.container div.prompt,
+div.nboutput.container div.prompt {
+    width: 4.5ex;
+    padding-top: 5px;
+    position: relative;
+    user-select: none;
+}
+
+div.nbinput.container div.prompt > div,
+div.nboutput.container div.prompt > div {
+    position: absolute;
+    right: 0;
+    margin-right: 0.3ex;
+}
+
+@media (max-width: 540px) {
+    div.nbinput.container div.prompt,
+    div.nboutput.container div.prompt {
+        width: unset;
+        text-align: left;
+        padding: 0.4em;
+    }
+    div.nboutput.container div.prompt.empty {
+        padding: 0;
+    }
+
+    div.nbinput.container div.prompt > div,
+    div.nboutput.container div.prompt > div {
+        position: unset;
+    }
+}
+
+/* disable scrollbars on prompts */
+div.nbinput.container div.prompt pre,
+div.nboutput.container div.prompt pre {
+    overflow: hidden;
+}
+
+/* input/output area */
+div.nbinput.container div.input_area,
+div.nboutput.container div.output_area {
+    -webkit-flex: 1;
+    flex: 1;
+    overflow: auto;
+}
+@media (max-width: 540px) {
+    div.nbinput.container div.input_area,
+    div.nboutput.container div.output_area {
+        width: 100%;
+    }
+}
+
+/* input area */
+div.nbinput.container div.input_area {
+    border: 1px solid #e0e0e0;
+    border-radius: 2px;
+    /*background: #f5f5f5;*/
+}
+
+/* override MathJax center alignment in output cells */
+div.nboutput.container div[class*=MathJax] {
+    text-align: left !important;
+}
+
+/* override sphinx.ext.imgmath center alignment in output cells */
+div.nboutput.container div.math p {
+    text-align: left;
+}
+
+/* standard error */
+div.nboutput.container div.output_area.stderr {
+    background: #fdd;
+}
+
+/* ANSI colors */
+.ansi-black-fg { color: #3E424D; }
+.ansi-black-bg { background-color: #3E424D; }
+.ansi-black-intense-fg { color: #282C36; }
+.ansi-black-intense-bg { background-color: #282C36; }
+.ansi-red-fg { color: #E75C58; }
+.ansi-red-bg { background-color: #E75C58; }
+.ansi-red-intense-fg { color: #B22B31; }
+.ansi-red-intense-bg { background-color: #B22B31; }
+.ansi-green-fg { color: #00A250; }
+.ansi-green-bg { background-color: #00A250; }
+.ansi-green-intense-fg { color: #007427; }
+.ansi-green-intense-bg { background-color: #007427; }
+.ansi-yellow-fg { color: #DDB62B; }
+.ansi-yellow-bg { background-color: #DDB62B; }
+.ansi-yellow-intense-fg { color: #B27D12; }
+.ansi-yellow-intense-bg { background-color: #B27D12; }
+.ansi-blue-fg { color: #208FFB; }
+.ansi-blue-bg { background-color: #208FFB; }
+.ansi-blue-intense-fg { color: #0065CA; }
+.ansi-blue-intense-bg { background-color: #0065CA; }
+.ansi-magenta-fg { color: #D160C4; }
+.ansi-magenta-bg { background-color: #D160C4; }
+.ansi-magenta-intense-fg { color: #A03196; }
+.ansi-magenta-intense-bg { background-color: #A03196; }
+.ansi-cyan-fg { color: #60C6C8; }
+.ansi-cyan-bg { background-color: #60C6C8; }
+.ansi-cyan-intense-fg { color: #258F8F; }
+.ansi-cyan-intense-bg { background-color: #258F8F; }
+.ansi-white-fg { color: #C5C1B4; }
+.ansi-white-bg { background-color: #C5C1B4; }
+.ansi-white-intense-fg { color: #A1A6B2; }
+.ansi-white-intense-bg { background-color: #A1A6B2; }
+
+.ansi-default-inverse-fg { color: #FFFFFF; }
+.ansi-default-inverse-bg { background-color: #000000; }
+
+.ansi-bold { font-weight: bold; }
+.ansi-underline { text-decoration: underline; }
+
+
+div.nbinput.container div.input_area div[class*=highlight] > pre,
+div.nboutput.container div.output_area div[class*=highlight] > pre,
+div.nboutput.container div.output_area div[class*=highlight].math,
+div.nboutput.container div.output_area.rendered_html,
+div.nboutput.container div.output_area > div.output_javascript,
+div.nboutput.container div.output_area:not(.rendered_html) > img{
+    padding: 5px;
+    margin: 0;
+}
+
+/* fix copybtn overflow problem in chromium (needed for 'sphinx_copybutton') */
+div.nbinput.container div.input_area > div[class^='highlight'],
+div.nboutput.container div.output_area > div[class^='highlight']{
+    overflow-y: hidden;
+}
+
+/* hide copybtn icon on prompts (needed for 'sphinx_copybutton') */
+.prompt .copybtn {
+    display: none;
+}
+
+/* Some additional styling taken form the Jupyter notebook CSS */
+.jp-RenderedHTMLCommon table,
+div.rendered_html table {
+  border: none;
+  border-collapse: collapse;
+  border-spacing: 0;
+  color: black;
+  font-size: 12px;
+  table-layout: fixed;
+}
+.jp-RenderedHTMLCommon thead,
+div.rendered_html thead {
+  border-bottom: 1px solid black;
+  vertical-align: bottom;
+}
+.jp-RenderedHTMLCommon tr,
+.jp-RenderedHTMLCommon th,
+.jp-RenderedHTMLCommon td,
+div.rendered_html tr,
+div.rendered_html th,
+div.rendered_html td {
+  text-align: right;
+  vertical-align: middle;
+  padding: 0.5em 0.5em;
+  line-height: normal;
+  white-space: normal;
+  max-width: none;
+  border: none;
+}
+.jp-RenderedHTMLCommon th,
+div.rendered_html th {
+  font-weight: bold;
+}
+.jp-RenderedHTMLCommon tbody tr:nth-child(odd),
+div.rendered_html tbody tr:nth-child(odd) {
+  background: #f5f5f5;
+}
+.jp-RenderedHTMLCommon tbody tr:hover,
+div.rendered_html tbody tr:hover {
+  background: rgba(66, 165, 245, 0.2);
+}
+</style>
+<section id="Functional-scores-of-variants-for-viral-entry">
+<h1>Functional scores of variants for viral entry<a class="headerlink" href="#Functional-scores-of-variants-for-viral-entry" title="Permalink to this headline">¶</a></h1>
+<p>This notebook analyzes the functional scores, which are effects of mutations on viral entry: positive values indicate better entry, negative values worse entry.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">math</span>
+<span class="kn">import</span> <span class="nn">os</span>
+
+<span class="kn">import</span> <span class="nn">altair</span> <span class="k">as</span> <span class="nn">alt</span>
+
+<span class="kn">import</span> <span class="nn">dms_variants.codonvarianttable</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span>
+
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+<span class="kn">import</span> <span class="nn">plotnine</span> <span class="k">as</span> <span class="nn">p9</span>
+
+<span class="kn">import</span> <span class="nn">scipy.stats</span>
+
+<span class="kn">import</span> <span class="nn">yaml</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># allow more rows for Altair</span>
+<span class="n">_</span> <span class="o">=</span> <span class="n">alt</span><span class="o">.</span><span class="n">data_transformers</span><span class="o">.</span><span class="n">disable_max_rows</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<p>Get configuration information:</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># If you are running notebook interactively rather than in pipeline that handles</span>
+<span class="c1"># working directories, you may have to first `os.chdir` to appropriate directory.</span>
+
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;config.yaml&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">config</span> <span class="o">=</span> <span class="n">yaml</span><span class="o">.</span><span class="n">safe_load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<section id="Read-functional-selections-and-functional-scores">
+<h2>Read functional selections and functional scores<a class="headerlink" href="#Read-functional-selections-and-functional-scores" title="Permalink to this headline">¶</a></h2>
+<p>Get the functional selections data frame:</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">functional_selections</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">config</span><span class="p">[</span><span class="s2">&quot;functional_selections&quot;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<p>Read in the functional scores:</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">func_scores</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">(</span>
+    <span class="p">[</span>
+        <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span>
+            <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">config</span><span class="p">[</span><span class="s2">&quot;func_score_dir&quot;</span><span class="p">],</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">selection_name</span><span class="si">}</span><span class="s2">_func_scores.csv&quot;</span><span class="p">),</span>
+            <span class="n">na_filter</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="k">for</span> <span class="n">selection_name</span> <span class="ow">in</span> <span class="n">functional_selections</span><span class="p">[</span><span class="s2">&quot;selection_name&quot;</span><span class="p">]</span>
+    <span class="p">],</span>
+    <span class="n">ignore_index</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">func_scores</span><span class="p">)</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">func_scores</span><span class="o">.</span><span class="n">drop_duplicates</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="Variants-with-sufficient-pre-selection-counts">
+<h2>Variants with sufficient pre-selection counts<a class="headerlink" href="#Variants-with-sufficient-pre-selection-counts" title="Permalink to this headline">¶</a></h2>
+<p>We will eventually only analyze the functional scores for variants with some minimum threshold of pre-selection counts.</p>
+<p>Draw a boxplot for the pre-selection samples with a black line at the median, boxes spanning the 25th to 75th percentiles, lines spanning the minimum to the maximum, and a red line indciating the threshold. You can mouseover bars for details and use the dropdown selections to just show certain subsets. Note that y-axis uses a symlog scale:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># get data to plot</span>
+<span class="n">preselection_count_boxplot_df</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">func_scores</span><span class="p">[</span>
+        <span class="p">[</span>
+            <span class="s2">&quot;library&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;pre_sample&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;pre_count&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;barcode&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;pre_count_threshold&quot;</span><span class="p">,</span>
+        <span class="p">]</span>
+    <span class="p">]</span>
+    <span class="o">.</span><span class="n">drop_duplicates</span><span class="p">()</span>
+    <span class="o">.</span><span class="n">assign</span><span class="p">(</span>
+        <span class="n">variant_above_threshold</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="p">(</span>
+            <span class="n">x</span><span class="p">[</span><span class="s2">&quot;pre_count&quot;</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="n">x</span><span class="p">[</span><span class="s2">&quot;pre_count_threshold&quot;</span><span class="p">]</span>
+        <span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">),</span>
+        <span class="n">count_above_threshold</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="s2">&quot;pre_count&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="n">x</span><span class="p">[</span><span class="s2">&quot;variant_above_threshold&quot;</span><span class="p">],</span>
+    <span class="p">)</span>
+    <span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s2">&quot;library&quot;</span><span class="p">,</span> <span class="s2">&quot;pre_sample&quot;</span><span class="p">,</span> <span class="s2">&quot;pre_count_threshold&quot;</span><span class="p">],</span> <span class="n">as_index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">aggregate</span><span class="p">(</span>
+        <span class="n">median</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">NamedAgg</span><span class="p">(</span><span class="s2">&quot;pre_count&quot;</span><span class="p">,</span> <span class="s2">&quot;median&quot;</span><span class="p">),</span>
+        <span class="n">percentile_25</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">NamedAgg</span><span class="p">(</span><span class="s2">&quot;pre_count&quot;</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">s</span><span class="p">:</span> <span class="n">s</span><span class="o">.</span><span class="n">quantile</span><span class="p">(</span><span class="mf">0.25</span><span class="p">)),</span>
+        <span class="n">percentile_75</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">NamedAgg</span><span class="p">(</span><span class="s2">&quot;pre_count&quot;</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">s</span><span class="p">:</span> <span class="n">s</span><span class="o">.</span><span class="n">quantile</span><span class="p">(</span><span class="mf">0.75</span><span class="p">)),</span>
+        <span class="nb">min</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">NamedAgg</span><span class="p">(</span><span class="s2">&quot;pre_count&quot;</span><span class="p">,</span> <span class="s2">&quot;min&quot;</span><span class="p">),</span>
+        <span class="nb">max</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">NamedAgg</span><span class="p">(</span><span class="s2">&quot;pre_count&quot;</span><span class="p">,</span> <span class="s2">&quot;max&quot;</span><span class="p">),</span>
+        <span class="n">nvariants</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">NamedAgg</span><span class="p">(</span><span class="s2">&quot;barcode&quot;</span><span class="p">,</span> <span class="s2">&quot;count&quot;</span><span class="p">),</span>
+        <span class="n">total_counts</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">NamedAgg</span><span class="p">(</span><span class="s2">&quot;pre_count&quot;</span><span class="p">,</span> <span class="s2">&quot;sum&quot;</span><span class="p">),</span>
+        <span class="n">variants_above_threshold</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">NamedAgg</span><span class="p">(</span><span class="s2">&quot;variant_above_threshold&quot;</span><span class="p">,</span> <span class="s2">&quot;sum&quot;</span><span class="p">),</span>
+        <span class="n">counts_above_threshold</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">NamedAgg</span><span class="p">(</span><span class="s2">&quot;count_above_threshold&quot;</span><span class="p">,</span> <span class="s2">&quot;sum&quot;</span><span class="p">),</span>
+    <span class="p">)</span>
+    <span class="o">.</span><span class="n">assign</span><span class="p">(</span>
+        <span class="n">library_sample</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="s2">&quot;library&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="s2">&quot; &quot;</span> <span class="o">+</span> <span class="n">x</span><span class="p">[</span><span class="s2">&quot;pre_sample&quot;</span><span class="p">],</span>
+        <span class="n">frac_counts_above_threshold</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="s2">&quot;counts_above_threshold&quot;</span><span class="p">]</span>
+        <span class="o">/</span> <span class="n">x</span><span class="p">[</span><span class="s2">&quot;total_counts&quot;</span><span class="p">],</span>
+        <span class="n">frac_variants_above_threshold</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="s2">&quot;variants_above_threshold&quot;</span><span class="p">]</span>
+        <span class="o">/</span> <span class="n">x</span><span class="p">[</span><span class="s2">&quot;nvariants&quot;</span><span class="p">],</span>
+    <span class="p">)</span>
+    <span class="o">.</span><span class="n">drop</span><span class="p">(</span>
+        <span class="n">columns</span><span class="o">=</span><span class="p">[</span>
+            <span class="s2">&quot;counts_above_threshold&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;variants_above_threshold&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;total_counts&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;nvariants&quot;</span><span class="p">,</span>
+        <span class="p">]</span>
+    <span class="p">)</span>
+    <span class="o">.</span><span class="n">merge</span><span class="p">(</span>
+        <span class="n">functional_selections</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;preselection_sample&quot;</span><span class="p">:</span> <span class="s2">&quot;pre_sample&quot;</span><span class="p">})[</span>
+            <span class="p">[</span><span class="s2">&quot;pre_sample&quot;</span><span class="p">,</span> <span class="s2">&quot;virus_batch&quot;</span><span class="p">,</span> <span class="s2">&quot;library&quot;</span><span class="p">]</span>
+        <span class="p">]</span><span class="o">.</span><span class="n">drop_duplicates</span><span class="p">(),</span>
+        <span class="n">how</span><span class="o">=</span><span class="s2">&quot;left&quot;</span><span class="p">,</span>
+        <span class="n">validate</span><span class="o">=</span><span class="s2">&quot;one_to_one&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+<span class="p">)</span>
+<span class="k">assert</span> <span class="p">(</span>
+    <span class="nb">len</span><span class="p">(</span><span class="n">preselection_count_boxplot_df</span><span class="p">)</span>
+    <span class="o">==</span> <span class="n">preselection_count_boxplot_df</span><span class="p">[</span><span class="s2">&quot;library_sample&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">nunique</span><span class="p">()</span>
+<span class="p">)</span>
+
+<span class="c1"># make plot</span>
+<span class="n">preselection_count_base</span> <span class="o">=</span> <span class="n">alt</span><span class="o">.</span><span class="n">Chart</span><span class="p">(</span><span class="n">preselection_count_boxplot_df</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span>
+    <span class="n">y</span><span class="o">=</span><span class="n">alt</span><span class="o">.</span><span class="n">Y</span><span class="p">(</span><span class="s2">&quot;library_sample&quot;</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="kc">None</span><span class="p">),</span>
+    <span class="n">tooltip</span><span class="o">=</span><span class="p">[</span>
+        <span class="n">alt</span><span class="o">.</span><span class="n">Tooltip</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s2">&quot;.2g&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">preselection_count_boxplot_df</span><span class="p">[</span><span class="n">c</span><span class="p">]</span><span class="o">.</span><span class="n">dtype</span> <span class="o">==</span> <span class="nb">float</span>
+        <span class="k">else</span> <span class="n">c</span>
+        <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">preselection_count_boxplot_df</span><span class="o">.</span><span class="n">columns</span>
+        <span class="k">if</span> <span class="n">c</span> <span class="o">!=</span> <span class="s2">&quot;library_sample&quot;</span>
+    <span class="p">],</span>
+<span class="p">)</span>
+
+<span class="n">preselection_count_quartile_bars</span> <span class="o">=</span> <span class="n">preselection_count_base</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span>
+    <span class="n">alt</span><span class="o">.</span><span class="n">X</span><span class="p">(</span>
+        <span class="s2">&quot;percentile_25&quot;</span><span class="p">,</span>
+        <span class="n">scale</span><span class="o">=</span><span class="n">alt</span><span class="o">.</span><span class="n">Scale</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s2">&quot;symlog&quot;</span><span class="p">,</span> <span class="n">constant</span><span class="o">=</span><span class="mi">20</span><span class="p">),</span>
+        <span class="n">title</span><span class="o">=</span><span class="s2">&quot;counts for variant&quot;</span><span class="p">,</span>
+    <span class="p">),</span>
+    <span class="n">alt</span><span class="o">.</span><span class="n">X2</span><span class="p">(</span><span class="s2">&quot;percentile_75&quot;</span><span class="p">),</span>
+<span class="p">)</span><span class="o">.</span><span class="n">mark_bar</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s2">&quot;blue&quot;</span><span class="p">)</span>
+
+<span class="n">preselection_count_range_lines</span> <span class="o">=</span> <span class="n">preselection_count_base</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span>
+    <span class="n">alt</span><span class="o">.</span><span class="n">X</span><span class="p">(</span><span class="s2">&quot;min&quot;</span><span class="p">),</span>
+    <span class="n">alt</span><span class="o">.</span><span class="n">X2</span><span class="p">(</span><span class="s2">&quot;max&quot;</span><span class="p">),</span>
+<span class="p">)</span><span class="o">.</span><span class="n">mark_rule</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s2">&quot;blue&quot;</span><span class="p">,</span> <span class="n">opacity</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+
+<span class="n">preselection_count_median_lines</span> <span class="o">=</span> <span class="n">preselection_count_base</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span>
+    <span class="n">alt</span><span class="o">.</span><span class="n">X</span><span class="p">(</span><span class="s2">&quot;median&quot;</span><span class="p">),</span> <span class="n">alt</span><span class="o">.</span><span class="n">X2</span><span class="p">(</span><span class="s2">&quot;median&quot;</span><span class="p">)</span>
+<span class="p">)</span><span class="o">.</span><span class="n">mark_bar</span><span class="p">(</span><span class="n">xOffset</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">x2Offset</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">)</span>
+
+<span class="n">preselection_count_threshold</span> <span class="o">=</span> <span class="n">preselection_count_base</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span>
+    <span class="n">alt</span><span class="o">.</span><span class="n">X</span><span class="p">(</span><span class="s2">&quot;pre_count_threshold&quot;</span><span class="p">),</span> <span class="n">alt</span><span class="o">.</span><span class="n">X2</span><span class="p">(</span><span class="s2">&quot;pre_count_threshold&quot;</span><span class="p">)</span>
+<span class="p">)</span><span class="o">.</span><span class="n">mark_bar</span><span class="p">(</span><span class="n">xOffset</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">x2Offset</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;red&quot;</span><span class="p">)</span>
+
+<span class="n">preselection_count_chart</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="p">(</span>
+        <span class="n">preselection_count_quartile_bars</span>
+        <span class="o">+</span> <span class="n">preselection_count_range_lines</span>
+        <span class="o">+</span> <span class="n">preselection_count_median_lines</span>
+        <span class="o">+</span> <span class="n">preselection_count_threshold</span>
+    <span class="p">)</span>
+    <span class="o">.</span><span class="n">configure_axis</span><span class="p">(</span><span class="n">labelLimit</span><span class="o">=</span><span class="mi">500</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">properties</span><span class="p">(</span><span class="n">width</span><span class="o">=</span><span class="mi">350</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="n">alt</span><span class="o">.</span><span class="n">Step</span><span class="p">(</span><span class="mi">14</span><span class="p">))</span>
+<span class="p">)</span>
+
+<span class="c1"># set up selections over other columns of interest</span>
+<span class="n">selection_names</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;library&quot;</span><span class="p">,</span> <span class="s2">&quot;virus_batch&quot;</span><span class="p">]</span>
+<span class="n">selections</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="n">alt</span><span class="o">.</span><span class="n">selection_point</span><span class="p">(</span>
+        <span class="n">fields</span><span class="o">=</span><span class="p">[</span><span class="n">col</span><span class="p">],</span>
+        <span class="n">bind</span><span class="o">=</span><span class="n">alt</span><span class="o">.</span><span class="n">binding_select</span><span class="p">(</span>
+            <span class="n">options</span><span class="o">=</span><span class="p">[</span><span class="kc">None</span><span class="p">]</span> <span class="o">+</span> <span class="n">functional_selections</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span><span class="o">.</span><span class="n">tolist</span><span class="p">(),</span>
+            <span class="n">labels</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;all&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">functional_selections</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">()],</span>
+            <span class="n">name</span><span class="o">=</span><span class="n">col</span><span class="p">,</span>
+        <span class="p">),</span>
+    <span class="p">)</span>
+    <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">selection_names</span>
+<span class="p">]</span>
+
+<span class="c1"># add selections</span>
+<span class="k">for</span> <span class="n">s</span><span class="p">,</span> <span class="n">name</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">selections</span><span class="p">,</span> <span class="n">selection_names</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">name</span> <span class="o">!=</span> <span class="s2">&quot;antibody&quot;</span><span class="p">:</span>
+        <span class="n">preselection_count_chart</span> <span class="o">=</span> <span class="n">preselection_count_chart</span><span class="o">.</span><span class="n">add_parameter</span><span class="p">(</span>
+            <span class="n">s</span>
+        <span class="p">)</span><span class="o">.</span><span class="n">transform_filter</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+
+<span class="n">preselection_count_chart</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div id="altair-viz-92f9c3f367a9410681a08c6d134829e5"></div>
+<script type="text/javascript">
+  var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
+  (function(spec, embedOpt){
+    let outputDiv = document.currentScript.previousElementSibling;
+    if (outputDiv.id !== "altair-viz-92f9c3f367a9410681a08c6d134829e5") {
+      outputDiv = document.getElementById("altair-viz-92f9c3f367a9410681a08c6d134829e5");
+    }
+    const paths = {
+      "vega": "https://cdn.jsdelivr.net/npm//vega@5?noext",
+      "vega-lib": "https://cdn.jsdelivr.net/npm//vega-lib?noext",
+      "vega-lite": "https://cdn.jsdelivr.net/npm//vega-lite@5.2.0?noext",
+      "vega-embed": "https://cdn.jsdelivr.net/npm//vega-embed@6?noext",
+    };
+
+    function maybeLoadScript(lib, version) {
+      var key = `${lib.replace("-", "")}_version`;
+      return (VEGA_DEBUG[key] == version) ?
+        Promise.resolve(paths[lib]) :
+        new Promise(function(resolve, reject) {
+          var s = document.createElement('script');
+          document.getElementsByTagName("head")[0].appendChild(s);
+          s.async = true;
+          s.onload = () => {
+            VEGA_DEBUG[key] = version;
+            return resolve(paths[lib]);
+          };
+          s.onerror = () => reject(`Error loading script: ${paths[lib]}`);
+          s.src = paths[lib];
+        });
+    }
+
+    function showError(err) {
+      outputDiv.innerHTML = `<div class="error" style="color:red;">${err}</div>`;
+      throw err;
+    }
+
+    function displayChart(vegaEmbed) {
+      vegaEmbed(outputDiv, spec, embedOpt)
+        .catch(err => showError(`Javascript Error: ${err.message}<br>This usually means there's a typo in your chart specification. See the javascript console for the full traceback.`));
+    }
+
+    if(typeof define === "function" && define.amd) {
+      requirejs.config({paths});
+      require(["vega-embed"], displayChart, err => showError(`Error loading script: ${err.message}`));
+    } else {
+      maybeLoadScript("vega", "5")
+        .then(() => maybeLoadScript("vega-lite", "5.2.0"))
+        .then(() => maybeLoadScript("vega-embed", "6"))
+        .catch(showError)
+        .then(() => displayChart(vegaEmbed));
+    }
+  })({"config": {"view": {"continuousWidth": 400, "continuousHeight": 300}, "axis": {"labelLimit": 500}}, "layer": [{"mark": {"type": "bar", "color": "blue"}, "encoding": {"tooltip": [{"field": "library", "type": "nominal"}, {"field": "pre_sample", "type": "nominal"}, {"field": "pre_count_threshold", "type": "quantitative"}, {"field": "median", "format": ".2g", "type": "quantitative"}, {"field": "percentile_25", "format": ".2g", "type": "quantitative"}, {"field": "percentile_75", "format": ".2g", "type": "quantitative"}, {"field": "min", "type": "quantitative"}, {"field": "max", "type": "quantitative"}, {"field": "frac_counts_above_threshold", "format": ".2g", "type": "quantitative"}, {"field": "frac_variants_above_threshold", "format": ".2g", "type": "quantitative"}, {"field": "virus_batch", "type": "nominal"}], "x": {"field": "percentile_25", "scale": {"constant": 20, "type": "symlog"}, "title": "counts for variant", "type": "quantitative"}, "x2": {"field": "percentile_75"}, "y": {"field": "library_sample", "title": null, "type": "nominal"}}, "params": [{"name": "parameter001", "select": {"type": "point", "fields": ["library"]}, "bind": {"input": "select", "options": [null, "Lib-1", "Lib-2"], "labels": ["all", "Lib-1", "Lib-2"], "name": "library"}}, {"name": "parameter002", "select": {"type": "point", "fields": ["virus_batch"]}, "bind": {"input": "select", "options": [null, "thaw-1", "thaw-2"], "labels": ["all", "thaw-1", "thaw-2"], "name": "virus_batch"}}]}, {"mark": {"type": "rule", "color": "blue", "opacity": 0.5}, "encoding": {"tooltip": [{"field": "library", "type": "nominal"}, {"field": "pre_sample", "type": "nominal"}, {"field": "pre_count_threshold", "type": "quantitative"}, {"field": "median", "format": ".2g", "type": "quantitative"}, {"field": "percentile_25", "format": ".2g", "type": "quantitative"}, {"field": "percentile_75", "format": ".2g", "type": "quantitative"}, {"field": "min", "type": "quantitative"}, {"field": "max", "type": "quantitative"}, {"field": "frac_counts_above_threshold", "format": ".2g", "type": "quantitative"}, {"field": "frac_variants_above_threshold", "format": ".2g", "type": "quantitative"}, {"field": "virus_batch", "type": "nominal"}], "x": {"field": "min", "type": "quantitative"}, "x2": {"field": "max"}, "y": {"field": "library_sample", "title": null, "type": "nominal"}}}, {"mark": {"type": "bar", "color": "black", "x2Offset": -1, "xOffset": 1}, "encoding": {"tooltip": [{"field": "library", "type": "nominal"}, {"field": "pre_sample", "type": "nominal"}, {"field": "pre_count_threshold", "type": "quantitative"}, {"field": "median", "format": ".2g", "type": "quantitative"}, {"field": "percentile_25", "format": ".2g", "type": "quantitative"}, {"field": "percentile_75", "format": ".2g", "type": "quantitative"}, {"field": "min", "type": "quantitative"}, {"field": "max", "type": "quantitative"}, {"field": "frac_counts_above_threshold", "format": ".2g", "type": "quantitative"}, {"field": "frac_variants_above_threshold", "format": ".2g", "type": "quantitative"}, {"field": "virus_batch", "type": "nominal"}], "x": {"field": "median", "type": "quantitative"}, "x2": {"field": "median"}, "y": {"field": "library_sample", "title": null, "type": "nominal"}}}, {"mark": {"type": "bar", "color": "red", "x2Offset": -1, "xOffset": 1}, "encoding": {"tooltip": [{"field": "library", "type": "nominal"}, {"field": "pre_sample", "type": "nominal"}, {"field": "pre_count_threshold", "type": "quantitative"}, {"field": "median", "format": ".2g", "type": "quantitative"}, {"field": "percentile_25", "format": ".2g", "type": "quantitative"}, {"field": "percentile_75", "format": ".2g", "type": "quantitative"}, {"field": "min", "type": "quantitative"}, {"field": "max", "type": "quantitative"}, {"field": "frac_counts_above_threshold", "format": ".2g", "type": "quantitative"}, {"field": "frac_variants_above_threshold", "format": ".2g", "type": "quantitative"}, {"field": "virus_batch", "type": "nominal"}], "x": {"field": "pre_count_threshold", "type": "quantitative"}, "x2": {"field": "pre_count_threshold"}, "y": {"field": "library_sample", "title": null, "type": "nominal"}}}], "data": {"name": "data-82c014d3d14139f89bf3ab347d12c0c2"}, "height": {"step": 14}, "transform": [{"filter": {"param": "parameter001"}}, {"filter": {"param": "parameter002"}}], "width": 350, "$schema": "https://vega.github.io/schema/vega-lite/v5.2.0.json", "datasets": {"data-82c014d3d14139f89bf3ab347d12c0c2": [{"library": "Lib-1", "pre_sample": "2022-10-22_thaw-1_VSVG_control_1", "pre_count_threshold": 59, "median": 408.0, "percentile_25": 205.0, "percentile_75": 828.0, "min": 0, "max": 16987, "library_sample": "Lib-1 2022-10-22_thaw-1_VSVG_control_1", "frac_counts_above_threshold": 0.9984724885834274, "frac_variants_above_threshold": 0.9615680499384561, "virus_batch": "thaw-1"}, {"library": "Lib-1", "pre_sample": "2022-10-22_thaw-2_VSVG_control_1", "pre_count_threshold": 46, "median": 324.0, "percentile_25": 142.0, "percentile_75": 665.0, "min": 0, "max": 20089, "library_sample": "Lib-1 2022-10-22_thaw-2_VSVG_control_1", "frac_counts_above_threshold": 0.9968380634108808, "frac_variants_above_threshold": 0.915080446632671, "virus_batch": "thaw-2"}, {"library": "Lib-2", "pre_sample": "2022-10-22_thaw-1_VSVG_control_1", "pre_count_threshold": 69, "median": 471.0, "percentile_25": 221.0, "percentile_75": 1028.0, "min": 0, "max": 20276, "library_sample": "Lib-2 2022-10-22_thaw-1_VSVG_control_1", "frac_counts_above_threshold": 0.9981251461868653, "frac_variants_above_threshold": 0.952388217345382, "virus_batch": "thaw-1"}, {"library": "Lib-2", "pre_sample": "2022-10-22_thaw-2_VSVG_control_1", "pre_count_threshold": 56, "median": 402.0, "percentile_25": 169.0, "percentile_75": 844.0, "min": 0, "max": 14525, "library_sample": "Lib-2 2022-10-22_thaw-2_VSVG_control_1", "frac_counts_above_threshold": 0.9967481576506412, "frac_variants_above_threshold": 0.9084614481868325, "virus_batch": "thaw-2"}]}}, {"mode": "vega-lite"});
+</script></div>
+</div>
+<p>Plot the fraction of all variants, and fraction of all counts, that are above the thresholds for the pre-selection samples:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">frac_counts_df</span> <span class="o">=</span> <span class="n">preselection_count_boxplot_df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span>
+    <span class="n">columns</span><span class="o">=</span><span class="p">[</span>
+        <span class="s2">&quot;median&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;pre_count_threshold&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;min&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;max&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;percentile_25&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;percentile_75&quot;</span><span class="p">,</span>
+    <span class="p">],</span>
+<span class="p">)</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span>
+    <span class="n">columns</span><span class="o">=</span><span class="p">{</span>
+        <span class="s2">&quot;frac_counts_above_threshold&quot;</span><span class="p">:</span> <span class="s2">&quot;counts&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;frac_variants_above_threshold&quot;</span><span class="p">:</span> <span class="s2">&quot;variants&quot;</span><span class="p">,</span>
+    <span class="p">}</span>
+<span class="p">)</span>
+
+<span class="n">fraction_type_selection</span> <span class="o">=</span> <span class="n">alt</span><span class="o">.</span><span class="n">selection_point</span><span class="p">(</span>
+    <span class="n">fields</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;fraction_type&quot;</span><span class="p">],</span>
+    <span class="n">bind</span><span class="o">=</span><span class="s2">&quot;legend&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">frac_counts_chart</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">alt</span><span class="o">.</span><span class="n">Chart</span><span class="p">(</span><span class="n">frac_counts_df</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">transform_fold</span><span class="p">(</span><span class="n">fold</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;counts&quot;</span><span class="p">,</span> <span class="s2">&quot;variants&quot;</span><span class="p">],</span> <span class="n">as_</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;fraction_type&quot;</span><span class="p">,</span> <span class="s2">&quot;fraction&quot;</span><span class="p">])</span>
+    <span class="o">.</span><span class="n">encode</span><span class="p">(</span>
+        <span class="n">y</span><span class="o">=</span><span class="n">alt</span><span class="o">.</span><span class="n">Y</span><span class="p">(</span><span class="s2">&quot;library_sample&quot;</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="kc">None</span><span class="p">),</span>
+        <span class="n">tooltip</span><span class="o">=</span><span class="p">[</span>
+            <span class="n">alt</span><span class="o">.</span><span class="n">Tooltip</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s2">&quot;.2g&quot;</span><span class="p">)</span> <span class="k">if</span> <span class="n">frac_counts_df</span><span class="p">[</span><span class="n">c</span><span class="p">]</span><span class="o">.</span><span class="n">dtype</span> <span class="o">==</span> <span class="nb">float</span> <span class="k">else</span> <span class="n">c</span>
+            <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">frac_counts_df</span><span class="o">.</span><span class="n">columns</span>
+            <span class="k">if</span> <span class="n">c</span> <span class="o">!=</span> <span class="s2">&quot;library_sample&quot;</span>
+        <span class="p">],</span>
+        <span class="n">x</span><span class="o">=</span><span class="n">alt</span><span class="o">.</span><span class="n">X</span><span class="p">(</span>
+            <span class="s2">&quot;fraction:Q&quot;</span><span class="p">,</span>
+            <span class="n">title</span><span class="o">=</span><span class="s2">&quot;fraction above threshold&quot;</span><span class="p">,</span>
+            <span class="n">scale</span><span class="o">=</span><span class="n">alt</span><span class="o">.</span><span class="n">Scale</span><span class="p">(</span><span class="n">domain</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)),</span>
+        <span class="p">),</span>
+        <span class="n">color</span><span class="o">=</span><span class="n">alt</span><span class="o">.</span><span class="n">Color</span><span class="p">(</span>
+            <span class="s2">&quot;fraction_type:N&quot;</span><span class="p">,</span>
+            <span class="n">title</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+            <span class="n">scale</span><span class="o">=</span><span class="n">alt</span><span class="o">.</span><span class="n">Scale</span><span class="p">(</span><span class="n">domain</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;counts&quot;</span><span class="p">,</span> <span class="s2">&quot;variants&quot;</span><span class="p">]),</span>
+        <span class="p">),</span>
+    <span class="p">)</span>
+    <span class="o">.</span><span class="n">mark_point</span><span class="p">(</span><span class="n">filled</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">properties</span><span class="p">(</span><span class="n">width</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="n">alt</span><span class="o">.</span><span class="n">Step</span><span class="p">(</span><span class="mi">14</span><span class="p">))</span>
+    <span class="o">.</span><span class="n">configure_axis</span><span class="p">(</span><span class="n">labelLimit</span><span class="o">=</span><span class="mi">500</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">add_selection</span><span class="p">(</span><span class="n">fraction_type_selection</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">transform_filter</span><span class="p">(</span><span class="n">fraction_type_selection</span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">selections</span><span class="p">:</span>
+    <span class="n">frac_counts_chart</span> <span class="o">=</span> <span class="n">frac_counts_chart</span><span class="o">.</span><span class="n">add_selection</span><span class="p">(</span><span class="n">s</span><span class="p">)</span><span class="o">.</span><span class="n">transform_filter</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+
+<span class="n">frac_counts_chart</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div id="altair-viz-53219f92c15b4a51b6328358605b8714"></div>
+<script type="text/javascript">
+  var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
+  (function(spec, embedOpt){
+    let outputDiv = document.currentScript.previousElementSibling;
+    if (outputDiv.id !== "altair-viz-53219f92c15b4a51b6328358605b8714") {
+      outputDiv = document.getElementById("altair-viz-53219f92c15b4a51b6328358605b8714");
+    }
+    const paths = {
+      "vega": "https://cdn.jsdelivr.net/npm//vega@5?noext",
+      "vega-lib": "https://cdn.jsdelivr.net/npm//vega-lib?noext",
+      "vega-lite": "https://cdn.jsdelivr.net/npm//vega-lite@5.2.0?noext",
+      "vega-embed": "https://cdn.jsdelivr.net/npm//vega-embed@6?noext",
+    };
+
+    function maybeLoadScript(lib, version) {
+      var key = `${lib.replace("-", "")}_version`;
+      return (VEGA_DEBUG[key] == version) ?
+        Promise.resolve(paths[lib]) :
+        new Promise(function(resolve, reject) {
+          var s = document.createElement('script');
+          document.getElementsByTagName("head")[0].appendChild(s);
+          s.async = true;
+          s.onload = () => {
+            VEGA_DEBUG[key] = version;
+            return resolve(paths[lib]);
+          };
+          s.onerror = () => reject(`Error loading script: ${paths[lib]}`);
+          s.src = paths[lib];
+        });
+    }
+
+    function showError(err) {
+      outputDiv.innerHTML = `<div class="error" style="color:red;">${err}</div>`;
+      throw err;
+    }
+
+    function displayChart(vegaEmbed) {
+      vegaEmbed(outputDiv, spec, embedOpt)
+        .catch(err => showError(`Javascript Error: ${err.message}<br>This usually means there's a typo in your chart specification. See the javascript console for the full traceback.`));
+    }
+
+    if(typeof define === "function" && define.amd) {
+      requirejs.config({paths});
+      require(["vega-embed"], displayChart, err => showError(`Error loading script: ${err.message}`));
+    } else {
+      maybeLoadScript("vega", "5")
+        .then(() => maybeLoadScript("vega-lite", "5.2.0"))
+        .then(() => maybeLoadScript("vega-embed", "6"))
+        .catch(showError)
+        .then(() => displayChart(vegaEmbed));
+    }
+  })({"config": {"view": {"continuousWidth": 400, "continuousHeight": 300}, "axis": {"labelLimit": 500}}, "data": {"name": "data-38b9164b83f8d0078168ebd848ea196d"}, "mark": {"type": "point", "filled": true, "size": 50}, "encoding": {"color": {"field": "fraction_type", "scale": {"domain": ["counts", "variants"]}, "title": null, "type": "nominal"}, "tooltip": [{"field": "library", "type": "nominal"}, {"field": "pre_sample", "type": "nominal"}, {"field": "counts", "format": ".2g", "type": "quantitative"}, {"field": "variants", "format": ".2g", "type": "quantitative"}, {"field": "virus_batch", "type": "nominal"}], "x": {"field": "fraction", "scale": {"domain": [0, 1]}, "title": "fraction above threshold", "type": "quantitative"}, "y": {"field": "library_sample", "title": null, "type": "nominal"}}, "height": {"step": 14}, "params": [{"name": "parameter003", "select": {"type": "point", "fields": ["fraction_type"]}, "bind": "legend"}, {"name": "parameter001", "select": {"type": "point", "fields": ["library"]}, "bind": {"input": "select", "options": [null, "Lib-1", "Lib-2"], "labels": ["all", "Lib-1", "Lib-2"], "name": "library"}}, {"name": "parameter002", "select": {"type": "point", "fields": ["virus_batch"]}, "bind": {"input": "select", "options": [null, "thaw-1", "thaw-2"], "labels": ["all", "thaw-1", "thaw-2"], "name": "virus_batch"}}], "transform": [{"fold": ["counts", "variants"], "as": ["fraction_type", "fraction"]}, {"filter": {"param": "parameter003"}}, {"filter": {"param": "parameter001"}}, {"filter": {"param": "parameter002"}}], "width": 200, "$schema": "https://vega.github.io/schema/vega-lite/v5.2.0.json", "datasets": {"data-38b9164b83f8d0078168ebd848ea196d": [{"library": "Lib-1", "pre_sample": "2022-10-22_thaw-1_VSVG_control_1", "library_sample": "Lib-1 2022-10-22_thaw-1_VSVG_control_1", "counts": 0.9984724885834274, "variants": 0.9615680499384561, "virus_batch": "thaw-1"}, {"library": "Lib-1", "pre_sample": "2022-10-22_thaw-2_VSVG_control_1", "library_sample": "Lib-1 2022-10-22_thaw-2_VSVG_control_1", "counts": 0.9968380634108808, "variants": 0.915080446632671, "virus_batch": "thaw-2"}, {"library": "Lib-2", "pre_sample": "2022-10-22_thaw-1_VSVG_control_1", "library_sample": "Lib-2 2022-10-22_thaw-1_VSVG_control_1", "counts": 0.9981251461868653, "variants": 0.952388217345382, "virus_batch": "thaw-1"}, {"library": "Lib-2", "pre_sample": "2022-10-22_thaw-2_VSVG_control_1", "library_sample": "Lib-2 2022-10-22_thaw-2_VSVG_control_1", "counts": 0.9967481576506412, "variants": 0.9084614481868325, "virus_batch": "thaw-2"}]}}, {"mode": "vega-lite"});
+</script></div>
+</div>
+<p>Now just get the functional scores for variant with sufficient pre-selection counts:</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">func_scores_filtered</span> <span class="o">=</span> <span class="n">func_scores</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s2">&quot;pre_count &gt;= pre_count_threshold&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="Distributions-of-functional-scores">
+<h2>Distributions of functional scores<a class="headerlink" href="#Distributions-of-functional-scores" title="Permalink to this headline">¶</a></h2>
+<p>Plot the distribution of functional scores. These plots are most informative if we classify variants by the “types” of mutations they have, which we do here using the <a class="reference external" href="https://jbloomlab.github.io/dms_variants/dms_variants.codonvarianttable.html#dms_variants.codonvarianttable.CodonVariantTable.classifyVariants">CodonVariantTable.classifyVariants</a> method, which adds a column called variant_class to the data frame:</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">func_scores_filtered</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">func_scores_filtered</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span>
+        <span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;aa_substitutions_sequential&quot;</span><span class="p">:</span> <span class="s2">&quot;aa_substitutions&quot;</span><span class="p">}</span>
+    <span class="p">)</span>
+    <span class="o">.</span><span class="n">pipe</span><span class="p">(</span><span class="n">dms_variants</span><span class="o">.</span><span class="n">codonvarianttable</span><span class="o">.</span><span class="n">CodonVariantTable</span><span class="o">.</span><span class="n">classifyVariants</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;aa_substitutions&quot;</span><span class="p">:</span> <span class="s2">&quot;aa_substitutions_sequential&quot;</span><span class="p">})</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>Now we use <a class="reference external" href="https://plotnine.readthedocs.io/">plotnine</a> to plot the distributions of scores in ggplot2-like syntax, coloring by the variant class. This plot shows the expected behavior for different variant classes; for instance, stop codon variants tend to have low scores and synonymous variants tend to have wildtype-like (near 0) scores. As expected, there is more noise with a tighter bottleneck:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ncols</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="n">nrows</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">ceil</span><span class="p">(</span>
+    <span class="nb">len</span><span class="p">(</span><span class="n">func_scores_filtered</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s2">&quot;library&quot;</span><span class="p">,</span> <span class="s2">&quot;pre_sample&quot;</span><span class="p">,</span> <span class="s2">&quot;post_sample&quot;</span><span class="p">]))</span> <span class="o">/</span> <span class="n">ncols</span>
+<span class="p">)</span>
+
+<span class="n">p</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">p9</span><span class="o">.</span><span class="n">ggplot</span><span class="p">(</span><span class="n">func_scores_filtered</span><span class="p">,</span> <span class="n">p9</span><span class="o">.</span><span class="n">aes</span><span class="p">(</span><span class="s2">&quot;variant_class&quot;</span><span class="p">,</span> <span class="s2">&quot;func_score&quot;</span><span class="p">))</span>
+    <span class="o">+</span> <span class="n">p9</span><span class="o">.</span><span class="n">geom_violin</span><span class="p">(</span><span class="n">p9</span><span class="o">.</span><span class="n">aes</span><span class="p">(</span><span class="n">fill</span><span class="o">=</span><span class="s2">&quot;variant_class&quot;</span><span class="p">))</span>
+    <span class="o">+</span> <span class="n">p9</span><span class="o">.</span><span class="n">ylab</span><span class="p">(</span><span class="s2">&quot;functional score&quot;</span><span class="p">)</span>
+    <span class="o">+</span> <span class="n">p9</span><span class="o">.</span><span class="n">xlab</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+    <span class="o">+</span> <span class="n">p9</span><span class="o">.</span><span class="n">facet_wrap</span><span class="p">(</span><span class="s2">&quot;~ library + pre_sample + post_sample&quot;</span><span class="p">,</span> <span class="n">ncol</span><span class="o">=</span><span class="n">ncols</span><span class="p">)</span>
+    <span class="o">+</span> <span class="n">p9</span><span class="o">.</span><span class="n">theme</span><span class="p">(</span>
+        <span class="n">figure_size</span><span class="o">=</span><span class="p">(</span><span class="mf">3.75</span> <span class="o">*</span> <span class="n">ncols</span><span class="p">,</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">nrows</span><span class="p">),</span>
+        <span class="n">axis_text_x</span><span class="o">=</span><span class="n">p9</span><span class="o">.</span><span class="n">element_text</span><span class="p">(</span><span class="n">angle</span><span class="o">=</span><span class="mi">90</span><span class="p">),</span>
+        <span class="n">panel_grid_major_x</span><span class="o">=</span><span class="n">p9</span><span class="o">.</span><span class="n">element_blank</span><span class="p">(),</span>  <span class="c1"># no vertical grid lines</span>
+    <span class="p">)</span>
+    <span class="o">+</span> <span class="n">p9</span><span class="o">.</span><span class="n">scale_fill_discrete</span><span class="p">(</span><span class="n">guide</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="p">)</span>
+<span class="n">_</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">draw</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="_images/analyze_func_scores_18_0.png" src="_images/analyze_func_scores_18_0.png" />
+</div>
+</div>
+<p>Now plot distribution of functional scores in a ridgeplot using <code class="docutils literal notranslate"><span class="pre">altair</span></code>, this time faceting <strong>just by library</strong> (averaging al replicates within a library):</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># get smoothed distribution of functional scores</span>
+<span class="n">bins</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span>
+    <span class="n">func_scores_filtered</span><span class="p">[</span><span class="s2">&quot;func_score&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span>
+    <span class="n">func_scores_filtered</span><span class="p">[</span><span class="s2">&quot;func_score&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">(),</span>
+    <span class="n">num</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">smoothed_dist</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">(</span>
+    <span class="p">[</span>
+        <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
+            <span class="p">{</span>
+                <span class="s2">&quot;library&quot;</span><span class="p">:</span> <span class="n">lib</span><span class="p">,</span>
+                <span class="s2">&quot;variant_class&quot;</span><span class="p">:</span> <span class="n">var</span><span class="p">,</span>
+                <span class="s2">&quot;func_score&quot;</span><span class="p">:</span> <span class="n">bins</span><span class="p">,</span>
+                <span class="s2">&quot;count&quot;</span><span class="p">:</span> <span class="n">scipy</span><span class="o">.</span><span class="n">stats</span><span class="o">.</span><span class="n">gaussian_kde</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;func_score&quot;</span><span class="p">])(</span><span class="n">bins</span><span class="p">),</span>
+                <span class="s2">&quot;mean_func_score&quot;</span><span class="p">:</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;func_score&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span>
+            <span class="p">}</span>
+        <span class="p">)</span>
+        <span class="k">for</span> <span class="p">(</span><span class="n">lib</span><span class="p">,</span> <span class="n">var</span><span class="p">),</span> <span class="n">df</span> <span class="ow">in</span> <span class="n">func_scores_filtered</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s2">&quot;library&quot;</span><span class="p">,</span> <span class="s2">&quot;variant_class&quot;</span><span class="p">])</span>
+    <span class="p">]</span>
+<span class="p">)</span>
+
+<span class="c1"># ridgeline plot: https://altair-viz.github.io/gallery/ridgeline_plot.html</span>
+<span class="n">facet_height</span> <span class="o">=</span> <span class="mi">27</span>
+<span class="n">facet_overlap</span> <span class="o">=</span> <span class="mf">0.7</span>
+<span class="n">ridgeline_chart</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">alt</span><span class="o">.</span><span class="n">Chart</span><span class="p">(</span><span class="n">smoothed_dist</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">encode</span><span class="p">(</span>
+        <span class="n">x</span><span class="o">=</span><span class="n">alt</span><span class="o">.</span><span class="n">X</span><span class="p">(</span><span class="s2">&quot;func_score&quot;</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;functional score&quot;</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="n">alt</span><span class="o">.</span><span class="n">Scale</span><span class="p">(</span><span class="n">nice</span><span class="o">=</span><span class="kc">False</span><span class="p">)),</span>
+        <span class="n">y</span><span class="o">=</span><span class="n">alt</span><span class="o">.</span><span class="n">Y</span><span class="p">(</span>
+            <span class="s2">&quot;count&quot;</span><span class="p">,</span>
+            <span class="n">axis</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+            <span class="n">scale</span><span class="o">=</span><span class="n">alt</span><span class="o">.</span><span class="n">Scale</span><span class="p">(</span><span class="nb">range</span><span class="o">=</span><span class="p">[</span><span class="n">facet_height</span><span class="p">,</span> <span class="o">-</span><span class="n">facet_overlap</span> <span class="o">*</span> <span class="n">facet_height</span><span class="p">]),</span>
+        <span class="p">),</span>
+        <span class="n">fill</span><span class="o">=</span><span class="n">alt</span><span class="o">.</span><span class="n">Fill</span><span class="p">(</span>
+            <span class="s2">&quot;mean_func_score:Q&quot;</span><span class="p">,</span>
+            <span class="n">title</span><span class="o">=</span><span class="s2">&quot;mean functional score&quot;</span><span class="p">,</span>
+            <span class="n">legend</span><span class="o">=</span><span class="n">alt</span><span class="o">.</span><span class="n">Legend</span><span class="p">(</span><span class="n">direction</span><span class="o">=</span><span class="s2">&quot;horizontal&quot;</span><span class="p">),</span>
+            <span class="n">scale</span><span class="o">=</span><span class="n">alt</span><span class="o">.</span><span class="n">Scale</span><span class="p">(</span><span class="n">scheme</span><span class="o">=</span><span class="s2">&quot;yellowgreenblue&quot;</span><span class="p">),</span>
+        <span class="p">),</span>
+        <span class="n">row</span><span class="o">=</span><span class="n">alt</span><span class="o">.</span><span class="n">Row</span><span class="p">(</span>
+            <span class="s2">&quot;variant_class&quot;</span><span class="p">,</span>
+            <span class="n">title</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+            <span class="n">header</span><span class="o">=</span><span class="n">alt</span><span class="o">.</span><span class="n">Header</span><span class="p">(</span><span class="n">labelAlign</span><span class="o">=</span><span class="s2">&quot;left&quot;</span><span class="p">,</span> <span class="n">labelAngle</span><span class="o">=</span><span class="mi">0</span><span class="p">),</span>
+            <span class="n">spacing</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+            <span class="n">sort</span><span class="o">=</span><span class="p">[</span>
+                <span class="s2">&quot;wildtype&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;synonymous&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;1 nonsynonymous&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;&gt;1 nonsynonymous&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;deletion&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;stop&quot;</span><span class="p">,</span>
+            <span class="p">],</span>
+        <span class="p">),</span>
+        <span class="n">column</span><span class="o">=</span><span class="n">alt</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span>
+            <span class="s2">&quot;library&quot;</span><span class="p">,</span>
+            <span class="n">title</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+            <span class="n">header</span><span class="o">=</span><span class="n">alt</span><span class="o">.</span><span class="n">Header</span><span class="p">(</span>
+                <span class="n">labelFontWeight</span><span class="o">=</span><span class="s2">&quot;bold&quot;</span><span class="p">,</span>
+                <span class="n">labelPadding</span><span class="o">=</span><span class="n">facet_height</span> <span class="o">*</span> <span class="n">facet_overlap</span><span class="p">,</span>
+            <span class="p">),</span>
+        <span class="p">),</span>
+        <span class="n">tooltip</span><span class="o">=</span><span class="p">[</span>
+            <span class="s2">&quot;library&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;variant_class&quot;</span><span class="p">,</span>
+            <span class="n">alt</span><span class="o">.</span><span class="n">Tooltip</span><span class="p">(</span><span class="s2">&quot;mean_func_score&quot;</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s2">&quot;.2f&quot;</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;mean functional score&quot;</span><span class="p">),</span>
+        <span class="p">],</span>
+    <span class="p">)</span>
+    <span class="o">.</span><span class="n">mark_area</span><span class="p">(</span>
+        <span class="n">interpolate</span><span class="o">=</span><span class="s2">&quot;monotone&quot;</span><span class="p">,</span>
+        <span class="n">smooth</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <span class="n">fillOpacity</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span>
+        <span class="n">stroke</span><span class="o">=</span><span class="s2">&quot;lightgray&quot;</span><span class="p">,</span>
+        <span class="n">strokeWidth</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="o">.</span><span class="n">configure_view</span><span class="p">(</span><span class="n">stroke</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">configure_axis</span><span class="p">(</span><span class="n">grid</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">properties</span><span class="p">(</span><span class="n">width</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="n">facet_height</span><span class="p">,</span> <span class="n">bounds</span><span class="o">=</span><span class="s2">&quot;flush&quot;</span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="n">ridgeline_chart</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div id="altair-viz-5ac93cfcf60f4eae8d7cdcec2fd1c389"></div>
+<script type="text/javascript">
+  var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
+  (function(spec, embedOpt){
+    let outputDiv = document.currentScript.previousElementSibling;
+    if (outputDiv.id !== "altair-viz-5ac93cfcf60f4eae8d7cdcec2fd1c389") {
+      outputDiv = document.getElementById("altair-viz-5ac93cfcf60f4eae8d7cdcec2fd1c389");
+    }
+    const paths = {
+      "vega": "https://cdn.jsdelivr.net/npm//vega@5?noext",
+      "vega-lib": "https://cdn.jsdelivr.net/npm//vega-lib?noext",
+      "vega-lite": "https://cdn.jsdelivr.net/npm//vega-lite@5.2.0?noext",
+      "vega-embed": "https://cdn.jsdelivr.net/npm//vega-embed@6?noext",
+    };
+
+    function maybeLoadScript(lib, version) {
+      var key = `${lib.replace("-", "")}_version`;
+      return (VEGA_DEBUG[key] == version) ?
+        Promise.resolve(paths[lib]) :
+        new Promise(function(resolve, reject) {
+          var s = document.createElement('script');
+          document.getElementsByTagName("head")[0].appendChild(s);
+          s.async = true;
+          s.onload = () => {
+            VEGA_DEBUG[key] = version;
+            return resolve(paths[lib]);
+          };
+          s.onerror = () => reject(`Error loading script: ${paths[lib]}`);
+          s.src = paths[lib];
+        });
+    }
+
+    function showError(err) {
+      outputDiv.innerHTML = `<div class="error" style="color:red;">${err}</div>`;
+      throw err;
+    }
+
+    function displayChart(vegaEmbed) {
+      vegaEmbed(outputDiv, spec, embedOpt)
+        .catch(err => showError(`Javascript Error: ${err.message}<br>This usually means there's a typo in your chart specification. See the javascript console for the full traceback.`));
+    }
+
+    if(typeof define === "function" && define.amd) {
+      requirejs.config({paths});
+      require(["vega-embed"], displayChart, err => showError(`Error loading script: ${err.message}`));
+    } else {
+      maybeLoadScript("vega", "5")
+        .then(() => maybeLoadScript("vega-lite", "5.2.0"))
+        .then(() => maybeLoadScript("vega-embed", "6"))
+        .catch(showError)
+        .then(() => displayChart(vegaEmbed));
+    }
+  })({"config": {"view": {"continuousWidth": 400, "continuousHeight": 300, "stroke": null}, "axis": {"grid": false}}, "data": {"name": "data-4858443198bb2339342f7170af790bae"}, "mark": {"type": "area", "fillOpacity": 0.8, "interpolate": "monotone", "smooth": true, "stroke": "lightgray", "strokeWidth": 0.5}, "bounds": "flush", "encoding": {"column": {"field": "library", "header": {"labelFontWeight": "bold", "labelPadding": 18.9}, "title": null, "type": "nominal"}, "fill": {"field": "mean_func_score", "legend": {"direction": "horizontal"}, "scale": {"scheme": "yellowgreenblue"}, "title": "mean functional score", "type": "quantitative"}, "row": {"field": "variant_class", "header": {"labelAlign": "left", "labelAngle": 0}, "sort": ["wildtype", "synonymous", "1 nonsynonymous", ">1 nonsynonymous", "deletion", "stop"], "spacing": 0, "title": null, "type": "nominal"}, "tooltip": [{"field": "library", "type": "nominal"}, {"field": "variant_class", "type": "nominal"}, {"field": "mean_func_score", "format": ".2f", "title": "mean functional score", "type": "quantitative"}], "x": {"field": "func_score", "scale": {"nice": false}, "title": "functional score", "type": "quantitative"}, "y": {"axis": null, "field": "count", "scale": {"range": [27, -18.9]}, "type": "quantitative"}}, "height": 27, "width": 200, "$schema": "https://vega.github.io/schema/vega-lite/v5.2.0.json", "datasets": {"data-4858443198bb2339342f7170af790bae": [{"library": "Lib-1", "variant_class": "1 nonsynonymous", "func_score": -13.1057, "count": 9.247506469168818e-18, "mean_func_score": -0.8361349990988903}, {"library": "Lib-1", "variant_class": "1 nonsynonymous", "func_score": -12.741485714285714, "count": 6.499581312724287e-13, "mean_func_score": -0.8361349990988903}, {"library": "Lib-1", "variant_class": "1 nonsynonymous", "func_score": -12.37727142857143, "count": 3.1631258905778362e-09, "mean_func_score": -0.8361349990988903}, {"library": "Lib-1", "variant_class": "1 nonsynonymous", "func_score": -12.013057142857143, "count": 1.06590389520638e-06, "mean_func_score": -0.8361349990988903}, {"library": "Lib-1", "variant_class": "1 nonsynonymous", "func_score": -11.648842857142858, "count": 2.4872933109696622e-05, "mean_func_score": -0.8361349990988903}, {"library": "Lib-1", "variant_class": "1 nonsynonymous", "func_score": -11.284628571428572, "count": 4.1306072886275554e-05, "mean_func_score": -0.8361349990988903}, {"library": "Lib-1", "variant_class": "1 nonsynonymous", "func_score": -10.920414285714287, "count": 5.5110203943267906e-05, "mean_func_score": -0.8361349990988903}, {"library": "Lib-1", "variant_class": "1 nonsynonymous", "func_score": -10.5562, "count": 0.0003319254822166636, "mean_func_score": -0.8361349990988903}, {"library": "Lib-1", "variant_class": "1 nonsynonymous", "func_score": -10.191985714285714, "count": 0.0008007095191726228, "mean_func_score": -0.8361349990988903}, {"library": "Lib-1", "variant_class": "1 nonsynonymous", "func_score": -9.82777142857143, "count": 0.0020268075196881313, "mean_func_score": -0.8361349990988903}, {"library": "Lib-1", "variant_class": "1 nonsynonymous", "func_score": -9.463557142857145, "count": 0.004059985370481866, "mean_func_score": -0.8361349990988903}, {"library": "Lib-1", "variant_class": "1 nonsynonymous", "func_score": -9.099342857142858, "count": 0.006352777126013955, "mean_func_score": -0.8361349990988903}, {"library": "Lib-1", "variant_class": "1 nonsynonymous", "func_score": -8.735128571428572, "count": 0.00879976598566591, "mean_func_score": -0.8361349990988903}, {"library": "Lib-1", "variant_class": "1 nonsynonymous", "func_score": -8.370914285714285, "count": 0.011524602289879319, "mean_func_score": -0.8361349990988903}, {"library": "Lib-1", "variant_class": "1 nonsynonymous", "func_score": -8.0067, "count": 0.014163223958604552, "mean_func_score": -0.8361349990988903}, {"library": "Lib-1", "variant_class": "1 nonsynonymous", "func_score": -7.642485714285715, "count": 0.014453789181937671, "mean_func_score": -0.8361349990988903}, {"library": "Lib-1", "variant_class": "1 nonsynonymous", "func_score": -7.278271428571429, "count": 0.013210325729074431, "mean_func_score": -0.8361349990988903}, {"library": "Lib-1", "variant_class": "1 nonsynonymous", "func_score": -6.914057142857144, "count": 0.01221911868519512, "mean_func_score": -0.8361349990988903}, {"library": "Lib-1", "variant_class": "1 nonsynonymous", "func_score": -6.549842857142858, "count": 0.011393533355340258, "mean_func_score": -0.8361349990988903}, {"library": "Lib-1", "variant_class": "1 nonsynonymous", "func_score": -6.185628571428572, "count": 0.010520505991133078, "mean_func_score": -0.8361349990988903}, {"library": "Lib-1", "variant_class": "1 nonsynonymous", "func_score": -5.821414285714287, "count": 0.01042107177033692, "mean_func_score": -0.8361349990988903}, {"library": "Lib-1", "variant_class": "1 nonsynonymous", "func_score": -5.4572, "count": 0.009433376742648608, "mean_func_score": -0.8361349990988903}, {"library": "Lib-1", "variant_class": "1 nonsynonymous", "func_score": -5.092985714285716, "count": 0.008327177236867468, "mean_func_score": -0.8361349990988903}, {"library": "Lib-1", "variant_class": "1 nonsynonymous", "func_score": -4.728771428571429, "count": 0.011105974858948174, "mean_func_score": -0.8361349990988903}, {"library": "Lib-1", "variant_class": "1 nonsynonymous", "func_score": -4.364557142857143, "count": 0.013483094429075583, "mean_func_score": -0.8361349990988903}, {"library": "Lib-1", "variant_class": "1 nonsynonymous", "func_score": -4.000342857142858, "count": 0.016216819444533806, "mean_func_score": -0.8361349990988903}, {"library": "Lib-1", "variant_class": "1 nonsynonymous", "func_score": -3.6361285714285714, "count": 0.0209038605273032, "mean_func_score": -0.8361349990988903}, {"library": "Lib-1", "variant_class": "1 nonsynonymous", "func_score": -3.2719142857142867, "count": 0.027981065967272747, "mean_func_score": -0.8361349990988903}, {"library": "Lib-1", "variant_class": "1 nonsynonymous", "func_score": -2.9077, "count": 0.03633140639840864, "mean_func_score": -0.8361349990988903}, {"library": "Lib-1", "variant_class": "1 nonsynonymous", "func_score": -2.5434857142857155, "count": 0.04945776477568321, "mean_func_score": -0.8361349990988903}, {"library": "Lib-1", "variant_class": "1 nonsynonymous", "func_score": -2.179271428571429, "count": 0.07103738761570974, "mean_func_score": -0.8361349990988903}, {"library": "Lib-1", "variant_class": "1 nonsynonymous", "func_score": -1.8150571428571443, "count": 0.1014930708150588, "mean_func_score": -0.8361349990988903}, {"library": "Lib-1", "variant_class": "1 nonsynonymous", "func_score": -1.4508428571428578, "count": 0.1501465618449831, "mean_func_score": -0.8361349990988903}, {"library": "Lib-1", "variant_class": "1 nonsynonymous", "func_score": -1.0866285714285713, "count": 0.23109958711447762, "mean_func_score": -0.8361349990988903}, {"library": "Lib-1", "variant_class": "1 nonsynonymous", "func_score": -0.7224142857142866, "count": 0.33614615432797823, "mean_func_score": -0.8361349990988903}, {"library": "Lib-1", "variant_class": "1 nonsynonymous", "func_score": -0.3582000000000001, "count": 0.4277238154223999, "mean_func_score": -0.8361349990988903}, {"library": "Lib-1", "variant_class": "1 nonsynonymous", "func_score": 0.0060142857142846395, "count": 0.4299802250613113, "mean_func_score": -0.8361349990988903}, {"library": "Lib-1", "variant_class": "1 nonsynonymous", "func_score": 0.37022857142857113, "count": 0.32678974376382897, "mean_func_score": -0.8361349990988903}, {"library": "Lib-1", "variant_class": "1 nonsynonymous", "func_score": 0.7344428571428558, "count": 0.19350927057950826, "mean_func_score": -0.8361349990988903}, {"library": "Lib-1", "variant_class": "1 nonsynonymous", "func_score": 1.0986571428571423, "count": 0.09715930685409178, "mean_func_score": -0.8361349990988903}, {"library": "Lib-1", "variant_class": "1 nonsynonymous", "func_score": 1.462871428571427, "count": 0.04159298113079999, "mean_func_score": -0.8361349990988903}, {"library": "Lib-1", "variant_class": "1 nonsynonymous", "func_score": 1.8270857142857135, "count": 0.01600112287313384, "mean_func_score": -0.8361349990988903}, {"library": "Lib-1", "variant_class": "1 nonsynonymous", "func_score": 2.1913, "count": 0.006037013886107438, "mean_func_score": -0.8361349990988903}, {"library": "Lib-1", "variant_class": "1 nonsynonymous", "func_score": 2.5555142857142847, "count": 0.002083463638603461, "mean_func_score": -0.8361349990988903}, {"library": "Lib-1", "variant_class": "1 nonsynonymous", "func_score": 2.9197285714285695, "count": 0.0007604335520680832, "mean_func_score": -0.8361349990988903}, {"library": "Lib-1", "variant_class": "1 nonsynonymous", "func_score": 3.283942857142856, "count": 0.00025261889257832774, "mean_func_score": -0.8361349990988903}, {"library": "Lib-1", "variant_class": "1 nonsynonymous", "func_score": 3.6481571428571424, "count": 7.74350425056727e-05, "mean_func_score": -0.8361349990988903}, {"library": "Lib-1", "variant_class": "1 nonsynonymous", "func_score": 4.012371428571429, "count": 8.470417762705344e-05, "mean_func_score": -0.8361349990988903}, {"library": "Lib-1", "variant_class": "1 nonsynonymous", "func_score": 4.376585714285715, "count": 2.158438795747146e-05, "mean_func_score": -0.8361349990988903}, {"library": "Lib-1", "variant_class": "1 nonsynonymous", "func_score": 4.7408, "count": 5.093489856420992e-07, "mean_func_score": -0.8361349990988903}, {"library": "Lib-1", "variant_class": ">1 nonsynonymous", "func_score": -13.1057, "count": 6.312602666801256e-14, "mean_func_score": -2.371234077580389}, {"library": "Lib-1", "variant_class": ">1 nonsynonymous", "func_score": -12.741485714285714, "count": 1.1547563196221556e-10, "mean_func_score": -2.371234077580389}, {"library": "Lib-1", "variant_class": ">1 nonsynonymous", "func_score": -12.37727142857143, "count": 3.5936226881071903e-08, "mean_func_score": -2.371234077580389}, {"library": "Lib-1", "variant_class": ">1 nonsynonymous", "func_score": -12.013057142857143, "count": 1.972767823755871e-06, "mean_func_score": -2.371234077580389}, {"library": "Lib-1", "variant_class": ">1 nonsynonymous", "func_score": -11.648842857142858, "count": 2.2181791819244937e-05, "mean_func_score": -2.371234077580389}, {"library": "Lib-1", "variant_class": ">1 nonsynonymous", "func_score": -11.284628571428572, "count": 0.0001054423475269988, "mean_func_score": -2.371234077580389}, {"library": "Lib-1", "variant_class": ">1 nonsynonymous", "func_score": -10.920414285714287, "count": 0.000461473030208903, "mean_func_score": -2.371234077580389}, {"library": "Lib-1", "variant_class": ">1 nonsynonymous", "func_score": -10.5562, "count": 0.0014399452259582393, "mean_func_score": -2.371234077580389}, {"library": "Lib-1", "variant_class": ">1 nonsynonymous", "func_score": -10.191985714285714, "count": 0.003763802239107102, "mean_func_score": -2.371234077580389}, {"library": "Lib-1", "variant_class": ">1 nonsynonymous", "func_score": -9.82777142857143, "count": 0.008123937127769173, "mean_func_score": -2.371234077580389}, {"library": "Lib-1", "variant_class": ">1 nonsynonymous", "func_score": -9.463557142857145, "count": 0.01597760665950816, "mean_func_score": -2.371234077580389}, {"library": "Lib-1", "variant_class": ">1 nonsynonymous", "func_score": -9.099342857142858, "count": 0.02655560952778013, "mean_func_score": -2.371234077580389}, {"library": "Lib-1", "variant_class": ">1 nonsynonymous", "func_score": -8.735128571428572, "count": 0.03674906431427927, "mean_func_score": -2.371234077580389}, {"library": "Lib-1", "variant_class": ">1 nonsynonymous", "func_score": -8.370914285714285, "count": 0.046021459094118776, "mean_func_score": -2.371234077580389}, {"library": "Lib-1", "variant_class": ">1 nonsynonymous", "func_score": -8.0067, "count": 0.05201043017942449, "mean_func_score": -2.371234077580389}, {"library": "Lib-1", "variant_class": ">1 nonsynonymous", "func_score": -7.642485714285715, "count": 0.053386114073634444, "mean_func_score": -2.371234077580389}, {"library": "Lib-1", "variant_class": ">1 nonsynonymous", "func_score": -7.278271428571429, "count": 0.05123344063445301, "mean_func_score": -2.371234077580389}, {"library": "Lib-1", "variant_class": ">1 nonsynonymous", "func_score": -6.914057142857144, "count": 0.04525218319959799, "mean_func_score": -2.371234077580389}, {"library": "Lib-1", "variant_class": ">1 nonsynonymous", "func_score": -6.549842857142858, "count": 0.0396052903982808, "mean_func_score": -2.371234077580389}, {"library": "Lib-1", "variant_class": ">1 nonsynonymous", "func_score": -6.185628571428572, "count": 0.03645824660196455, "mean_func_score": -2.371234077580389}, {"library": "Lib-1", "variant_class": ">1 nonsynonymous", "func_score": -5.821414285714287, "count": 0.034220424967417444, "mean_func_score": -2.371234077580389}, {"library": "Lib-1", "variant_class": ">1 nonsynonymous", "func_score": -5.4572, "count": 0.031143039859015613, "mean_func_score": -2.371234077580389}, {"library": "Lib-1", "variant_class": ">1 nonsynonymous", "func_score": -5.092985714285716, "count": 0.02881566428558522, "mean_func_score": -2.371234077580389}, {"library": "Lib-1", "variant_class": ">1 nonsynonymous", "func_score": -4.728771428571429, "count": 0.032820894603733275, "mean_func_score": -2.371234077580389}, {"library": "Lib-1", "variant_class": ">1 nonsynonymous", "func_score": -4.364557142857143, "count": 0.04070323182626559, "mean_func_score": -2.371234077580389}, {"library": "Lib-1", "variant_class": ">1 nonsynonymous", "func_score": -4.000342857142858, "count": 0.05115446812814769, "mean_func_score": -2.371234077580389}, {"library": "Lib-1", "variant_class": ">1 nonsynonymous", "func_score": -3.6361285714285714, "count": 0.06445171899006573, "mean_func_score": -2.371234077580389}, {"library": "Lib-1", "variant_class": ">1 nonsynonymous", "func_score": -3.2719142857142867, "count": 0.07873019851114332, "mean_func_score": -2.371234077580389}, {"library": "Lib-1", "variant_class": ">1 nonsynonymous", "func_score": -2.9077, "count": 0.09566634694763117, "mean_func_score": -2.371234077580389}, {"library": "Lib-1", "variant_class": ">1 nonsynonymous", "func_score": -2.5434857142857155, "count": 0.11583077110006917, "mean_func_score": -2.371234077580389}, {"library": "Lib-1", "variant_class": ">1 nonsynonymous", "func_score": -2.179271428571429, "count": 0.14031929617692088, "mean_func_score": -2.371234077580389}, {"library": "Lib-1", "variant_class": ">1 nonsynonymous", "func_score": -1.8150571428571443, "count": 0.16625136595579254, "mean_func_score": -2.371234077580389}, {"library": "Lib-1", "variant_class": ">1 nonsynonymous", "func_score": -1.4508428571428578, "count": 0.19336292958408244, "mean_func_score": -2.371234077580389}, {"library": "Lib-1", "variant_class": ">1 nonsynonymous", "func_score": -1.0866285714285713, "count": 0.22351051151759826, "mean_func_score": -2.371234077580389}, {"library": "Lib-1", "variant_class": ">1 nonsynonymous", "func_score": -0.7224142857142866, "count": 0.24537724464924143, "mean_func_score": -2.371234077580389}, {"library": "Lib-1", "variant_class": ">1 nonsynonymous", "func_score": -0.3582000000000001, "count": 0.24520490986787097, "mean_func_score": -2.371234077580389}, {"library": "Lib-1", "variant_class": ">1 nonsynonymous", "func_score": 0.0060142857142846395, "count": 0.21356106518390872, "mean_func_score": -2.371234077580389}, {"library": "Lib-1", "variant_class": ">1 nonsynonymous", "func_score": 0.37022857142857113, "count": 0.15343683963782342, "mean_func_score": -2.371234077580389}, {"library": "Lib-1", "variant_class": ">1 nonsynonymous", "func_score": 0.7344428571428558, "count": 0.09125828585600383, "mean_func_score": -2.371234077580389}, {"library": "Lib-1", "variant_class": ">1 nonsynonymous", "func_score": 1.0986571428571423, "count": 0.046709123630120294, "mean_func_score": -2.371234077580389}, {"library": "Lib-1", "variant_class": ">1 nonsynonymous", "func_score": 1.462871428571427, "count": 0.02123996399386301, "mean_func_score": -2.371234077580389}, {"library": "Lib-1", "variant_class": ">1 nonsynonymous", "func_score": 1.8270857142857135, "count": 0.00879747232778079, "mean_func_score": -2.371234077580389}, {"library": "Lib-1", "variant_class": ">1 nonsynonymous", "func_score": 2.1913, "count": 0.003568342772389792, "mean_func_score": -2.371234077580389}, {"library": "Lib-1", "variant_class": ">1 nonsynonymous", "func_score": 2.5555142857142847, "count": 0.0015431565750122292, "mean_func_score": -2.371234077580389}, {"library": "Lib-1", "variant_class": ">1 nonsynonymous", "func_score": 2.9197285714285695, "count": 0.0005370072728134106, "mean_func_score": -2.371234077580389}, {"library": "Lib-1", "variant_class": ">1 nonsynonymous", "func_score": 3.283942857142856, "count": 0.00014989355893470658, "mean_func_score": -2.371234077580389}, {"library": "Lib-1", "variant_class": ">1 nonsynonymous", "func_score": 3.6481571428571424, "count": 7.255140400151492e-05, "mean_func_score": -2.371234077580389}, {"library": "Lib-1", "variant_class": ">1 nonsynonymous", "func_score": 4.012371428571429, "count": 2.8664400584155225e-05, "mean_func_score": -2.371234077580389}, {"library": "Lib-1", "variant_class": ">1 nonsynonymous", "func_score": 4.376585714285715, "count": 2.854702800286813e-06, "mean_func_score": -2.371234077580389}, {"library": "Lib-1", "variant_class": ">1 nonsynonymous", "func_score": 4.7408, "count": 5.069855307921791e-08, "mean_func_score": -2.371234077580389}, {"library": "Lib-1", "variant_class": "deletion", "func_score": -13.1057, "count": 1.0794338422336193e-07, "mean_func_score": -3.098082543731779}, {"library": "Lib-1", "variant_class": "deletion", "func_score": -12.741485714285714, "count": 1.0745918429211387e-06, "mean_func_score": -3.098082543731779}, {"library": "Lib-1", "variant_class": "deletion", "func_score": -12.37727142857143, "count": 7.777112650181985e-06, "mean_func_score": -3.098082543731779}, {"library": "Lib-1", "variant_class": "deletion", "func_score": -12.013057142857143, "count": 4.173912530404933e-05, "mean_func_score": -3.098082543731779}, {"library": "Lib-1", "variant_class": "deletion", "func_score": -11.648842857142858, "count": 0.00017182528356553134, "mean_func_score": -3.098082543731779}, {"library": "Lib-1", "variant_class": "deletion", "func_score": -11.284628571428572, "count": 0.0005704328958694525, "mean_func_score": -3.098082543731779}, {"library": "Lib-1", "variant_class": "deletion", "func_score": -10.920414285714287, "count": 0.0016157245548551718, "mean_func_score": -3.098082543731779}, {"library": "Lib-1", "variant_class": "deletion", "func_score": -10.5562, "count": 0.004055366018143301, "mean_func_score": -3.098082543731779}, {"library": "Lib-1", "variant_class": "deletion", "func_score": -10.191985714285714, "count": 0.009065414860830422, "mean_func_score": -3.098082543731779}, {"library": "Lib-1", "variant_class": "deletion", "func_score": -9.82777142857143, "count": 0.01781790957467065, "mean_func_score": -3.098082543731779}, {"library": "Lib-1", "variant_class": "deletion", "func_score": -9.463557142857145, "count": 0.03049283877483631, "mean_func_score": -3.098082543731779}, {"library": "Lib-1", "variant_class": "deletion", "func_score": -9.099342857142858, "count": 0.04543380900059331, "mean_func_score": -3.098082543731779}, {"library": "Lib-1", "variant_class": "deletion", "func_score": -8.735128571428572, "count": 0.059404780382626664, "mean_func_score": -3.098082543731779}, {"library": "Lib-1", "variant_class": "deletion", "func_score": -8.370914285714285, "count": 0.0692070609555948, "mean_func_score": -3.098082543731779}, {"library": "Lib-1", "variant_class": "deletion", "func_score": -8.0067, "count": 0.07358429366087463, "mean_func_score": -3.098082543731779}, {"library": "Lib-1", "variant_class": "deletion", "func_score": -7.642485714285715, "count": 0.07348839272699201, "mean_func_score": -3.098082543731779}, {"library": "Lib-1", "variant_class": "deletion", "func_score": -7.278271428571429, "count": 0.07034798167871521, "mean_func_score": -3.098082543731779}, {"library": "Lib-1", "variant_class": "deletion", "func_score": -6.914057142857144, "count": 0.06480581211403806, "mean_func_score": -3.098082543731779}, {"library": "Lib-1", "variant_class": "deletion", "func_score": -6.549842857142858, "count": 0.05752718419018162, "mean_func_score": -3.098082543731779}, {"library": "Lib-1", "variant_class": "deletion", "func_score": -6.185628571428572, "count": 0.050207995384997706, "mean_func_score": -3.098082543731779}, {"library": "Lib-1", "variant_class": "deletion", "func_score": -5.821414285714287, "count": 0.04489200307780365, "mean_func_score": -3.098082543731779}, {"library": "Lib-1", "variant_class": "deletion", "func_score": -5.4572, "count": 0.04264269329914908, "mean_func_score": -3.098082543731779}, {"library": "Lib-1", "variant_class": "deletion", "func_score": -5.092985714285716, "count": 0.04345154517424025, "mean_func_score": -3.098082543731779}, {"library": "Lib-1", "variant_class": "deletion", "func_score": -4.728771428571429, "count": 0.04722498581713149, "mean_func_score": -3.098082543731779}, {"library": "Lib-1", "variant_class": "deletion", "func_score": -4.364557142857143, "count": 0.05432775401514443, "mean_func_score": -3.098082543731779}, {"library": "Lib-1", "variant_class": "deletion", "func_score": -4.000342857142858, "count": 0.06496068532388773, "mean_func_score": -3.098082543731779}, {"library": "Lib-1", "variant_class": "deletion", "func_score": -3.6361285714285714, "count": 0.07837407736997597, "mean_func_score": -3.098082543731779}, {"library": "Lib-1", "variant_class": "deletion", "func_score": -3.2719142857142867, "count": 0.09321268560363155, "mean_func_score": -3.098082543731779}, {"library": "Lib-1", "variant_class": "deletion", "func_score": -2.9077, "count": 0.10839643748738716, "mean_func_score": -3.098082543731779}, {"library": "Lib-1", "variant_class": "deletion", "func_score": -2.5434857142857155, "count": 0.12327265665445418, "mean_func_score": -3.098082543731779}, {"library": "Lib-1", "variant_class": "deletion", "func_score": -2.179271428571429, "count": 0.13715610576442178, "mean_func_score": -3.098082543731779}, {"library": "Lib-1", "variant_class": "deletion", "func_score": -1.8150571428571443, "count": 0.14926697287054516, "mean_func_score": -3.098082543731779}, {"library": "Lib-1", "variant_class": "deletion", "func_score": -1.4508428571428578, "count": 0.15949427486356282, "mean_func_score": -3.098082543731779}, {"library": "Lib-1", "variant_class": "deletion", "func_score": -1.0866285714285713, "count": 0.16816662351974454, "mean_func_score": -3.098082543731779}, {"library": "Lib-1", "variant_class": "deletion", "func_score": -0.7224142857142866, "count": 0.17335681428926344, "mean_func_score": -3.098082543731779}, {"library": "Lib-1", "variant_class": "deletion", "func_score": -0.3582000000000001, "count": 0.16952080723950802, "mean_func_score": -3.098082543731779}, {"library": "Lib-1", "variant_class": "deletion", "func_score": 0.0060142857142846395, "count": 0.1516299582777338, "mean_func_score": -3.098082543731779}, {"library": "Lib-1", "variant_class": "deletion", "func_score": 0.37022857142857113, "count": 0.12084810981657078, "mean_func_score": -3.098082543731779}, {"library": "Lib-1", "variant_class": "deletion", "func_score": 0.7344428571428558, "count": 0.084724602026347, "mean_func_score": -3.098082543731779}, {"library": "Lib-1", "variant_class": "deletion", "func_score": 1.0986571428571423, "count": 0.052026481030184084, "mean_func_score": -3.098082543731779}, {"library": "Lib-1", "variant_class": "deletion", "func_score": 1.462871428571427, "count": 0.027992941719067688, "mean_func_score": -3.098082543731779}, {"library": "Lib-1", "variant_class": "deletion", "func_score": 1.8270857142857135, "count": 0.013296837546498883, "mean_func_score": -3.098082543731779}, {"library": "Lib-1", "variant_class": "deletion", "func_score": 2.1913, "count": 0.00570099157399263, "mean_func_score": -3.098082543731779}, {"library": "Lib-1", "variant_class": "deletion", "func_score": 2.5555142857142847, "count": 0.0023044393294843852, "mean_func_score": -3.098082543731779}, {"library": "Lib-1", "variant_class": "deletion", "func_score": 2.9197285714285695, "count": 0.0009321260715651955, "mean_func_score": -3.098082543731779}, {"library": "Lib-1", "variant_class": "deletion", "func_score": 3.283942857142856, "count": 0.000388106804072277, "mean_func_score": -3.098082543731779}, {"library": "Lib-1", "variant_class": "deletion", "func_score": 3.6481571428571424, "count": 0.00015591324783588748, "mean_func_score": -3.098082543731779}, {"library": "Lib-1", "variant_class": "deletion", "func_score": 4.012371428571429, "count": 5.360400669481133e-05, "mean_func_score": -3.098082543731779}, {"library": "Lib-1", "variant_class": "deletion", "func_score": 4.376585714285715, "count": 1.4346739719993966e-05, "mean_func_score": -3.098082543731779}, {"library": "Lib-1", "variant_class": "deletion", "func_score": 4.7408, "count": 2.839431322536416e-06, "mean_func_score": -3.098082543731779}, {"library": "Lib-1", "variant_class": "stop", "func_score": -13.1057, "count": 1.743112357741224e-07, "mean_func_score": -5.255875}, {"library": "Lib-1", "variant_class": "stop", "func_score": -12.741485714285714, "count": 2.4296394336634227e-06, "mean_func_score": -5.255875}, {"library": "Lib-1", "variant_class": "stop", "func_score": -12.37727142857143, "count": 2.171183978751206e-05, "mean_func_score": -5.255875}, {"library": "Lib-1", "variant_class": "stop", "func_score": -12.013057142857143, "count": 0.00012834695974620275, "mean_func_score": -5.255875}, {"library": "Lib-1", "variant_class": "stop", "func_score": -11.648842857142858, "count": 0.0005307640212867193, "mean_func_score": -5.255875}, {"library": "Lib-1", "variant_class": "stop", "func_score": -11.284628571428572, "count": 0.0016718240497832252, "mean_func_score": -5.255875}, {"library": "Lib-1", "variant_class": "stop", "func_score": -10.920414285714287, "count": 0.004404652491187866, "mean_func_score": -5.255875}, {"library": "Lib-1", "variant_class": "stop", "func_score": -10.5562, "count": 0.010313817134340706, "mean_func_score": -5.255875}, {"library": "Lib-1", "variant_class": "stop", "func_score": -10.191985714285714, "count": 0.021763328546193138, "mean_func_score": -5.255875}, {"library": "Lib-1", "variant_class": "stop", "func_score": -9.82777142857143, "count": 0.04086180460304121, "mean_func_score": -5.255875}, {"library": "Lib-1", "variant_class": "stop", "func_score": -9.463557142857145, "count": 0.06718925294144303, "mean_func_score": -5.255875}, {"library": "Lib-1", "variant_class": "stop", "func_score": -9.099342857142858, "count": 0.0966661144289968, "mean_func_score": -5.255875}, {"library": "Lib-1", "variant_class": "stop", "func_score": -8.735128571428572, "count": 0.12355835158393727, "mean_func_score": -5.255875}, {"library": "Lib-1", "variant_class": "stop", "func_score": -8.370914285714285, "count": 0.14242482613435772, "mean_func_score": -5.255875}, {"library": "Lib-1", "variant_class": "stop", "func_score": -8.0067, "count": 0.14900232808261055, "mean_func_score": -5.255875}, {"library": "Lib-1", "variant_class": "stop", "func_score": -7.642485714285715, "count": 0.14300574907606456, "mean_func_score": -5.255875}, {"library": "Lib-1", "variant_class": "stop", "func_score": -7.278271428571429, "count": 0.1290660732401444, "mean_func_score": -5.255875}, {"library": "Lib-1", "variant_class": "stop", "func_score": -6.914057142857144, "count": 0.11282635618280584, "mean_func_score": -5.255875}, {"library": "Lib-1", "variant_class": "stop", "func_score": -6.549842857142858, "count": 0.09816707688552039, "mean_func_score": -5.255875}, {"library": "Lib-1", "variant_class": "stop", "func_score": -6.185628571428572, "count": 0.08743327300829548, "mean_func_score": -5.255875}, {"library": "Lib-1", "variant_class": "stop", "func_score": -5.821414285714287, "count": 0.08103013067373724, "mean_func_score": -5.255875}, {"library": "Lib-1", "variant_class": "stop", "func_score": -5.4572, "count": 0.0782529661063399, "mean_func_score": -5.255875}, {"library": "Lib-1", "variant_class": "stop", "func_score": -5.092985714285716, "count": 0.07921711337711831, "mean_func_score": -5.255875}, {"library": "Lib-1", "variant_class": "stop", "func_score": -4.728771428571429, "count": 0.08417253482990027, "mean_func_score": -5.255875}, {"library": "Lib-1", "variant_class": "stop", "func_score": -4.364557142857143, "count": 0.09277860383895963, "mean_func_score": -5.255875}, {"library": "Lib-1", "variant_class": "stop", "func_score": -4.000342857142858, "count": 0.10392703974097572, "mean_func_score": -5.255875}, {"library": "Lib-1", "variant_class": "stop", "func_score": -3.6361285714285714, "count": 0.11472025988284731, "mean_func_score": -5.255875}, {"library": "Lib-1", "variant_class": "stop", "func_score": -3.2719142857142867, "count": 0.1221748368082491, "mean_func_score": -5.255875}, {"library": "Lib-1", "variant_class": "stop", "func_score": -2.9077, "count": 0.1254519653927576, "mean_func_score": -5.255875}, {"library": "Lib-1", "variant_class": "stop", "func_score": -2.5434857142857155, "count": 0.12411197493046798, "mean_func_score": -5.255875}, {"library": "Lib-1", "variant_class": "stop", "func_score": -2.179271428571429, "count": 0.1162565814442354, "mean_func_score": -5.255875}, {"library": "Lib-1", "variant_class": "stop", "func_score": -1.8150571428571443, "count": 0.10095153396028303, "mean_func_score": -5.255875}, {"library": "Lib-1", "variant_class": "stop", "func_score": -1.4508428571428578, "count": 0.08126126398957136, "mean_func_score": -5.255875}, {"library": "Lib-1", "variant_class": "stop", "func_score": -1.0866285714285713, "count": 0.062030321146512545, "mean_func_score": -5.255875}, {"library": "Lib-1", "variant_class": "stop", "func_score": -0.7224142857142866, "count": 0.045992632166454876, "mean_func_score": -5.255875}, {"library": "Lib-1", "variant_class": "stop", "func_score": -0.3582000000000001, "count": 0.03370500966616075, "mean_func_score": -5.255875}, {"library": "Lib-1", "variant_class": "stop", "func_score": 0.0060142857142846395, "count": 0.024699568703555656, "mean_func_score": -5.255875}, {"library": "Lib-1", "variant_class": "stop", "func_score": 0.37022857142857113, "count": 0.01786784329296919, "mean_func_score": -5.255875}, {"library": "Lib-1", "variant_class": "stop", "func_score": 0.7344428571428558, "count": 0.012247449603459167, "mean_func_score": -5.255875}, {"library": "Lib-1", "variant_class": "stop", "func_score": 1.0986571428571423, "count": 0.007666835405950075, "mean_func_score": -5.255875}, {"library": "Lib-1", "variant_class": "stop", "func_score": 1.462871428571427, "count": 0.004339610090330819, "mean_func_score": -5.255875}, {"library": "Lib-1", "variant_class": "stop", "func_score": 1.8270857142857135, "count": 0.0022245181552564834, "mean_func_score": -5.255875}, {"library": "Lib-1", "variant_class": "stop", "func_score": 2.1913, "count": 0.0010088873882460611, "mean_func_score": -5.255875}, {"library": "Lib-1", "variant_class": "stop", "func_score": 2.5555142857142847, "count": 0.0003780621646167174, "mean_func_score": -5.255875}, {"library": "Lib-1", "variant_class": "stop", "func_score": 2.9197285714285695, "count": 0.00010670689204431734, "mean_func_score": -5.255875}, {"library": "Lib-1", "variant_class": "stop", "func_score": 3.283942857142856, "count": 2.0939352237225163e-05, "mean_func_score": -5.255875}, {"library": "Lib-1", "variant_class": "stop", "func_score": 3.6481571428571424, "count": 2.710354532690168e-06, "mean_func_score": -5.255875}, {"library": "Lib-1", "variant_class": "stop", "func_score": 4.012371428571429, "count": 2.2455822978673492e-07, "mean_func_score": -5.255875}, {"library": "Lib-1", "variant_class": "stop", "func_score": 4.376585714285715, "count": 1.1716127208044407e-08, "mean_func_score": -5.255875}, {"library": "Lib-1", "variant_class": "stop", "func_score": 4.7408, "count": 3.8154731967411534e-10, "mean_func_score": -5.255875}, {"library": "Lib-1", "variant_class": "synonymous", "func_score": -13.1057, "count": 1.4996879708417845e-63, "mean_func_score": -0.1430911599099099}, {"library": "Lib-1", "variant_class": "synonymous", "func_score": -12.741485714285714, "count": 4.966720113217967e-51, "mean_func_score": -0.1430911599099099}, {"library": "Lib-1", "variant_class": "synonymous", "func_score": -12.37727142857143, "count": 5.509080599950775e-40, "mean_func_score": -0.1430911599099099}, {"library": "Lib-1", "variant_class": "synonymous", "func_score": -12.013057142857143, "count": 2.0465823552515932e-30, "mean_func_score": -0.1430911599099099}, {"library": "Lib-1", "variant_class": "synonymous", "func_score": -11.648842857142858, "count": 2.546361062700818e-22, "mean_func_score": -0.1430911599099099}, {"library": "Lib-1", "variant_class": "synonymous", "func_score": -11.284628571428572, "count": 1.0610880021304954e-15, "mean_func_score": -0.1430911599099099}, {"library": "Lib-1", "variant_class": "synonymous", "func_score": -10.920414285714287, "count": 1.4808923278960412e-10, "mean_func_score": -0.1430911599099099}, {"library": "Lib-1", "variant_class": "synonymous", "func_score": -10.5562, "count": 6.92207375794591e-07, "mean_func_score": -0.1430911599099099}, {"library": "Lib-1", "variant_class": "synonymous", "func_score": -10.191985714285714, "count": 0.00010836520244569225, "mean_func_score": -0.1430911599099099}, {"library": "Lib-1", "variant_class": "synonymous", "func_score": -9.82777142857143, "count": 0.0005685383114269246, "mean_func_score": -0.1430911599099099}, {"library": "Lib-1", "variant_class": "synonymous", "func_score": -9.463557142857145, "count": 0.00017786939715199243, "mean_func_score": -0.1430911599099099}, {"library": "Lib-1", "variant_class": "synonymous", "func_score": -9.099342857142858, "count": 0.0006386571293118961, "mean_func_score": -0.1430911599099099}, {"library": "Lib-1", "variant_class": "synonymous", "func_score": -8.735128571428572, "count": 0.0011821260651208524, "mean_func_score": -0.1430911599099099}, {"library": "Lib-1", "variant_class": "synonymous", "func_score": -8.370914285714285, "count": 0.0016346429839082524, "mean_func_score": -0.1430911599099099}, {"library": "Lib-1", "variant_class": "synonymous", "func_score": -8.0067, "count": 0.0021794803051768063, "mean_func_score": -0.1430911599099099}, {"library": "Lib-1", "variant_class": "synonymous", "func_score": -7.642485714285715, "count": 0.002428187869889989, "mean_func_score": -0.1430911599099099}, {"library": "Lib-1", "variant_class": "synonymous", "func_score": -7.278271428571429, "count": 0.0025839630388596454, "mean_func_score": -0.1430911599099099}, {"library": "Lib-1", "variant_class": "synonymous", "func_score": -6.914057142857144, "count": 0.002160280443603099, "mean_func_score": -0.1430911599099099}, {"library": "Lib-1", "variant_class": "synonymous", "func_score": -6.549842857142858, "count": 0.0025799104951062034, "mean_func_score": -0.1430911599099099}, {"library": "Lib-1", "variant_class": "synonymous", "func_score": -6.185628571428572, "count": 0.0037712559419130686, "mean_func_score": -0.1430911599099099}, {"library": "Lib-1", "variant_class": "synonymous", "func_score": -5.821414285714287, "count": 0.0028651227082285378, "mean_func_score": -0.1430911599099099}, {"library": "Lib-1", "variant_class": "synonymous", "func_score": -5.4572, "count": 0.0009443861998904284, "mean_func_score": -0.1430911599099099}, {"library": "Lib-1", "variant_class": "synonymous", "func_score": -5.092985714285716, "count": 0.00024178460291375922, "mean_func_score": -0.1430911599099099}, {"library": "Lib-1", "variant_class": "synonymous", "func_score": -4.728771428571429, "count": 0.0011925899494701167, "mean_func_score": -0.1430911599099099}, {"library": "Lib-1", "variant_class": "synonymous", "func_score": -4.364557142857143, "count": 0.0009593547549369811, "mean_func_score": -0.1430911599099099}, {"library": "Lib-1", "variant_class": "synonymous", "func_score": -4.000342857142858, "count": 0.000710086899582972, "mean_func_score": -0.1430911599099099}, {"library": "Lib-1", "variant_class": "synonymous", "func_score": -3.6361285714285714, "count": 0.0035567709474771864, "mean_func_score": -0.1430911599099099}, {"library": "Lib-1", "variant_class": "synonymous", "func_score": -3.2719142857142867, "count": 0.007857097479315673, "mean_func_score": -0.1430911599099099}, {"library": "Lib-1", "variant_class": "synonymous", "func_score": -2.9077, "count": 0.006024179628808457, "mean_func_score": -0.1430911599099099}, {"library": "Lib-1", "variant_class": "synonymous", "func_score": -2.5434857142857155, "count": 0.010225622519572574, "mean_func_score": -0.1430911599099099}, {"library": "Lib-1", "variant_class": "synonymous", "func_score": -2.179271428571429, "count": 0.01713799595405873, "mean_func_score": -0.1430911599099099}, {"library": "Lib-1", "variant_class": "synonymous", "func_score": -1.8150571428571443, "count": 0.03893155444342214, "mean_func_score": -0.1430911599099099}, {"library": "Lib-1", "variant_class": "synonymous", "func_score": -1.4508428571428578, "count": 0.07733212378165079, "mean_func_score": -0.1430911599099099}, {"library": "Lib-1", "variant_class": "synonymous", "func_score": -1.0866285714285713, "count": 0.1638180064259902, "mean_func_score": -0.1430911599099099}, {"library": "Lib-1", "variant_class": "synonymous", "func_score": -0.7224142857142866, "count": 0.31459007980002296, "mean_func_score": -0.1430911599099099}, {"library": "Lib-1", "variant_class": "synonymous", "func_score": -0.3582000000000001, "count": 0.49749217660130285, "mean_func_score": -0.1430911599099099}, {"library": "Lib-1", "variant_class": "synonymous", "func_score": 0.0060142857142846395, "count": 0.5979591345565514, "mean_func_score": -0.1430911599099099}, {"library": "Lib-1", "variant_class": "synonymous", "func_score": 0.37022857142857113, "count": 0.4926453267472782, "mean_func_score": -0.1430911599099099}, {"library": "Lib-1", "variant_class": "synonymous", "func_score": 0.7344428571428558, "count": 0.27839831346494726, "mean_func_score": -0.1430911599099099}, {"library": "Lib-1", "variant_class": "synonymous", "func_score": 1.0986571428571423, "count": 0.1264536125343007, "mean_func_score": -0.1430911599099099}, {"library": "Lib-1", "variant_class": "synonymous", "func_score": 1.462871428571427, "count": 0.053028066719157683, "mean_func_score": -0.1430911599099099}, {"library": "Lib-1", "variant_class": "synonymous", "func_score": 1.8270857142857135, "count": 0.01977545816415101, "mean_func_score": -0.1430911599099099}, {"library": "Lib-1", "variant_class": "synonymous", "func_score": 2.1913, "count": 0.007374463475369437, "mean_func_score": -0.1430911599099099}, {"library": "Lib-1", "variant_class": "synonymous", "func_score": 2.5555142857142847, "count": 0.0017204913747302683, "mean_func_score": -0.1430911599099099}, {"library": "Lib-1", "variant_class": "synonymous", "func_score": 2.9197285714285695, "count": 0.0017902554313195588, "mean_func_score": -0.1430911599099099}, {"library": "Lib-1", "variant_class": "synonymous", "func_score": 3.283942857142856, "count": 0.002081404735912004, "mean_func_score": -0.1430911599099099}, {"library": "Lib-1", "variant_class": "synonymous", "func_score": 3.6481571428571424, "count": 0.0003580526499759639, "mean_func_score": -0.1430911599099099}, {"library": "Lib-1", "variant_class": "synonymous", "func_score": 4.012371428571429, "count": 3.3689579470181505e-06, "mean_func_score": -0.1430911599099099}, {"library": "Lib-1", "variant_class": "synonymous", "func_score": 4.376585714285715, "count": 1.2319347413641816e-09, "mean_func_score": -0.1430911599099099}, {"library": "Lib-1", "variant_class": "synonymous", "func_score": 4.7408, "count": 1.60911652490039e-14, "mean_func_score": -0.1430911599099099}, {"library": "Lib-1", "variant_class": "wildtype", "func_score": -13.1057, "count": 1.302594122171804e-74, "mean_func_score": -0.10508692496924968}, {"library": "Lib-1", "variant_class": "wildtype", "func_score": -12.741485714285714, "count": 8.472631004005353e-56, "mean_func_score": -0.10508692496924968}, {"library": "Lib-1", "variant_class": "wildtype", "func_score": -12.37727142857143, "count": 6.4433551167357496e-40, "mean_func_score": -0.10508692496924968}, {"library": "Lib-1", "variant_class": "wildtype", "func_score": -12.013057142857143, "count": 5.729153243187853e-27, "mean_func_score": -0.10508692496924968}, {"library": "Lib-1", "variant_class": "wildtype", "func_score": -11.648842857142858, "count": 5.955982412881894e-17, "mean_func_score": -0.10508692496924968}, {"library": "Lib-1", "variant_class": "wildtype", "func_score": -11.284628571428572, "count": 7.239373523118474e-10, "mean_func_score": -0.10508692496924968}, {"library": "Lib-1", "variant_class": "wildtype", "func_score": -10.920414285714287, "count": 1.0288446052761527e-05, "mean_func_score": -0.10508692496924968}, {"library": "Lib-1", "variant_class": "wildtype", "func_score": -10.5562, "count": 0.00017861093708492243, "mean_func_score": -0.10508692496924968}, {"library": "Lib-1", "variant_class": "wildtype", "func_score": -10.191985714285714, "count": 0.0001922931291693759, "mean_func_score": -0.10508692496924968}, {"library": "Lib-1", "variant_class": "wildtype", "func_score": -9.82777142857143, "count": 0.00034859912014177034, "mean_func_score": -0.10508692496924968}, {"library": "Lib-1", "variant_class": "wildtype", "func_score": -9.463557142857145, "count": 0.00032219918470590146, "mean_func_score": -0.10508692496924968}, {"library": "Lib-1", "variant_class": "wildtype", "func_score": -9.099342857142858, "count": 0.0007248721305020162, "mean_func_score": -0.10508692496924968}, {"library": "Lib-1", "variant_class": "wildtype", "func_score": -8.735128571428572, "count": 0.0012940111440701283, "mean_func_score": -0.10508692496924968}, {"library": "Lib-1", "variant_class": "wildtype", "func_score": -8.370914285714285, "count": 0.0012626111189213344, "mean_func_score": -0.10508692496924968}, {"library": "Lib-1", "variant_class": "wildtype", "func_score": -8.0067, "count": 0.0013124284946969768, "mean_func_score": -0.10508692496924968}, {"library": "Lib-1", "variant_class": "wildtype", "func_score": -7.642485714285715, "count": 0.0010350927040499237, "mean_func_score": -0.10508692496924968}, {"library": "Lib-1", "variant_class": "wildtype", "func_score": -7.278271428571429, "count": 0.001686740797132804, "mean_func_score": -0.10508692496924968}, {"library": "Lib-1", "variant_class": "wildtype", "func_score": -6.914057142857144, "count": 0.0015710875035852162, "mean_func_score": -0.10508692496924968}, {"library": "Lib-1", "variant_class": "wildtype", "func_score": -6.549842857142858, "count": 0.001988792929950289, "mean_func_score": -0.10508692496924968}, {"library": "Lib-1", "variant_class": "wildtype", "func_score": -6.185628571428572, "count": 0.0017453863511386577, "mean_func_score": -0.10508692496924968}, {"library": "Lib-1", "variant_class": "wildtype", "func_score": -5.821414285714287, "count": 0.0025115443370776797, "mean_func_score": -0.10508692496924968}, {"library": "Lib-1", "variant_class": "wildtype", "func_score": -5.4572, "count": 0.0019768078881757106, "mean_func_score": -0.10508692496924968}, {"library": "Lib-1", "variant_class": "wildtype", "func_score": -5.092985714285716, "count": 0.0009226532034095371, "mean_func_score": -0.10508692496924968}, {"library": "Lib-1", "variant_class": "wildtype", "func_score": -4.728771428571429, "count": 0.0006162267230657755, "mean_func_score": -0.10508692496924968}, {"library": "Lib-1", "variant_class": "wildtype", "func_score": -4.364557142857143, "count": 0.0011599094171404962, "mean_func_score": -0.10508692496924968}, {"library": "Lib-1", "variant_class": "wildtype", "func_score": -4.000342857142858, "count": 0.0020025216759639885, "mean_func_score": -0.10508692496924968}, {"library": "Lib-1", "variant_class": "wildtype", "func_score": -3.6361285714285714, "count": 0.0029615027266452084, "mean_func_score": -0.10508692496924968}, {"library": "Lib-1", "variant_class": "wildtype", "func_score": -3.2719142857142867, "count": 0.005693114714565039, "mean_func_score": -0.10508692496924968}, {"library": "Lib-1", "variant_class": "wildtype", "func_score": -2.9077, "count": 0.008209731414188098, "mean_func_score": -0.10508692496924968}, {"library": "Lib-1", "variant_class": "wildtype", "func_score": -2.5434857142857155, "count": 0.011587313895382, "mean_func_score": -0.10508692496924968}, {"library": "Lib-1", "variant_class": "wildtype", "func_score": -2.179271428571429, "count": 0.019608961731735316, "mean_func_score": -0.10508692496924968}, {"library": "Lib-1", "variant_class": "wildtype", "func_score": -1.8150571428571443, "count": 0.03462664320567511, "mean_func_score": -0.10508692496924968}, {"library": "Lib-1", "variant_class": "wildtype", "func_score": -1.4508428571428578, "count": 0.06825867698948854, "mean_func_score": -0.10508692496924968}, {"library": "Lib-1", "variant_class": "wildtype", "func_score": -1.0866285714285713, "count": 0.1422929159996774, "mean_func_score": -0.10508692496924968}, {"library": "Lib-1", "variant_class": "wildtype", "func_score": -0.7224142857142866, "count": 0.27730746956890456, "mean_func_score": -0.10508692496924968}, {"library": "Lib-1", "variant_class": "wildtype", "func_score": -0.3582000000000001, "count": 0.5187012051750288, "mean_func_score": -0.10508692496924968}, {"library": "Lib-1", "variant_class": "wildtype", "func_score": 0.0060142857142846395, "count": 0.6339672067884393, "mean_func_score": -0.10508692496924968}, {"library": "Lib-1", "variant_class": "wildtype", "func_score": 0.37022857142857113, "count": 0.491895624283879, "mean_func_score": -0.10508692496924968}, {"library": "Lib-1", "variant_class": "wildtype", "func_score": 0.7344428571428558, "count": 0.2760785051683082, "mean_func_score": -0.10508692496924968}, {"library": "Lib-1", "variant_class": "wildtype", "func_score": 1.0986571428571423, "count": 0.13550057391542153, "mean_func_score": -0.10508692496924968}, {"library": "Lib-1", "variant_class": "wildtype", "func_score": 1.462871428571427, "count": 0.05850887668493168, "mean_func_score": -0.10508692496924968}, {"library": "Lib-1", "variant_class": "wildtype", "func_score": 1.8270857142857135, "count": 0.022409428724246474, "mean_func_score": -0.10508692496924968}, {"library": "Lib-1", "variant_class": "wildtype", "func_score": 2.1913, "count": 0.009122835613186563, "mean_func_score": -0.10508692496924968}, {"library": "Lib-1", "variant_class": "wildtype", "func_score": 2.5555142857142847, "count": 0.0017307578151737342, "mean_func_score": -0.10508692496924968}, {"library": "Lib-1", "variant_class": "wildtype", "func_score": 2.9197285714285695, "count": 0.0009135490134999754, "mean_func_score": -0.10508692496924968}, {"library": "Lib-1", "variant_class": "wildtype", "func_score": 3.283942857142856, "count": 0.0003399948874034506, "mean_func_score": -0.10508692496924968}, {"library": "Lib-1", "variant_class": "wildtype", "func_score": 3.6481571428571424, "count": 0.0002034238471912386, "mean_func_score": -0.10508692496924968}, {"library": "Lib-1", "variant_class": "wildtype", "func_score": 4.012371428571429, "count": 1.622954102943224e-06, "mean_func_score": -0.10508692496924968}, {"library": "Lib-1", "variant_class": "wildtype", "func_score": 4.376585714285715, "count": 4.870003267622654e-05, "mean_func_score": -0.10508692496924968}, {"library": "Lib-1", "variant_class": "wildtype", "func_score": 4.7408, "count": 0.0001062951869947177, "mean_func_score": -0.10508692496924968}, {"library": "Lib-2", "variant_class": "1 nonsynonymous", "func_score": -13.1057, "count": 1.7239775713531248e-07, "mean_func_score": -0.8756045184405835}, {"library": "Lib-2", "variant_class": "1 nonsynonymous", "func_score": -12.741485714285714, "count": 9.927852260204809e-06, "mean_func_score": -0.8756045184405835}, {"library": "Lib-2", "variant_class": "1 nonsynonymous", "func_score": -12.37727142857143, "count": 9.275210599520743e-05, "mean_func_score": -0.8756045184405835}, {"library": "Lib-2", "variant_class": "1 nonsynonymous", "func_score": -12.013057142857143, "count": 0.00020890745197295191, "mean_func_score": -0.8756045184405835}, {"library": "Lib-2", "variant_class": "1 nonsynonymous", "func_score": -11.648842857142858, "count": 0.0004102325520257296, "mean_func_score": -0.8756045184405835}, {"library": "Lib-2", "variant_class": "1 nonsynonymous", "func_score": -11.284628571428572, "count": 0.0012374003230548698, "mean_func_score": -0.8756045184405835}, {"library": "Lib-2", "variant_class": "1 nonsynonymous", "func_score": -10.920414285714287, "count": 0.00252288288866988, "mean_func_score": -0.8756045184405835}, {"library": "Lib-2", "variant_class": "1 nonsynonymous", "func_score": -10.5562, "count": 0.00436268634179535, "mean_func_score": -0.8756045184405835}, {"library": "Lib-2", "variant_class": "1 nonsynonymous", "func_score": -10.191985714285714, "count": 0.005364109230568668, "mean_func_score": -0.8756045184405835}, {"library": "Lib-2", "variant_class": "1 nonsynonymous", "func_score": -9.82777142857143, "count": 0.0065314178299693635, "mean_func_score": -0.8756045184405835}, {"library": "Lib-2", "variant_class": "1 nonsynonymous", "func_score": -9.463557142857145, "count": 0.008688661654673316, "mean_func_score": -0.8756045184405835}, {"library": "Lib-2", "variant_class": "1 nonsynonymous", "func_score": -9.099342857142858, "count": 0.010954144272439879, "mean_func_score": -0.8756045184405835}, {"library": "Lib-2", "variant_class": "1 nonsynonymous", "func_score": -8.735128571428572, "count": 0.013208609509037085, "mean_func_score": -0.8756045184405835}, {"library": "Lib-2", "variant_class": "1 nonsynonymous", "func_score": -8.370914285714285, "count": 0.014217303301109905, "mean_func_score": -0.8756045184405835}, {"library": "Lib-2", "variant_class": "1 nonsynonymous", "func_score": -8.0067, "count": 0.013872779724407168, "mean_func_score": -0.8756045184405835}, {"library": "Lib-2", "variant_class": "1 nonsynonymous", "func_score": -7.642485714285715, "count": 0.012498051969433365, "mean_func_score": -0.8756045184405835}, {"library": "Lib-2", "variant_class": "1 nonsynonymous", "func_score": -7.278271428571429, "count": 0.008937010754054162, "mean_func_score": -0.8756045184405835}, {"library": "Lib-2", "variant_class": "1 nonsynonymous", "func_score": -6.914057142857144, "count": 0.006065155762884654, "mean_func_score": -0.8756045184405835}, {"library": "Lib-2", "variant_class": "1 nonsynonymous", "func_score": -6.549842857142858, "count": 0.005559383712102326, "mean_func_score": -0.8756045184405835}, {"library": "Lib-2", "variant_class": "1 nonsynonymous", "func_score": -6.185628571428572, "count": 0.005938482511069698, "mean_func_score": -0.8756045184405835}, {"library": "Lib-2", "variant_class": "1 nonsynonymous", "func_score": -5.821414285714287, "count": 0.0061753550952762, "mean_func_score": -0.8756045184405835}, {"library": "Lib-2", "variant_class": "1 nonsynonymous", "func_score": -5.4572, "count": 0.007328306802127036, "mean_func_score": -0.8756045184405835}, {"library": "Lib-2", "variant_class": "1 nonsynonymous", "func_score": -5.092985714285716, "count": 0.0089373671803121, "mean_func_score": -0.8756045184405835}, {"library": "Lib-2", "variant_class": "1 nonsynonymous", "func_score": -4.728771428571429, "count": 0.011138986598226699, "mean_func_score": -0.8756045184405835}, {"library": "Lib-2", "variant_class": "1 nonsynonymous", "func_score": -4.364557142857143, "count": 0.01421389247727492, "mean_func_score": -0.8756045184405835}, {"library": "Lib-2", "variant_class": "1 nonsynonymous", "func_score": -4.000342857142858, "count": 0.017400076319114357, "mean_func_score": -0.8756045184405835}, {"library": "Lib-2", "variant_class": "1 nonsynonymous", "func_score": -3.6361285714285714, "count": 0.022316538383267123, "mean_func_score": -0.8756045184405835}, {"library": "Lib-2", "variant_class": "1 nonsynonymous", "func_score": -3.2719142857142867, "count": 0.03034111136082762, "mean_func_score": -0.8756045184405835}, {"library": "Lib-2", "variant_class": "1 nonsynonymous", "func_score": -2.9077, "count": 0.038931770581726775, "mean_func_score": -0.8756045184405835}, {"library": "Lib-2", "variant_class": "1 nonsynonymous", "func_score": -2.5434857142857155, "count": 0.05036833504890818, "mean_func_score": -0.8756045184405835}, {"library": "Lib-2", "variant_class": "1 nonsynonymous", "func_score": -2.179271428571429, "count": 0.06932532244903948, "mean_func_score": -0.8756045184405835}, {"library": "Lib-2", "variant_class": "1 nonsynonymous", "func_score": -1.8150571428571443, "count": 0.0975752479222423, "mean_func_score": -0.8756045184405835}, {"library": "Lib-2", "variant_class": "1 nonsynonymous", "func_score": -1.4508428571428578, "count": 0.14410030492639853, "mean_func_score": -0.8756045184405835}, {"library": "Lib-2", "variant_class": "1 nonsynonymous", "func_score": -1.0866285714285713, "count": 0.22161495055542177, "mean_func_score": -0.8756045184405835}, {"library": "Lib-2", "variant_class": "1 nonsynonymous", "func_score": -0.7224142857142866, "count": 0.32611648062681153, "mean_func_score": -0.8756045184405835}, {"library": "Lib-2", "variant_class": "1 nonsynonymous", "func_score": -0.3582000000000001, "count": 0.42395479921736257, "mean_func_score": -0.8756045184405835}, {"library": "Lib-2", "variant_class": "1 nonsynonymous", "func_score": 0.0060142857142846395, "count": 0.4287585664805513, "mean_func_score": -0.8756045184405835}, {"library": "Lib-2", "variant_class": "1 nonsynonymous", "func_score": 0.37022857142857113, "count": 0.33198898022009127, "mean_func_score": -0.8756045184405835}, {"library": "Lib-2", "variant_class": "1 nonsynonymous", "func_score": 0.7344428571428558, "count": 0.2009024016030746, "mean_func_score": -0.8756045184405835}, {"library": "Lib-2", "variant_class": "1 nonsynonymous", "func_score": 1.0986571428571423, "count": 0.10071447915040904, "mean_func_score": -0.8756045184405835}, {"library": "Lib-2", "variant_class": "1 nonsynonymous", "func_score": 1.462871428571427, "count": 0.044379775219202666, "mean_func_score": -0.8756045184405835}, {"library": "Lib-2", "variant_class": "1 nonsynonymous", "func_score": 1.8270857142857135, "count": 0.01748304550677487, "mean_func_score": -0.8756045184405835}, {"library": "Lib-2", "variant_class": "1 nonsynonymous", "func_score": 2.1913, "count": 0.006802893660437864, "mean_func_score": -0.8756045184405835}, {"library": "Lib-2", "variant_class": "1 nonsynonymous", "func_score": 2.5555142857142847, "count": 0.002548397770262108, "mean_func_score": -0.8756045184405835}, {"library": "Lib-2", "variant_class": "1 nonsynonymous", "func_score": 2.9197285714285695, "count": 0.0009458801817372968, "mean_func_score": -0.8756045184405835}, {"library": "Lib-2", "variant_class": "1 nonsynonymous", "func_score": 3.283942857142856, "count": 0.00029522974251832606, "mean_func_score": -0.8756045184405835}, {"library": "Lib-2", "variant_class": "1 nonsynonymous", "func_score": 3.6481571428571424, "count": 0.00011106868850819744, "mean_func_score": -0.8756045184405835}, {"library": "Lib-2", "variant_class": "1 nonsynonymous", "func_score": 4.012371428571429, "count": 3.986097689352116e-05, "mean_func_score": -0.8756045184405835}, {"library": "Lib-2", "variant_class": "1 nonsynonymous", "func_score": 4.376585714285715, "count": 6.175240134380797e-05, "mean_func_score": -0.8756045184405835}, {"library": "Lib-2", "variant_class": "1 nonsynonymous", "func_score": 4.7408, "count": 6.537072854966403e-05, "mean_func_score": -0.8756045184405835}, {"library": "Lib-2", "variant_class": ">1 nonsynonymous", "func_score": -13.1057, "count": 3.933393587228507e-05, "mean_func_score": -2.554710864333497}, {"library": "Lib-2", "variant_class": ">1 nonsynonymous", "func_score": -12.741485714285714, "count": 0.00012101634657131709, "mean_func_score": -2.554710864333497}, {"library": "Lib-2", "variant_class": ">1 nonsynonymous", "func_score": -12.37727142857143, "count": 0.00036244933847635473, "mean_func_score": -2.554710864333497}, {"library": "Lib-2", "variant_class": ">1 nonsynonymous", "func_score": -12.013057142857143, "count": 0.001092696055781084, "mean_func_score": -2.554710864333497}, {"library": "Lib-2", "variant_class": ">1 nonsynonymous", "func_score": -11.648842857142858, "count": 0.0027558362401430636, "mean_func_score": -2.554710864333497}, {"library": "Lib-2", "variant_class": ">1 nonsynonymous", "func_score": -11.284628571428572, "count": 0.005766772271179063, "mean_func_score": -2.554710864333497}, {"library": "Lib-2", "variant_class": ">1 nonsynonymous", "func_score": -10.920414285714287, "count": 0.010360703040432396, "mean_func_score": -2.554710864333497}, {"library": "Lib-2", "variant_class": ">1 nonsynonymous", "func_score": -10.5562, "count": 0.015716569096432712, "mean_func_score": -2.554710864333497}, {"library": "Lib-2", "variant_class": ">1 nonsynonymous", "func_score": -10.191985714285714, "count": 0.02170872263834834, "mean_func_score": -2.554710864333497}, {"library": "Lib-2", "variant_class": ">1 nonsynonymous", "func_score": -9.82777142857143, "count": 0.028829676955204595, "mean_func_score": -2.554710864333497}, {"library": "Lib-2", "variant_class": ">1 nonsynonymous", "func_score": -9.463557142857145, "count": 0.03610989570703349, "mean_func_score": -2.554710864333497}, {"library": "Lib-2", "variant_class": ">1 nonsynonymous", "func_score": -9.099342857142858, "count": 0.04235190906312329, "mean_func_score": -2.554710864333497}, {"library": "Lib-2", "variant_class": ">1 nonsynonymous", "func_score": -8.735128571428572, "count": 0.0469160153370642, "mean_func_score": -2.554710864333497}, {"library": "Lib-2", "variant_class": ">1 nonsynonymous", "func_score": -8.370914285714285, "count": 0.04944379439705889, "mean_func_score": -2.554710864333497}, {"library": "Lib-2", "variant_class": ">1 nonsynonymous", "func_score": -8.0067, "count": 0.04808729851459732, "mean_func_score": -2.554710864333497}, {"library": "Lib-2", "variant_class": ">1 nonsynonymous", "func_score": -7.642485714285715, "count": 0.041386538202222274, "mean_func_score": -2.554710864333497}, {"library": "Lib-2", "variant_class": ">1 nonsynonymous", "func_score": -7.278271428571429, "count": 0.030265147069413932, "mean_func_score": -2.554710864333497}, {"library": "Lib-2", "variant_class": ">1 nonsynonymous", "func_score": -6.914057142857144, "count": 0.021789842973318596, "mean_func_score": -2.554710864333497}, {"library": "Lib-2", "variant_class": ">1 nonsynonymous", "func_score": -6.549842857142858, "count": 0.020637969309774348, "mean_func_score": -2.554710864333497}, {"library": "Lib-2", "variant_class": ">1 nonsynonymous", "func_score": -6.185628571428572, "count": 0.02214544035448788, "mean_func_score": -2.554710864333497}, {"library": "Lib-2", "variant_class": ">1 nonsynonymous", "func_score": -5.821414285714287, "count": 0.023632971622047506, "mean_func_score": -2.554710864333497}, {"library": "Lib-2", "variant_class": ">1 nonsynonymous", "func_score": -5.4572, "count": 0.0260707861554112, "mean_func_score": -2.554710864333497}, {"library": "Lib-2", "variant_class": ">1 nonsynonymous", "func_score": -5.092985714285716, "count": 0.03103223505735412, "mean_func_score": -2.554710864333497}, {"library": "Lib-2", "variant_class": ">1 nonsynonymous", "func_score": -4.728771428571429, "count": 0.03827801053806185, "mean_func_score": -2.554710864333497}, {"library": "Lib-2", "variant_class": ">1 nonsynonymous", "func_score": -4.364557142857143, "count": 0.04646396287757344, "mean_func_score": -2.554710864333497}, {"library": "Lib-2", "variant_class": ">1 nonsynonymous", "func_score": -4.000342857142858, "count": 0.05568381584754874, "mean_func_score": -2.554710864333497}, {"library": "Lib-2", "variant_class": ">1 nonsynonymous", "func_score": -3.6361285714285714, "count": 0.06732429274230552, "mean_func_score": -2.554710864333497}, {"library": "Lib-2", "variant_class": ">1 nonsynonymous", "func_score": -3.2719142857142867, "count": 0.08185750725888322, "mean_func_score": -2.554710864333497}, {"library": "Lib-2", "variant_class": ">1 nonsynonymous", "func_score": -2.9077, "count": 0.09672890054073299, "mean_func_score": -2.554710864333497}, {"library": "Lib-2", "variant_class": ">1 nonsynonymous", "func_score": -2.5434857142857155, "count": 0.11280895509042774, "mean_func_score": -2.554710864333497}, {"library": "Lib-2", "variant_class": ">1 nonsynonymous", "func_score": -2.179271428571429, "count": 0.13392285414140498, "mean_func_score": -2.554710864333497}, {"library": "Lib-2", "variant_class": ">1 nonsynonymous", "func_score": -1.8150571428571443, "count": 0.15878634693864283, "mean_func_score": -2.554710864333497}, {"library": "Lib-2", "variant_class": ">1 nonsynonymous", "func_score": -1.4508428571428578, "count": 0.18692789083351136, "mean_func_score": -2.554710864333497}, {"library": "Lib-2", "variant_class": ">1 nonsynonymous", "func_score": -1.0866285714285713, "count": 0.21442826761556644, "mean_func_score": -2.554710864333497}, {"library": "Lib-2", "variant_class": ">1 nonsynonymous", "func_score": -0.7224142857142866, "count": 0.23571293593708958, "mean_func_score": -2.554710864333497}, {"library": "Lib-2", "variant_class": ">1 nonsynonymous", "func_score": -0.3582000000000001, "count": 0.24039496035442845, "mean_func_score": -2.554710864333497}, {"library": "Lib-2", "variant_class": ">1 nonsynonymous", "func_score": 0.0060142857142846395, "count": 0.21301977250234944, "mean_func_score": -2.554710864333497}, {"library": "Lib-2", "variant_class": ">1 nonsynonymous", "func_score": 0.37022857142857113, "count": 0.1557097157036323, "mean_func_score": -2.554710864333497}, {"library": "Lib-2", "variant_class": ">1 nonsynonymous", "func_score": 0.7344428571428558, "count": 0.09386217780312246, "mean_func_score": -2.554710864333497}, {"library": "Lib-2", "variant_class": ">1 nonsynonymous", "func_score": 1.0986571428571423, "count": 0.04822497575992108, "mean_func_score": -2.554710864333497}, {"library": "Lib-2", "variant_class": ">1 nonsynonymous", "func_score": 1.462871428571427, "count": 0.022520735417664174, "mean_func_score": -2.554710864333497}, {"library": "Lib-2", "variant_class": ">1 nonsynonymous", "func_score": 1.8270857142857135, "count": 0.009854569547945047, "mean_func_score": -2.554710864333497}, {"library": "Lib-2", "variant_class": ">1 nonsynonymous", "func_score": 2.1913, "count": 0.00406332882808202, "mean_func_score": -2.554710864333497}, {"library": "Lib-2", "variant_class": ">1 nonsynonymous", "func_score": 2.5555142857142847, "count": 0.0014985671702510844, "mean_func_score": -2.554710864333497}, {"library": "Lib-2", "variant_class": ">1 nonsynonymous", "func_score": 2.9197285714285695, "count": 0.0005497225587932188, "mean_func_score": -2.554710864333497}, {"library": "Lib-2", "variant_class": ">1 nonsynonymous", "func_score": 3.283942857142856, "count": 0.00024157786595781883, "mean_func_score": -2.554710864333497}, {"library": "Lib-2", "variant_class": ">1 nonsynonymous", "func_score": 3.6481571428571424, "count": 8.698764223374893e-05, "mean_func_score": -2.554710864333497}, {"library": "Lib-2", "variant_class": ">1 nonsynonymous", "func_score": 4.012371428571429, "count": 3.7383418770471755e-05, "mean_func_score": -2.554710864333497}, {"library": "Lib-2", "variant_class": ">1 nonsynonymous", "func_score": 4.376585714285715, "count": 1.3146609212649734e-05, "mean_func_score": -2.554710864333497}, {"library": "Lib-2", "variant_class": ">1 nonsynonymous", "func_score": 4.7408, "count": 1.4409363678961381e-06, "mean_func_score": -2.554710864333497}, {"library": "Lib-2", "variant_class": "deletion", "func_score": -13.1057, "count": 0.00036871639971486787, "mean_func_score": -3.4309480451430874}, {"library": "Lib-2", "variant_class": "deletion", "func_score": -12.741485714285714, "count": 0.0009603648951585718, "mean_func_score": -3.4309480451430874}, {"library": "Lib-2", "variant_class": "deletion", "func_score": -12.37727142857143, "count": 0.002140521765131984, "mean_func_score": -3.4309480451430874}, {"library": "Lib-2", "variant_class": "deletion", "func_score": -12.013057142857143, "count": 0.004223614017130148, "mean_func_score": -3.4309480451430874}, {"library": "Lib-2", "variant_class": "deletion", "func_score": -11.648842857142858, "count": 0.007566606570940426, "mean_func_score": -3.4309480451430874}, {"library": "Lib-2", "variant_class": "deletion", "func_score": -11.284628571428572, "count": 0.012451266246156424, "mean_func_score": -3.4309480451430874}, {"library": "Lib-2", "variant_class": "deletion", "func_score": -10.920414285714287, "count": 0.0189080320112385, "mean_func_score": -3.4309480451430874}, {"library": "Lib-2", "variant_class": "deletion", "func_score": -10.5562, "count": 0.02668634428084001, "mean_func_score": -3.4309480451430874}, {"library": "Lib-2", "variant_class": "deletion", "func_score": -10.191985714285714, "count": 0.03538896681284337, "mean_func_score": -3.4309480451430874}, {"library": "Lib-2", "variant_class": "deletion", "func_score": -9.82777142857143, "count": 0.04450972871260695, "mean_func_score": -3.4309480451430874}, {"library": "Lib-2", "variant_class": "deletion", "func_score": -9.463557142857145, "count": 0.0533322204080117, "mean_func_score": -3.4309480451430874}, {"library": "Lib-2", "variant_class": "deletion", "func_score": -9.099342857142858, "count": 0.06092247662632923, "mean_func_score": -3.4309480451430874}, {"library": "Lib-2", "variant_class": "deletion", "func_score": -8.735128571428572, "count": 0.06617117611076859, "mean_func_score": -3.4309480451430874}, {"library": "Lib-2", "variant_class": "deletion", "func_score": -8.370914285714285, "count": 0.06777459567199676, "mean_func_score": -3.4309480451430874}, {"library": "Lib-2", "variant_class": "deletion", "func_score": -8.0067, "count": 0.06465591508590236, "mean_func_score": -3.4309480451430874}, {"library": "Lib-2", "variant_class": "deletion", "func_score": -7.642485714285715, "count": 0.057118096862785225, "mean_func_score": -3.4309480451430874}, {"library": "Lib-2", "variant_class": "deletion", "func_score": -7.278271428571429, "count": 0.047581521950381477, "mean_func_score": -3.4309480451430874}, {"library": "Lib-2", "variant_class": "deletion", "func_score": -6.914057142857144, "count": 0.03955289513322645, "mean_func_score": -3.4309480451430874}, {"library": "Lib-2", "variant_class": "deletion", "func_score": -6.549842857142858, "count": 0.035473181945382896, "mean_func_score": -3.4309480451430874}, {"library": "Lib-2", "variant_class": "deletion", "func_score": -6.185628571428572, "count": 0.035603137745621675, "mean_func_score": -3.4309480451430874}, {"library": "Lib-2", "variant_class": "deletion", "func_score": -5.821414285714287, "count": 0.03888213189178436, "mean_func_score": -3.4309480451430874}, {"library": "Lib-2", "variant_class": "deletion", "func_score": -5.4572, "count": 0.044344059090648376, "mean_func_score": -3.4309480451430874}, {"library": "Lib-2", "variant_class": "deletion", "func_score": -5.092985714285716, "count": 0.051429948304852736, "mean_func_score": -3.4309480451430874}, {"library": "Lib-2", "variant_class": "deletion", "func_score": -4.728771428571429, "count": 0.05947397866616143, "mean_func_score": -3.4309480451430874}, {"library": "Lib-2", "variant_class": "deletion", "func_score": -4.364557142857143, "count": 0.06763241459199992, "mean_func_score": -3.4309480451430874}, {"library": "Lib-2", "variant_class": "deletion", "func_score": -4.000342857142858, "count": 0.07545841714792959, "mean_func_score": -3.4309480451430874}, {"library": "Lib-2", "variant_class": "deletion", "func_score": -3.6361285714285714, "count": 0.0833335111612144, "mean_func_score": -3.4309480451430874}, {"library": "Lib-2", "variant_class": "deletion", "func_score": -3.2719142857142867, "count": 0.09219289283106903, "mean_func_score": -3.4309480451430874}, {"library": "Lib-2", "variant_class": "deletion", "func_score": -2.9077, "count": 0.10262966364991048, "mean_func_score": -3.4309480451430874}, {"library": "Lib-2", "variant_class": "deletion", "func_score": -2.5434857142857155, "count": 0.11417128890738247, "mean_func_score": -3.4309480451430874}, {"library": "Lib-2", "variant_class": "deletion", "func_score": -2.179271428571429, "count": 0.12567277302758054, "mean_func_score": -3.4309480451430874}, {"library": "Lib-2", "variant_class": "deletion", "func_score": -1.8150571428571443, "count": 0.13635664276073717, "mean_func_score": -3.4309480451430874}, {"library": "Lib-2", "variant_class": "deletion", "func_score": -1.4508428571428578, "count": 0.1458894034033864, "mean_func_score": -3.4309480451430874}, {"library": "Lib-2", "variant_class": "deletion", "func_score": -1.0866285714285713, "count": 0.15333289139569123, "mean_func_score": -3.4309480451430874}, {"library": "Lib-2", "variant_class": "deletion", "func_score": -0.7224142857142866, "count": 0.15645005667051406, "mean_func_score": -3.4309480451430874}, {"library": "Lib-2", "variant_class": "deletion", "func_score": -0.3582000000000001, "count": 0.15219432036969804, "mean_func_score": -3.4309480451430874}, {"library": "Lib-2", "variant_class": "deletion", "func_score": 0.0060142857142846395, "count": 0.13821103791691033, "mean_func_score": -3.4309480451430874}, {"library": "Lib-2", "variant_class": "deletion", "func_score": 0.37022857142857113, "count": 0.11479691442890583, "mean_func_score": -3.4309480451430874}, {"library": "Lib-2", "variant_class": "deletion", "func_score": 0.7344428571428558, "count": 0.08585135775975723, "mean_func_score": -3.4309480451430874}, {"library": "Lib-2", "variant_class": "deletion", "func_score": 1.0986571428571423, "count": 0.0573596605827414, "mean_func_score": -3.4309480451430874}, {"library": "Lib-2", "variant_class": "deletion", "func_score": 1.462871428571427, "count": 0.03427642846432918, "mean_func_score": -3.4309480451430874}, {"library": "Lib-2", "variant_class": "deletion", "func_score": 1.8270857142857135, "count": 0.018473611104202897, "mean_func_score": -3.4309480451430874}, {"library": "Lib-2", "variant_class": "deletion", "func_score": 2.1913, "count": 0.009074892490494191, "mean_func_score": -3.4309480451430874}, {"library": "Lib-2", "variant_class": "deletion", "func_score": 2.5555142857142847, "count": 0.004081618585275478, "mean_func_score": -3.4309480451430874}, {"library": "Lib-2", "variant_class": "deletion", "func_score": 2.9197285714285695, "count": 0.0016666385387145088, "mean_func_score": -3.4309480451430874}, {"library": "Lib-2", "variant_class": "deletion", "func_score": 3.283942857142856, "count": 0.0006043953451854627, "mean_func_score": -3.4309480451430874}, {"library": "Lib-2", "variant_class": "deletion", "func_score": 3.6481571428571424, "count": 0.0001890346291714089, "mean_func_score": -3.4309480451430874}, {"library": "Lib-2", "variant_class": "deletion", "func_score": 4.012371428571429, "count": 4.952530256984307e-05, "mean_func_score": -3.4309480451430874}, {"library": "Lib-2", "variant_class": "deletion", "func_score": 4.376585714285715, "count": 1.0604932913916998e-05, "mean_func_score": -3.4309480451430874}, {"library": "Lib-2", "variant_class": "deletion", "func_score": 4.7408, "count": 1.8215671237051218e-06, "mean_func_score": -3.4309480451430874}, {"library": "Lib-2", "variant_class": "stop", "func_score": -13.1057, "count": 0.0005396527540089606, "mean_func_score": -5.970127689055894}, {"library": "Lib-2", "variant_class": "stop", "func_score": -12.741485714285714, "count": 0.0013880770006262436, "mean_func_score": -5.970127689055894}, {"library": "Lib-2", "variant_class": "stop", "func_score": -12.37727142857143, "count": 0.0031787034860720396, "mean_func_score": -5.970127689055894}, {"library": "Lib-2", "variant_class": "stop", "func_score": -12.013057142857143, "count": 0.006768105978748556, "mean_func_score": -5.970127689055894}, {"library": "Lib-2", "variant_class": "stop", "func_score": -11.648842857142858, "count": 0.013316386002279598, "mean_func_score": -5.970127689055894}, {"library": "Lib-2", "variant_class": "stop", "func_score": -11.284628571428572, "count": 0.02387216083749087, "mean_func_score": -5.970127689055894}, {"library": "Lib-2", "variant_class": "stop", "func_score": -10.920414285714287, "count": 0.038875383010553606, "mean_func_score": -5.970127689055894}, {"library": "Lib-2", "variant_class": "stop", "func_score": -10.5562, "count": 0.057593281919617656, "mean_func_score": -5.970127689055894}, {"library": "Lib-2", "variant_class": "stop", "func_score": -10.191985714285714, "count": 0.07795791243731591, "mean_func_score": -5.970127689055894}, {"library": "Lib-2", "variant_class": "stop", "func_score": -9.82777142857143, "count": 0.09744675406920063, "mean_func_score": -5.970127689055894}, {"library": "Lib-2", "variant_class": "stop", "func_score": -9.463557142857145, "count": 0.11412344078733201, "mean_func_score": -5.970127689055894}, {"library": "Lib-2", "variant_class": "stop", "func_score": -9.099342857142858, "count": 0.12671415900367428, "mean_func_score": -5.970127689055894}, {"library": "Lib-2", "variant_class": "stop", "func_score": -8.735128571428572, "count": 0.13404280388829878, "mean_func_score": -5.970127689055894}, {"library": "Lib-2", "variant_class": "stop", "func_score": -8.370914285714285, "count": 0.13454154419600325, "mean_func_score": -5.970127689055894}, {"library": "Lib-2", "variant_class": "stop", "func_score": -8.0067, "count": 0.12700836269893728, "mean_func_score": -5.970127689055894}, {"library": "Lib-2", "variant_class": "stop", "func_score": -7.642485714285715, "count": 0.11267149067516365, "mean_func_score": -5.970127689055894}, {"library": "Lib-2", "variant_class": "stop", "func_score": -7.278271428571429, "count": 0.09591740606431026, "mean_func_score": -5.970127689055894}, {"library": "Lib-2", "variant_class": "stop", "func_score": -6.914057142857144, "count": 0.08219710163047918, "mean_func_score": -5.970127689055894}, {"library": "Lib-2", "variant_class": "stop", "func_score": -6.549842857142858, "count": 0.07467985871076088, "mean_func_score": -5.970127689055894}, {"library": "Lib-2", "variant_class": "stop", "func_score": -6.185628571428572, "count": 0.07302704890802976, "mean_func_score": -5.970127689055894}, {"library": "Lib-2", "variant_class": "stop", "func_score": -5.821414285714287, "count": 0.07551958560107942, "mean_func_score": -5.970127689055894}, {"library": "Lib-2", "variant_class": "stop", "func_score": -5.4572, "count": 0.08074550300152687, "mean_func_score": -5.970127689055894}, {"library": "Lib-2", "variant_class": "stop", "func_score": -5.092985714285716, "count": 0.08718342593045166, "mean_func_score": -5.970127689055894}, {"library": "Lib-2", "variant_class": "stop", "func_score": -4.728771428571429, "count": 0.09359229958648761, "mean_func_score": -5.970127689055894}, {"library": "Lib-2", "variant_class": "stop", "func_score": -4.364557142857143, "count": 0.09970879841177317, "mean_func_score": -5.970127689055894}, {"library": "Lib-2", "variant_class": "stop", "func_score": -4.000342857142858, "count": 0.10532249036092368, "mean_func_score": -5.970127689055894}, {"library": "Lib-2", "variant_class": "stop", "func_score": -3.6361285714285714, "count": 0.10959473458019613, "mean_func_score": -5.970127689055894}, {"library": "Lib-2", "variant_class": "stop", "func_score": -3.2719142857142867, "count": 0.11135077221838308, "mean_func_score": -5.970127689055894}, {"library": "Lib-2", "variant_class": "stop", "func_score": -2.9077, "count": 0.10917392780754802, "mean_func_score": -5.970127689055894}, {"library": "Lib-2", "variant_class": "stop", "func_score": -2.5434857142857155, "count": 0.10172738861031866, "mean_func_score": -5.970127689055894}, {"library": "Lib-2", "variant_class": "stop", "func_score": -2.179271428571429, "count": 0.08877016682777077, "mean_func_score": -5.970127689055894}, {"library": "Lib-2", "variant_class": "stop", "func_score": -1.8150571428571443, "count": 0.0721594905963338, "mean_func_score": -5.970127689055894}, {"library": "Lib-2", "variant_class": "stop", "func_score": -1.4508428571428578, "count": 0.05563334801090088, "mean_func_score": -5.970127689055894}, {"library": "Lib-2", "variant_class": "stop", "func_score": -1.0866285714285713, "count": 0.04249038941059345, "mean_func_score": -5.970127689055894}, {"library": "Lib-2", "variant_class": "stop", "func_score": -0.7224142857142866, "count": 0.03331340398716062, "mean_func_score": -5.970127689055894}, {"library": "Lib-2", "variant_class": "stop", "func_score": -0.3582000000000001, "count": 0.02660523247965174, "mean_func_score": -5.970127689055894}, {"library": "Lib-2", "variant_class": "stop", "func_score": 0.0060142857142846395, "count": 0.020812214361086274, "mean_func_score": -5.970127689055894}, {"library": "Lib-2", "variant_class": "stop", "func_score": 0.37022857142857113, "count": 0.01520656862531488, "mean_func_score": -5.970127689055894}, {"library": "Lib-2", "variant_class": "stop", "func_score": 0.7344428571428558, "count": 0.009888973619607574, "mean_func_score": -5.970127689055894}, {"library": "Lib-2", "variant_class": "stop", "func_score": 1.0986571428571423, "count": 0.005530258204989299, "mean_func_score": -5.970127689055894}, {"library": "Lib-2", "variant_class": "stop", "func_score": 1.462871428571427, "count": 0.0026806997359568483, "mean_func_score": -5.970127689055894}, {"library": "Lib-2", "variant_class": "stop", "func_score": 1.8270857142857135, "count": 0.0012294012985306594, "mean_func_score": -5.970127689055894}, {"library": "Lib-2", "variant_class": "stop", "func_score": 2.1913, "count": 0.0006224202637766076, "mean_func_score": -5.970127689055894}, {"library": "Lib-2", "variant_class": "stop", "func_score": 2.5555142857142847, "count": 0.00036123187571584657, "mean_func_score": -5.970127689055894}, {"library": "Lib-2", "variant_class": "stop", "func_score": 2.9197285714285695, "count": 0.00020322152606136462, "mean_func_score": -5.970127689055894}, {"library": "Lib-2", "variant_class": "stop", "func_score": 3.283942857142856, "count": 9.230789640477466e-05, "mean_func_score": -5.970127689055894}, {"library": "Lib-2", "variant_class": "stop", "func_score": 3.6481571428571424, "count": 3.046536602694635e-05, "mean_func_score": -5.970127689055894}, {"library": "Lib-2", "variant_class": "stop", "func_score": 4.012371428571429, "count": 6.939374909866186e-06, "mean_func_score": -5.970127689055894}, {"library": "Lib-2", "variant_class": "stop", "func_score": 4.376585714285715, "count": 1.0643649111564396e-06, "mean_func_score": -5.970127689055894}, {"library": "Lib-2", "variant_class": "stop", "func_score": 4.7408, "count": 1.086356881710196e-07, "mean_func_score": -5.970127689055894}, {"library": "Lib-2", "variant_class": "synonymous", "func_score": -13.1057, "count": 9.211103246150428e-92, "mean_func_score": -0.05782128562765313}, {"library": "Lib-2", "variant_class": "synonymous", "func_score": -12.741485714285714, "count": 1.661663808570156e-75, "mean_func_score": -0.05782128562765313}, {"library": "Lib-2", "variant_class": "synonymous", "func_score": -12.37727142857143, "count": 6.531193078511945e-61, "mean_func_score": -0.05782128562765313}, {"library": "Lib-2", "variant_class": "synonymous", "func_score": -12.013057142857143, "count": 5.593192103731237e-48, "mean_func_score": -0.05782128562765313}, {"library": "Lib-2", "variant_class": "synonymous", "func_score": -11.648842857142858, "count": 1.0436257839264003e-36, "mean_func_score": -0.05782128562765313}, {"library": "Lib-2", "variant_class": "synonymous", "func_score": -11.284628571428572, "count": 4.242752711378113e-27, "mean_func_score": -0.05782128562765313}, {"library": "Lib-2", "variant_class": "synonymous", "func_score": -10.920414285714287, "count": 3.7581021980546703e-19, "mean_func_score": -0.05782128562765313}, {"library": "Lib-2", "variant_class": "synonymous", "func_score": -10.5562, "count": 7.252867724405872e-13, "mean_func_score": -0.05782128562765313}, {"library": "Lib-2", "variant_class": "synonymous", "func_score": -10.191985714285714, "count": 3.050225246464832e-08, "mean_func_score": -0.05782128562765313}, {"library": "Lib-2", "variant_class": "synonymous", "func_score": -9.82777142857143, "count": 2.8056470398308037e-05, "mean_func_score": -0.05782128562765313}, {"library": "Lib-2", "variant_class": "synonymous", "func_score": -9.463557142857145, "count": 0.0006245246750249595, "mean_func_score": -0.05782128562765313}, {"library": "Lib-2", "variant_class": "synonymous", "func_score": -9.099342857142858, "count": 0.0014712024351250402, "mean_func_score": -0.05782128562765313}, {"library": "Lib-2", "variant_class": "synonymous", "func_score": -8.735128571428572, "count": 0.001851719672680633, "mean_func_score": -0.05782128562765313}, {"library": "Lib-2", "variant_class": "synonymous", "func_score": -8.370914285714285, "count": 0.0021582664196611954, "mean_func_score": -0.05782128562765313}, {"library": "Lib-2", "variant_class": "synonymous", "func_score": -8.0067, "count": 0.0023275517346340586, "mean_func_score": -0.05782128562765313}, {"library": "Lib-2", "variant_class": "synonymous", "func_score": -7.642485714285715, "count": 0.002424489947228931, "mean_func_score": -0.05782128562765313}, {"library": "Lib-2", "variant_class": "synonymous", "func_score": -7.278271428571429, "count": 0.0007749504282798633, "mean_func_score": -0.05782128562765313}, {"library": "Lib-2", "variant_class": "synonymous", "func_score": -6.914057142857144, "count": 8.77850057350811e-06, "mean_func_score": -0.05782128562765313}, {"library": "Lib-2", "variant_class": "synonymous", "func_score": -6.549842857142858, "count": 2.8379958687734354e-09, "mean_func_score": -0.05782128562765313}, {"library": "Lib-2", "variant_class": "synonymous", "func_score": -6.185628571428572, "count": 5.162301511982107e-07, "mean_func_score": -0.05782128562765313}, {"library": "Lib-2", "variant_class": "synonymous", "func_score": -5.821414285714287, "count": 0.00013110426919352695, "mean_func_score": -0.05782128562765313}, {"library": "Lib-2", "variant_class": "synonymous", "func_score": -5.4572, "count": 0.0010350887600999953, "mean_func_score": -0.05782128562765313}, {"library": "Lib-2", "variant_class": "synonymous", "func_score": -5.092985714285716, "count": 0.0006236838442367116, "mean_func_score": -0.05782128562765313}, {"library": "Lib-2", "variant_class": "synonymous", "func_score": -4.728771428571429, "count": 0.0007332768071177536, "mean_func_score": -0.05782128562765313}, {"library": "Lib-2", "variant_class": "synonymous", "func_score": -4.364557142857143, "count": 0.000799394886702297, "mean_func_score": -0.05782128562765313}, {"library": "Lib-2", "variant_class": "synonymous", "func_score": -4.000342857142858, "count": 0.0025948646522963416, "mean_func_score": -0.05782128562765313}, {"library": "Lib-2", "variant_class": "synonymous", "func_score": -3.6361285714285714, "count": 0.004128638317852782, "mean_func_score": -0.05782128562765313}, {"library": "Lib-2", "variant_class": "synonymous", "func_score": -3.2719142857142867, "count": 0.0036100088867120537, "mean_func_score": -0.05782128562765313}, {"library": "Lib-2", "variant_class": "synonymous", "func_score": -2.9077, "count": 0.007041876486084326, "mean_func_score": -0.05782128562765313}, {"library": "Lib-2", "variant_class": "synonymous", "func_score": -2.5434857142857155, "count": 0.009278649021200281, "mean_func_score": -0.05782128562765313}, {"library": "Lib-2", "variant_class": "synonymous", "func_score": -2.179271428571429, "count": 0.0139825768002123, "mean_func_score": -0.05782128562765313}, {"library": "Lib-2", "variant_class": "synonymous", "func_score": -1.8150571428571443, "count": 0.02529091844528104, "mean_func_score": -0.05782128562765313}, {"library": "Lib-2", "variant_class": "synonymous", "func_score": -1.4508428571428578, "count": 0.06720865694337523, "mean_func_score": -0.05782128562765313}, {"library": "Lib-2", "variant_class": "synonymous", "func_score": -1.0866285714285713, "count": 0.13697700367837826, "mean_func_score": -0.05782128562765313}, {"library": "Lib-2", "variant_class": "synonymous", "func_score": -0.7224142857142866, "count": 0.2770401736853817, "mean_func_score": -0.05782128562765313}, {"library": "Lib-2", "variant_class": "synonymous", "func_score": -0.3582000000000001, "count": 0.503459549527112, "mean_func_score": -0.05782128562765313}, {"library": "Lib-2", "variant_class": "synonymous", "func_score": 0.0060142857142846395, "count": 0.6468676587538185, "mean_func_score": -0.05782128562765313}, {"library": "Lib-2", "variant_class": "synonymous", "func_score": 0.37022857142857113, "count": 0.5018653997348793, "mean_func_score": -0.05782128562765313}, {"library": "Lib-2", "variant_class": "synonymous", "func_score": 0.7344428571428558, "count": 0.2874321706551957, "mean_func_score": -0.05782128562765313}, {"library": "Lib-2", "variant_class": "synonymous", "func_score": 1.0986571428571423, "count": 0.13077590832801686, "mean_func_score": -0.05782128562765313}, {"library": "Lib-2", "variant_class": "synonymous", "func_score": 1.462871428571427, "count": 0.06681624814271646, "mean_func_score": -0.05782128562765313}, {"library": "Lib-2", "variant_class": "synonymous", "func_score": 1.8270857142857135, "count": 0.02676934213851238, "mean_func_score": -0.05782128562765313}, {"library": "Lib-2", "variant_class": "synonymous", "func_score": 2.1913, "count": 0.011136620092096636, "mean_func_score": -0.05782128562765313}, {"library": "Lib-2", "variant_class": "synonymous", "func_score": 2.5555142857142847, "count": 0.004647209469062583, "mean_func_score": -0.05782128562765313}, {"library": "Lib-2", "variant_class": "synonymous", "func_score": 2.9197285714285695, "count": 0.003185244841205471, "mean_func_score": -0.05782128562765313}, {"library": "Lib-2", "variant_class": "synonymous", "func_score": 3.283942857142856, "count": 0.0005607987672852318, "mean_func_score": -0.05782128562765313}, {"library": "Lib-2", "variant_class": "synonymous", "func_score": 3.6481571428571424, "count": 6.138108351172387e-06, "mean_func_score": -0.05782128562765313}, {"library": "Lib-2", "variant_class": "synonymous", "func_score": 4.012371428571429, "count": 2.0461892048170914e-09, "mean_func_score": -0.05782128562765313}, {"library": "Lib-2", "variant_class": "synonymous", "func_score": 4.376585714285715, "count": 1.57473611691012e-14, "mean_func_score": -0.05782128562765313}, {"library": "Lib-2", "variant_class": "synonymous", "func_score": 4.7408, "count": 2.664024424060634e-21, "mean_func_score": -0.05782128562765313}, {"library": "Lib-2", "variant_class": "wildtype", "func_score": -13.1057, "count": 2.109395793626857e-07, "mean_func_score": -0.09903928081072245}, {"library": "Lib-2", "variant_class": "wildtype", "func_score": -12.741485714285714, "count": 9.667918674075606e-05, "mean_func_score": -0.09903928081072245}, {"library": "Lib-2", "variant_class": "wildtype", "func_score": -12.37727142857143, "count": 6.642465531008572e-05, "mean_func_score": -0.09903928081072245}, {"library": "Lib-2", "variant_class": "wildtype", "func_score": -12.013057142857143, "count": 7.913935371684625e-08, "mean_func_score": -0.09903928081072245}, {"library": "Lib-2", "variant_class": "wildtype", "func_score": -11.648842857142858, "count": 3.213509090145277e-05, "mean_func_score": -0.09903928081072245}, {"library": "Lib-2", "variant_class": "wildtype", "func_score": -11.284628571428572, "count": 0.00014434089067740015, "mean_func_score": -0.09903928081072245}, {"library": "Lib-2", "variant_class": "wildtype", "func_score": -10.920414285714287, "count": 1.7743109534327845e-05, "mean_func_score": -0.09903928081072245}, {"library": "Lib-2", "variant_class": "wildtype", "func_score": -10.5562, "count": 0.0001708687175455387, "mean_func_score": -0.09903928081072245}, {"library": "Lib-2", "variant_class": "wildtype", "func_score": -10.191985714285714, "count": 4.853650462597865e-06, "mean_func_score": -0.09903928081072245}, {"library": "Lib-2", "variant_class": "wildtype", "func_score": -9.82777142857143, "count": 0.00029504275842261174, "mean_func_score": -0.09903928081072245}, {"library": "Lib-2", "variant_class": "wildtype", "func_score": -9.463557142857145, "count": 0.00017747018078564396, "mean_func_score": -0.09903928081072245}, {"library": "Lib-2", "variant_class": "wildtype", "func_score": -9.099342857142858, "count": 0.0015688008442594449, "mean_func_score": -0.09903928081072245}, {"library": "Lib-2", "variant_class": "wildtype", "func_score": -8.735128571428572, "count": 0.0016233500210340744, "mean_func_score": -0.09903928081072245}, {"library": "Lib-2", "variant_class": "wildtype", "func_score": -8.370914285714285, "count": 0.0017736278868169906, "mean_func_score": -0.09903928081072245}, {"library": "Lib-2", "variant_class": "wildtype", "func_score": -8.0067, "count": 0.002405951410437115, "mean_func_score": -0.09903928081072245}, {"library": "Lib-2", "variant_class": "wildtype", "func_score": -7.642485714285715, "count": 0.0028152930106597612, "mean_func_score": -0.09903928081072245}, {"library": "Lib-2", "variant_class": "wildtype", "func_score": -7.278271428571429, "count": 0.0018961018959013233, "mean_func_score": -0.09903928081072245}, {"library": "Lib-2", "variant_class": "wildtype", "func_score": -6.914057142857144, "count": 0.0010412846193987662, "mean_func_score": -0.09903928081072245}, {"library": "Lib-2", "variant_class": "wildtype", "func_score": -6.549842857142858, "count": 0.0005849697256459267, "mean_func_score": -0.09903928081072245}, {"library": "Lib-2", "variant_class": "wildtype", "func_score": -6.185628571428572, "count": 0.001387116187137986, "mean_func_score": -0.09903928081072245}, {"library": "Lib-2", "variant_class": "wildtype", "func_score": -5.821414285714287, "count": 0.001664018112083688, "mean_func_score": -0.09903928081072245}, {"library": "Lib-2", "variant_class": "wildtype", "func_score": -5.4572, "count": 0.0006227812252095588, "mean_func_score": -0.09903928081072245}, {"library": "Lib-2", "variant_class": "wildtype", "func_score": -5.092985714285716, "count": 0.0008820264705753421, "mean_func_score": -0.09903928081072245}, {"library": "Lib-2", "variant_class": "wildtype", "func_score": -4.728771428571429, "count": 0.0008158129931862807, "mean_func_score": -0.09903928081072245}, {"library": "Lib-2", "variant_class": "wildtype", "func_score": -4.364557142857143, "count": 0.0009931759341365108, "mean_func_score": -0.09903928081072245}, {"library": "Lib-2", "variant_class": "wildtype", "func_score": -4.000342857142858, "count": 0.0014453735890118185, "mean_func_score": -0.09903928081072245}, {"library": "Lib-2", "variant_class": "wildtype", "func_score": -3.6361285714285714, "count": 0.002798784793371032, "mean_func_score": -0.09903928081072245}, {"library": "Lib-2", "variant_class": "wildtype", "func_score": -3.2719142857142867, "count": 0.005314204689201468, "mean_func_score": -0.09903928081072245}, {"library": "Lib-2", "variant_class": "wildtype", "func_score": -2.9077, "count": 0.007134849190195938, "mean_func_score": -0.09903928081072245}, {"library": "Lib-2", "variant_class": "wildtype", "func_score": -2.5434857142857155, "count": 0.011224475845236852, "mean_func_score": -0.09903928081072245}, {"library": "Lib-2", "variant_class": "wildtype", "func_score": -2.179271428571429, "count": 0.017996125358424497, "mean_func_score": -0.09903928081072245}, {"library": "Lib-2", "variant_class": "wildtype", "func_score": -1.8150571428571443, "count": 0.0348740462119428, "mean_func_score": -0.09903928081072245}, {"library": "Lib-2", "variant_class": "wildtype", "func_score": -1.4508428571428578, "count": 0.0593995805881001, "mean_func_score": -0.09903928081072245}, {"library": "Lib-2", "variant_class": "wildtype", "func_score": -1.0866285714285713, "count": 0.12578486014816675, "mean_func_score": -0.09903928081072245}, {"library": "Lib-2", "variant_class": "wildtype", "func_score": -0.7224142857142866, "count": 0.277022518265973, "mean_func_score": -0.09903928081072245}, {"library": "Lib-2", "variant_class": "wildtype", "func_score": -0.3582000000000001, "count": 0.5222465969793739, "mean_func_score": -0.09903928081072245}, {"library": "Lib-2", "variant_class": "wildtype", "func_score": 0.0060142857142846395, "count": 0.664928190900207, "mean_func_score": -0.09903928081072245}, {"library": "Lib-2", "variant_class": "wildtype", "func_score": 0.37022857142857113, "count": 0.5067486781866272, "mean_func_score": -0.09903928081072245}, {"library": "Lib-2", "variant_class": "wildtype", "func_score": 0.7344428571428558, "count": 0.2736560335803561, "mean_func_score": -0.09903928081072245}, {"library": "Lib-2", "variant_class": "wildtype", "func_score": 1.0986571428571423, "count": 0.1280620139146754, "mean_func_score": -0.09903928081072245}, {"library": "Lib-2", "variant_class": "wildtype", "func_score": 1.462871428571427, "count": 0.05297273286223905, "mean_func_score": -0.09903928081072245}, {"library": "Lib-2", "variant_class": "wildtype", "func_score": 1.8270857142857135, "count": 0.021868638613268973, "mean_func_score": -0.09903928081072245}, {"library": "Lib-2", "variant_class": "wildtype", "func_score": 2.1913, "count": 0.007388374358677645, "mean_func_score": -0.09903928081072245}, {"library": "Lib-2", "variant_class": "wildtype", "func_score": 2.5555142857142847, "count": 0.0023571422959417824, "mean_func_score": -0.09903928081072245}, {"library": "Lib-2", "variant_class": "wildtype", "func_score": 2.9197285714285695, "count": 0.0011499438252328003, "mean_func_score": -0.09903928081072245}, {"library": "Lib-2", "variant_class": "wildtype", "func_score": 3.283942857142856, "count": 0.00031453579226767584, "mean_func_score": -0.09903928081072245}, {"library": "Lib-2", "variant_class": "wildtype", "func_score": 3.6481571428571424, "count": 9.441990737928375e-07, "mean_func_score": -0.09903928081072245}, {"library": "Lib-2", "variant_class": "wildtype", "func_score": 4.012371428571429, "count": 6.0182798898111184e-12, "mean_func_score": -0.09903928081072245}, {"library": "Lib-2", "variant_class": "wildtype", "func_score": 4.376585714285715, "count": 6.252253695821284e-20, "mean_func_score": -0.09903928081072245}, {"library": "Lib-2", "variant_class": "wildtype", "func_score": 4.7408, "count": 1.0139970977286616e-30, "mean_func_score": -0.09903928081072245}]}}, {"mode": "vega-lite"});
+</script></div>
+</div>
+</section>
+<section id="Correlations-in-variant-level-functional-scores">
+<h2>Correlations in variant-level functional scores<a class="headerlink" href="#Correlations-in-variant-level-functional-scores" title="Permalink to this headline">¶</a></h2>
+<p>Analyze correlations of escape probabilities of different variants in same library:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">corrs</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">dms_variants</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">tidy_to_corr</span><span class="p">(</span>
+        <span class="n">df</span><span class="o">=</span><span class="n">func_scores_filtered</span><span class="o">.</span><span class="n">assign</span><span class="p">(</span>
+            <span class="n">sample</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="s2">&quot;pre_sample&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="s2">&quot; vs &quot;</span> <span class="o">+</span> <span class="n">x</span><span class="p">[</span><span class="s2">&quot;post_sample&quot;</span><span class="p">],</span>
+        <span class="p">),</span>
+        <span class="n">sample_col</span><span class="o">=</span><span class="s2">&quot;sample&quot;</span><span class="p">,</span>
+        <span class="n">label_col</span><span class="o">=</span><span class="s2">&quot;barcode&quot;</span><span class="p">,</span>
+        <span class="n">value_col</span><span class="o">=</span><span class="s2">&quot;func_score&quot;</span><span class="p">,</span>
+        <span class="n">group_cols</span><span class="o">=</span><span class="s2">&quot;library&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="o">.</span><span class="n">assign</span><span class="p">(</span><span class="n">r2</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="s2">&quot;correlation&quot;</span><span class="p">]</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="s2">&quot;correlation&quot;</span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="k">for</span> <span class="n">library</span><span class="p">,</span> <span class="n">library_corr</span> <span class="ow">in</span> <span class="n">corrs</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&quot;library&quot;</span><span class="p">):</span>
+    <span class="n">corr_chart</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">alt</span><span class="o">.</span><span class="n">Chart</span><span class="p">(</span><span class="n">library_corr</span><span class="p">)</span>
+        <span class="o">.</span><span class="n">encode</span><span class="p">(</span>
+            <span class="n">alt</span><span class="o">.</span><span class="n">X</span><span class="p">(</span><span class="s2">&quot;sample_1&quot;</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="kc">None</span><span class="p">),</span>
+            <span class="n">alt</span><span class="o">.</span><span class="n">Y</span><span class="p">(</span><span class="s2">&quot;sample_2&quot;</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="kc">None</span><span class="p">),</span>
+            <span class="n">color</span><span class="o">=</span><span class="n">alt</span><span class="o">.</span><span class="n">Color</span><span class="p">(</span><span class="s2">&quot;r2&quot;</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="n">alt</span><span class="o">.</span><span class="n">Scale</span><span class="p">(</span><span class="n">zero</span><span class="o">=</span><span class="kc">True</span><span class="p">)),</span>
+            <span class="n">tooltip</span><span class="o">=</span><span class="p">[</span>
+                <span class="n">alt</span><span class="o">.</span><span class="n">Tooltip</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s2">&quot;.3g&quot;</span><span class="p">)</span> <span class="k">if</span> <span class="n">c</span> <span class="o">==</span> <span class="s2">&quot;r2&quot;</span> <span class="k">else</span> <span class="n">c</span>
+                <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;library&quot;</span><span class="p">,</span> <span class="s2">&quot;sample_1&quot;</span><span class="p">,</span> <span class="s2">&quot;sample_2&quot;</span><span class="p">,</span> <span class="s2">&quot;r2&quot;</span><span class="p">]</span>
+            <span class="p">],</span>
+        <span class="p">)</span>
+        <span class="o">.</span><span class="n">mark_rect</span><span class="p">(</span><span class="n">stroke</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">)</span>
+        <span class="o">.</span><span class="n">properties</span><span class="p">(</span><span class="n">width</span><span class="o">=</span><span class="n">alt</span><span class="o">.</span><span class="n">Step</span><span class="p">(</span><span class="mi">15</span><span class="p">),</span> <span class="n">height</span><span class="o">=</span><span class="n">alt</span><span class="o">.</span><span class="n">Step</span><span class="p">(</span><span class="mi">15</span><span class="p">),</span> <span class="n">title</span><span class="o">=</span><span class="n">library</span><span class="p">)</span>
+        <span class="o">.</span><span class="n">configure_axis</span><span class="p">(</span><span class="n">labelLimit</span><span class="o">=</span><span class="mi">500</span><span class="p">)</span>
+    <span class="p">)</span>
+
+    <span class="n">display</span><span class="p">(</span><span class="n">corr_chart</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area rendered_html docutils container">
+<div id="altair-viz-0b00d76804f04e91b6c72d94b91bfa12"></div>
+<script type="text/javascript">
+  var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
+  (function(spec, embedOpt){
+    let outputDiv = document.currentScript.previousElementSibling;
+    if (outputDiv.id !== "altair-viz-0b00d76804f04e91b6c72d94b91bfa12") {
+      outputDiv = document.getElementById("altair-viz-0b00d76804f04e91b6c72d94b91bfa12");
+    }
+    const paths = {
+      "vega": "https://cdn.jsdelivr.net/npm//vega@5?noext",
+      "vega-lib": "https://cdn.jsdelivr.net/npm//vega-lib?noext",
+      "vega-lite": "https://cdn.jsdelivr.net/npm//vega-lite@5.2.0?noext",
+      "vega-embed": "https://cdn.jsdelivr.net/npm//vega-embed@6?noext",
+    };
+
+    function maybeLoadScript(lib, version) {
+      var key = `${lib.replace("-", "")}_version`;
+      return (VEGA_DEBUG[key] == version) ?
+        Promise.resolve(paths[lib]) :
+        new Promise(function(resolve, reject) {
+          var s = document.createElement('script');
+          document.getElementsByTagName("head")[0].appendChild(s);
+          s.async = true;
+          s.onload = () => {
+            VEGA_DEBUG[key] = version;
+            return resolve(paths[lib]);
+          };
+          s.onerror = () => reject(`Error loading script: ${paths[lib]}`);
+          s.src = paths[lib];
+        });
+    }
+
+    function showError(err) {
+      outputDiv.innerHTML = `<div class="error" style="color:red;">${err}</div>`;
+      throw err;
+    }
+
+    function displayChart(vegaEmbed) {
+      vegaEmbed(outputDiv, spec, embedOpt)
+        .catch(err => showError(`Javascript Error: ${err.message}<br>This usually means there's a typo in your chart specification. See the javascript console for the full traceback.`));
+    }
+
+    if(typeof define === "function" && define.amd) {
+      requirejs.config({paths});
+      require(["vega-embed"], displayChart, err => showError(`Error loading script: ${err.message}`));
+    } else {
+      maybeLoadScript("vega", "5")
+        .then(() => maybeLoadScript("vega-lite", "5.2.0"))
+        .then(() => maybeLoadScript("vega-embed", "6"))
+        .catch(showError)
+        .then(() => displayChart(vegaEmbed));
+    }
+  })({"config": {"view": {"continuousWidth": 400, "continuousHeight": 300}, "axis": {"labelLimit": 500}}, "data": {"name": "data-969fcb72a56b8bc882f0f1d910e762c9"}, "mark": {"type": "rect", "stroke": "black"}, "encoding": {"color": {"field": "r2", "scale": {"zero": true}, "type": "quantitative"}, "tooltip": [{"field": "library", "type": "nominal"}, {"field": "sample_1", "type": "nominal"}, {"field": "sample_2", "type": "nominal"}, {"field": "r2", "format": ".3g", "type": "quantitative"}], "x": {"field": "sample_1", "title": null, "type": "nominal"}, "y": {"field": "sample_2", "title": null, "type": "nominal"}}, "height": {"step": 15}, "title": "Lib-1", "width": {"step": 15}, "$schema": "https://vega.github.io/schema/vega-lite/v5.2.0.json", "datasets": {"data-969fcb72a56b8bc882f0f1d910e762c9": [{"library": "Lib-1", "sample_1": "2022-10-22_thaw-1_VSVG_control_1 vs 2022-10-22_thaw-1_no-antibody_control_1", "sample_2": "2022-10-22_thaw-1_VSVG_control_1 vs 2022-10-22_thaw-1_no-antibody_control_1", "r2": 1.0}, {"library": "Lib-1", "sample_1": "2022-10-22_thaw-2_VSVG_control_1 vs 2022-10-22_thaw-2_no-antibody_control_1", "sample_2": "2022-10-22_thaw-1_VSVG_control_1 vs 2022-10-22_thaw-1_no-antibody_control_1", "r2": 0.44211753783596314}, {"library": "Lib-1", "sample_1": "2022-10-22_thaw-1_VSVG_control_1 vs 2022-10-22_thaw-1_no-antibody_control_1", "sample_2": "2022-10-22_thaw-2_VSVG_control_1 vs 2022-10-22_thaw-2_no-antibody_control_1", "r2": 0.44211753783596314}, {"library": "Lib-1", "sample_1": "2022-10-22_thaw-2_VSVG_control_1 vs 2022-10-22_thaw-2_no-antibody_control_1", "sample_2": "2022-10-22_thaw-2_VSVG_control_1 vs 2022-10-22_thaw-2_no-antibody_control_1", "r2": 1.0}]}}, {"mode": "vega-lite"});
+</script></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area rendered_html docutils container">
+<div id="altair-viz-7ddb19496a1a40688a18710d43f561c6"></div>
+<script type="text/javascript">
+  var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
+  (function(spec, embedOpt){
+    let outputDiv = document.currentScript.previousElementSibling;
+    if (outputDiv.id !== "altair-viz-7ddb19496a1a40688a18710d43f561c6") {
+      outputDiv = document.getElementById("altair-viz-7ddb19496a1a40688a18710d43f561c6");
+    }
+    const paths = {
+      "vega": "https://cdn.jsdelivr.net/npm//vega@5?noext",
+      "vega-lib": "https://cdn.jsdelivr.net/npm//vega-lib?noext",
+      "vega-lite": "https://cdn.jsdelivr.net/npm//vega-lite@5.2.0?noext",
+      "vega-embed": "https://cdn.jsdelivr.net/npm//vega-embed@6?noext",
+    };
+
+    function maybeLoadScript(lib, version) {
+      var key = `${lib.replace("-", "")}_version`;
+      return (VEGA_DEBUG[key] == version) ?
+        Promise.resolve(paths[lib]) :
+        new Promise(function(resolve, reject) {
+          var s = document.createElement('script');
+          document.getElementsByTagName("head")[0].appendChild(s);
+          s.async = true;
+          s.onload = () => {
+            VEGA_DEBUG[key] = version;
+            return resolve(paths[lib]);
+          };
+          s.onerror = () => reject(`Error loading script: ${paths[lib]}`);
+          s.src = paths[lib];
+        });
+    }
+
+    function showError(err) {
+      outputDiv.innerHTML = `<div class="error" style="color:red;">${err}</div>`;
+      throw err;
+    }
+
+    function displayChart(vegaEmbed) {
+      vegaEmbed(outputDiv, spec, embedOpt)
+        .catch(err => showError(`Javascript Error: ${err.message}<br>This usually means there's a typo in your chart specification. See the javascript console for the full traceback.`));
+    }
+
+    if(typeof define === "function" && define.amd) {
+      requirejs.config({paths});
+      require(["vega-embed"], displayChart, err => showError(`Error loading script: ${err.message}`));
+    } else {
+      maybeLoadScript("vega", "5")
+        .then(() => maybeLoadScript("vega-lite", "5.2.0"))
+        .then(() => maybeLoadScript("vega-embed", "6"))
+        .catch(showError)
+        .then(() => displayChart(vegaEmbed));
+    }
+  })({"config": {"view": {"continuousWidth": 400, "continuousHeight": 300}, "axis": {"labelLimit": 500}}, "data": {"name": "data-01f1051d97f6f65c6749dfa661503c20"}, "mark": {"type": "rect", "stroke": "black"}, "encoding": {"color": {"field": "r2", "scale": {"zero": true}, "type": "quantitative"}, "tooltip": [{"field": "library", "type": "nominal"}, {"field": "sample_1", "type": "nominal"}, {"field": "sample_2", "type": "nominal"}, {"field": "r2", "format": ".3g", "type": "quantitative"}], "x": {"field": "sample_1", "title": null, "type": "nominal"}, "y": {"field": "sample_2", "title": null, "type": "nominal"}}, "height": {"step": 15}, "title": "Lib-2", "width": {"step": 15}, "$schema": "https://vega.github.io/schema/vega-lite/v5.2.0.json", "datasets": {"data-01f1051d97f6f65c6749dfa661503c20": [{"library": "Lib-2", "sample_1": "2022-10-22_thaw-1_VSVG_control_1 vs 2022-10-22_thaw-1_no-antibody_control_1", "sample_2": "2022-10-22_thaw-1_VSVG_control_1 vs 2022-10-22_thaw-1_no-antibody_control_1", "r2": 1.0}, {"library": "Lib-2", "sample_1": "2022-10-22_thaw-2_VSVG_control_1 vs 2022-10-22_thaw-2_no-antibody_control_1", "sample_2": "2022-10-22_thaw-1_VSVG_control_1 vs 2022-10-22_thaw-1_no-antibody_control_1", "r2": 0.4997712088012804}, {"library": "Lib-2", "sample_1": "2022-10-22_thaw-1_VSVG_control_1 vs 2022-10-22_thaw-1_no-antibody_control_1", "sample_2": "2022-10-22_thaw-2_VSVG_control_1 vs 2022-10-22_thaw-2_no-antibody_control_1", "r2": 0.4997712088012804}, {"library": "Lib-2", "sample_1": "2022-10-22_thaw-2_VSVG_control_1 vs 2022-10-22_thaw-2_no-antibody_control_1", "sample_2": "2022-10-22_thaw-2_VSVG_control_1 vs 2022-10-22_thaw-2_no-antibody_control_1", "r2": 1.0}]}}, {"mode": "vega-lite"});
+</script></div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+</div>
+</section>
+</section>
+
+
+          </div>
+          
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;Bernadeta Dadonaite and Jesse Bloom (2022).
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.3.2</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/analyze_func_scores.nblink.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

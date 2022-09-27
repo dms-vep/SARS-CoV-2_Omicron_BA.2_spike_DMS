@@ -29,7 +29,7 @@ consensus_params:  # parameters for building PacBio consensus sequences
   max_indel_diffs: null
   max_minor_sub_frac: 0.2
   max_minor_indel_frac: 0.2
-  min_support: 2
+  min_support: 3
 
 # Parameters for processing Illumina barcodes
 illumina_barcode_parser_params:
@@ -52,6 +52,8 @@ prob_escape_min_neut_standard_frac: 0.0005
 # counts and this fraction of total counts in no-antibody sample:
 prob_escape_min_no_antibody_counts: 20
 prob_escape_min_no_antibody_frac: 0.000001  # make smaller for large libraries, say 0.1 / (library size)
+# when averaging antibody escape values, take the "median" or "mean"?
+escape_avg_method: median
 
 # Parameters for functional scores and global epistasis analysis
 func_scores_pseudocount: 0.5  # pseudocount when computing functional scores
@@ -61,10 +63,22 @@ func_scores_min_wt_frac:  0.001  # require this fraction of all counts for wildt
 # pre-selection counts and this fraction of total pre-selection counts
 func_scores_min_preselection_counts: 20
 func_scores_min_preselection_frac: 0.000001  # make smaller for large libraries, say 0.1 / (library size)
-# when plotting mut effects on viral entry, initially require mutation seen in this many variants:
-plot_muteffects_min_times_seen: 3
 # when averaging mutation effects on viral entry, take the "median" or "mean"?
 muteffects_avg_method: median
+# keyword arguments to `polyclonal.plot.lineplot_and_heatmap` for plotting functional effects
+muteffects_plot_kwargs:
+  addtl_slider_stats:
+    times_seen: 3
+  heatmap_max_at_least: 1
+  heatmap_min_at_least: -1
+  init_floor_at_zero: False
+  slider_binding_range_kwargs:
+    n_libraries:
+      step: 1
+    times_seen:
+      step: 1
+      min: 1
+      max: 25
 
 # ----------------------------------------------------------------------------
 # Input data to dms-vep-pipeline
@@ -86,7 +100,12 @@ variant_tags:  # variant tags in PacBio amplicon, or "null" if no tags
 # Map sequential 1, 2, numbering of gene in PacBio amplicon to the desired
 # final reference numbering scheme. Unlike in the `dms-vep-pipeline`
 # test example, here we create this mapping from the Genbank accession.
+# Add a column called "region" that assigns each site to a
+# region of the protein (eg, domain like RBD or NTD).
 numbering_reference_accession: QHD43416.1  # Wuhan-Hu-1 spike
+# file that maps reference sites (Wuhan-Hu-1) to regions
+reference_site_regions: data/reference_site_to_region.csv
+# generated file by `Snakefile` with reference site numbering
 site_numbering_map: results/site_numbering/site_numbering_map.csv
 
 # Classify mutations into different categories, such as which ones are
@@ -97,7 +116,7 @@ mutation_design_classification: library_design/results/aggregated_mutations.csv
 neut_standard_barcodes: data/neutralization_standard_barcodes.csv
 
 # Illumina barcode sequencing
-barcode_runs: null
+barcode_runs: data/barcode_runs.csv
 
 # configuration for polyclonal fitting
 fit_polyclonal_threads: 2  # threads to use bootstrapping polyclonal models
@@ -136,6 +155,9 @@ antibody_selections: results/prob_escape/antibody_selections.csv
 
 # polyclonal fitting directory
 polyclonal_dir: results/polyclonal_fits
+
+# antibody-escape values
+escape_dir: results/antibody_escape
 
 # functional scores for functional selections
 func_score_dir: results/func_scores
