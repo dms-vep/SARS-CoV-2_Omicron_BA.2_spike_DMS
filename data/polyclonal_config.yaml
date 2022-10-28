@@ -36,15 +36,23 @@ sera_default: &sera_default
     reg_activity_weight: 1.0
 
 # define configuration for specific monoclonal antibodies, merging above defaults
-COV3360:
+COV3560:
   <<: *mAb_default
-COV3361:
+COV3561:
   <<: *mAb_default
-COV3366:
+COV3566:
   <<: *mAb_default
-
+COV3600:
+  <<: *mAb_default
+COV3619:
+  <<: *mAb_default
+COV3731:
+  <<: *mAb_default
+  
 # define configuration for specific sera, merging above defaults
 379C:
   <<: *sera_default
 407C:
+  <<: *sera_default
+405C:
   <<: *sera_default
