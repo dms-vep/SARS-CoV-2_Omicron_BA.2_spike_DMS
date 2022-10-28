@@ -57,7 +57,11 @@ Interactive plots of mutation functional effects
 Interactive plots of mutation antibody escape
 ---------------------------------------------
 - `379C escape plot <379C_escape_plot.html>`_
+- `405C escape plot <405C_escape_plot.html>`_
 - `407C escape plot <407C_escape_plot.html>`_
-- `COV3360 escape plot <COV3360_escape_plot.html>`_
-- `COV3361 escape plot <COV3361_escape_plot.html>`_
-- `COV3366 escape plot <COV3366_escape_plot.html>`_
+- `COV3560 escape plot <COV3560_escape_plot.html>`_
+- `COV3561 escape plot <COV3561_escape_plot.html>`_
+- `COV3566 escape plot <COV3566_escape_plot.html>`_
+- `COV3600 escape plot <COV3600_escape_plot.html>`_
+- `COV3619 escape plot <COV3619_escape_plot.html>`_
+- `COV3731 escape plot <COV3731_escape_plot.html>`_

@@ -1,0 +1,3 @@
+{
+    "path": "../notebooks/fit_polyclonal_Lib-2_2022-10-22_thaw-2_COV3560_1.ipynb"
+}
