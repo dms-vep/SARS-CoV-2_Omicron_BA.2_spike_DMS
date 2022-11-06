@@ -23,6 +23,10 @@ Lib-1,2022-10-23_thaw-3_antibody_COV3600_3.554184_1,106.2,20,True,no
 Lib-1,2022-10-23_thaw-3_antibody_COV3619_2.03628_1,145.5,20,True,no
 Lib-1,2022-10-23_thaw-3_antibody_COV3731_1.587924_1,132.7,20,True,no
 Lib-1,2022-10-23_thaw-3_no-antibody_control_1,199.3,20,True,no
+Lib-1,2022-11-03_thaw-3_antibody_405C_0.002148_1,65.2,20,True,no
+Lib-1,2022-11-03_thaw-3_antibody_405C_0.006444_1,53.5,20,True,no
+Lib-1,2022-11-03_thaw-3_antibody_405C_0.019332_1,55.2,20,True,no
+Lib-1,2022-11-03_thaw-3_no-antibody_control_1,63.6,20,True,no
 Lib-2,2022-10-22_thaw-1_VSVG_control_1,807.6,20,True,no
 Lib-2,2022-10-22_thaw-1_no-antibody_control_1,641.9,20,True,no
 Lib-2,2022-10-22_thaw-2_VSVG_control_1,652.3,20,True,no
@@ -38,3 +42,13 @@ Lib-2,2022-10-23_thaw-3_antibody_COV3600_3.554184_1,165.1,20,True,no
 Lib-2,2022-10-23_thaw-3_antibody_COV3619_2.03628_1,174.6,20,True,no
 Lib-2,2022-10-23_thaw-3_antibody_COV3731_1.587924_1,134.0,20,True,no
 Lib-2,2022-10-23_thaw-3_no-antibody_control_1,187.2,20,True,no
+Lib-2,2022-11-03_thaw-3_antibody_379C_0.015384615_1,51.0,20,True,no
+Lib-2,2022-11-03_thaw-3_antibody_379C_0.030769231_1,61.3,20,True,no
+Lib-2,2022-11-03_thaw-3_antibody_379C_0.06_1,58.5,20,True,no
+Lib-2,2022-11-03_thaw-3_antibody_405C_0.002148_1,70.1,20,True,no
+Lib-2,2022-11-03_thaw-3_antibody_405C_0.006444_1,56.1,20,True,no
+Lib-2,2022-11-03_thaw-3_antibody_405C_0.019332_1,48.1,20,True,no
+Lib-2,2022-11-03_thaw-3_antibody_407C_0.018181818_1,79.0,20,True,no
+Lib-2,2022-11-03_thaw-3_antibody_407C_0.036363636_1,46.4,20,True,no
+Lib-2,2022-11-03_thaw-3_antibody_407C_0.069090909_1,51.6,20,True,no
+Lib-2,2022-11-03_thaw-3_no-antibody_control_1,72.2,20,True,no
