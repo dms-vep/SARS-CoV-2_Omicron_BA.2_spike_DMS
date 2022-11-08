@@ -65,3 +65,4 @@ Interactive plots of mutation antibody escape
 - `COV3600 escape plot <COV3600_escape_plot.html>`_
 - `COV3619 escape plot <COV3619_escape_plot.html>`_
 - `COV3731 escape plot <COV3731_escape_plot.html>`_
+
