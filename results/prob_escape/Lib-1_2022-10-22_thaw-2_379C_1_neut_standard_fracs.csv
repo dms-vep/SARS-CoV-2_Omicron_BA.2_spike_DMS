@@ -1,2 +1,4 @@
 library,antibody_sample,no-antibody_sample,antibody,antibody_concentration,antibody_count,antibody_frac,no-antibody_count,no-antibody_frac
 Lib-1,2022-10-22_thaw-2_antibody_379C_0.01124_1,2022-10-22_thaw-2_no-antibody_control_1,379C,0.01124,71481,0.00542,12945,0.001044
+Lib-1,2022-10-22_thaw-2_antibody_379C_0.00281_1,2022-10-22_thaw-2_no-antibody_control_1,379C,0.00281,32724,0.002637,12945,0.001044
+Lib-1,2022-10-22_thaw-2_antibody_379C_0.000936667_1,2022-10-22_thaw-2_no-antibody_control_1,379C,0.0009367,35393,0.002436,12945,0.001044

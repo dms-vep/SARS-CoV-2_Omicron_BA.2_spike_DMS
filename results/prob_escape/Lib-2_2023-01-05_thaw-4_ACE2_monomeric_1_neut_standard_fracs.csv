@@ -1,0 +1,6 @@
+library,antibody_sample,no-antibody_sample,antibody,antibody_concentration,antibody_count,antibody_frac,no-antibody_count,no-antibody_frac
+Lib-2,2023-01-05_thaw-4_antibody_ACE2_monomeric_2.88_1,2023-01-05_thaw-4_no-antibody_control_1,ACE2_monomeric,2.88,1252945,0.07829,850109,0.06205
+Lib-2,2023-01-05_thaw-4_antibody_ACE2_monomeric_8.633016_1,2023-01-05_thaw-4_no-antibody_control_1,ACE2_monomeric,8.633,1999758,0.1197,850109,0.06205
+Lib-2,2023-01-05_thaw-4_antibody_ACE2_monomeric_25.899048_1,2023-01-05_thaw-4_no-antibody_control_1,ACE2_monomeric,25.9,3898509,0.2755,850109,0.06205
+Lib-2,2023-01-05_thaw-4_antibody_ACE2_monomeric_77.697144_1,2023-01-05_thaw-4_no-antibody_control_1,ACE2_monomeric,77.7,5740218,0.4801,850109,0.06205
+Lib-2,2023-01-05_thaw-4_antibody_ACE2_monomeric_233.091432_1,2023-01-05_thaw-4_no-antibody_control_1,ACE2_monomeric,233.1,6123943,0.5245,850109,0.06205

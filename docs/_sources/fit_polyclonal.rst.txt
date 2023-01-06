@@ -25,4 +25,10 @@ Fit ``polyclonal`` models
 - :doc:`Lib-1_2022-11-03_thaw-3_405C_1 <fit_polyclonal_Lib-1_2022-11-03_thaw-3_405C_1>`
 - :doc:`Lib-2_2022-11-03_thaw-3_405C_1 <fit_polyclonal_Lib-2_2022-11-03_thaw-3_405C_1>`
 - :doc:`Lib-2_2022-11-03_thaw-3_407C_1 <fit_polyclonal_Lib-2_2022-11-03_thaw-3_407C_1>`
+- :doc:`Lib-1_2023-01-05_thaw-4_360C_1 <fit_polyclonal_Lib-1_2023-01-05_thaw-4_360C_1>`
+- :doc:`Lib-1_2023-01-05_thaw-4_361C_1 <fit_polyclonal_Lib-1_2023-01-05_thaw-4_361C_1>`
+- :doc:`Lib-1_2023-01-05_thaw-4_362C_1 <fit_polyclonal_Lib-1_2023-01-05_thaw-4_362C_1>`
+- :doc:`Lib-1_2023-01-05_thaw-4_364C_1 <fit_polyclonal_Lib-1_2023-01-05_thaw-4_364C_1>`
+- :doc:`Lib-1_2023-01-05_thaw-4_400C_1 <fit_polyclonal_Lib-1_2023-01-05_thaw-4_400C_1>`
+- :doc:`Lib-2_2023-01-05_thaw-4_ACE2_monomeric_1 <fit_polyclonal_Lib-2_2023-01-05_thaw-4_ACE2_monomeric_1>`
 
