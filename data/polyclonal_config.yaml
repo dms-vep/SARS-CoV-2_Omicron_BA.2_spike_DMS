@@ -49,8 +49,20 @@ COV3619:
   <<: *mAb_default
 COV3731:
   <<: *mAb_default
+ACE2_monomeric:
+  <<: *mAb_default
   
 # define configuration for specific sera, merging above defaults
+360C:
+  <<: *sera_default
+361C:
+  <<: *sera_default
+362C:
+  <<: *sera_default
+400C:
+  <<: *sera_default
+364C:
+  <<: *sera_default
 379C:
   <<: *sera_default
 407C:
