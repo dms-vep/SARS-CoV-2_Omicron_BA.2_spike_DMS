@@ -44,6 +44,20 @@ rule site_numbering_map:
     script:
         "scripts/site_numbering_map.py"
 
+rule spatial_distances:
+    """Get spatial distances from PDB."""
+    input: 
+        pdb=config["PDB"],
+    output:
+        csv=config["spatial_distances"],
+    params:
+        target_chains=["A", "B", "C"],
+    log:
+        log=os.path.join(config["logdir"], "spatial_distances.txt"),
+    conda:
+        os.path.join(config["pipeline_path"], "environment.yml")
+    script:
+        "scripts/spatial_distances.py"
 
 # Add any extra data/results files for docs with name: file
 extra_data_files = {
