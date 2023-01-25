@@ -1,0 +1,4 @@
+library,antibody_sample,no-antibody_sample,antibody,antibody_concentration,antibody_count,antibody_frac,no-antibody_count,no-antibody_frac
+Lib-1,2023-01-14_thaw-4_antibody_394C_0.046896_1,2023-01-14_thaw-4_no-antibody_control_1,394C,0.0469,2737977,0.196,448717,0.02719
+Lib-1,2023-01-14_thaw-4_antibody_394C_0.093792_1,2023-01-14_thaw-4_no-antibody_control_1,394C,0.09379,2821395,0.23,448717,0.02719
+Lib-1,2023-01-14_thaw-4_antibody_394C_0.187584_1,2023-01-14_thaw-4_no-antibody_control_1,394C,0.1876,1758806,0.1778,448717,0.02719

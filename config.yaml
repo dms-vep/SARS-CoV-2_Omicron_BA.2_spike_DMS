@@ -122,6 +122,13 @@ barcode_runs: data/barcode_runs.csv
 fit_polyclonal_threads: 2  # threads to use bootstrapping polyclonal models
 polyclonal_config: data/polyclonal_config.yaml
 
+#Spike modeled with TM from: https://pubs.acs.org/doi/10.1021/acscentsci.0c01056
+PDB: data/PDBs/aligned_spike_TM.pdb    
+
+# spatial distances between residues
+spatial_distances: results/spatial_distances/spatial_distances.csv
+
+
 # ----------------------------------------------------------------------------
 # Names of output directories / files
 # ----------------------------------------------------------------------------
