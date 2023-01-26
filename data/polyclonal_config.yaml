@@ -16,6 +16,8 @@ overall_default: &overall_default
         max: 25
     heatmap_max_at_least: 2
     heatmap_min_at_least: -2
+    init_floor_at_zero: False
+ 
 
 # default configuration for monoclonal antibodies (mAbs)
 mAb_default: &mAb_default
@@ -29,12 +31,14 @@ mAb_default: &mAb_default
 # default configuration of polyclonal sera
 sera_default: &sera_default
   <<: *overall_default
-  max_epitopes: 1
+  max_epitopes: 2
   min_epitope_activity_to_include: 0.2
   fit_kwargs:
     reg_escape_weight: 0.1
-    reg_spread_weight: 0.25
-    reg_activity_weight: 1.0
+    reg_uniqueness_weight: 0
+    reg_uniqueness2_weight: 1
+    reg_spatial_weight: 0.0
+    reg_spatial2_weight: 0.0005
 
 # define configuration for specific monoclonal antibodies, merging above defaults
 COV3560:
@@ -56,4 +60,16 @@ COV3731:
 407C:
   <<: *sera_default
 405C:
+  <<: *sera_default
+360C:
+  <<: *sera_default
+361C:
+  <<: *sera_default
+362C:
+  <<: *sera_default
+364C:
+  <<: *sera_default
+394C:
+  <<: *sera_default
+400C:
   <<: *sera_default
