@@ -11,6 +11,7 @@ _*
 
 docs/*.ipynb
 !docs/**/_*
+docs/_
 
 results/*
 !results/gene_sequence
