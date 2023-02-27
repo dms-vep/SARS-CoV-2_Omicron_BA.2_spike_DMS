@@ -11,7 +11,6 @@ _*
 
 docs/*.ipynb
 !docs/**/_*
-docs/_
 
 results/*
 !results/gene_sequence
@@ -37,10 +36,16 @@ results/site_numbering/*
 !results/site_numbering/site_numbering_map.csv
 !results/func_scores
 results/func_scores/*
-!results/func_scores/*.csv
+!results/func_scores/functional_selections.csv
 !results/globalepistasis_fits
 results/globalepistasis_fits/*
 !results/globalepistasis_fits/*.csv
 !results/muteffects_functional
 results/muteffects_functional/*
 !results/muteffects_functional/*.csv
+!results/antibody_escape
+results/antibody_escape/*
+!results/antibody_escape/*.csv
+!results/spatial_distances
+results/spatial_distances/*
+!results/spatial_distances/*.csv
