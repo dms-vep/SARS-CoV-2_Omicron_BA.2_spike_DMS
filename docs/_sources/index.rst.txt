@@ -25,10 +25,10 @@ details, using dropdowns, etc.
    analyze_pacbio_ccs
    build_pacbio_consensus
    build_codon_variants
-   analyze_variant_counts
    analyze_func_scores
    fit_globalepistasis
    avg_muteffects
+   analyze_variant_counts
    analyze_prob_escape
    fit_polyclonal
    avg_antibody_escape
@@ -65,6 +65,7 @@ Interactive plots of mutation antibody escape
 - `400C escape plot <400C_escape_plot.html>`_
 - `405C escape plot <405C_escape_plot.html>`_
 - `407C escape plot <407C_escape_plot.html>`_
+- `C68.215 escape plot <C68.215_escape_plot.html>`_
 - `COV3560 escape plot <COV3560_escape_plot.html>`_
 - `COV3561 escape plot <COV3561_escape_plot.html>`_
 - `COV3566 escape plot <COV3566_escape_plot.html>`_
