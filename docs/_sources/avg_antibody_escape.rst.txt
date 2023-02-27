@@ -17,4 +17,5 @@ Antibody-escape averaged across replicates
 - :doc:`364C <avg_antibody_escape_364C>`
 - :doc:`400C <avg_antibody_escape_400C>`
 - :doc:`394C <avg_antibody_escape_394C>`
+- :doc:`C68.215 <avg_antibody_escape_C68.215>`
 

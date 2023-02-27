@@ -1,21 +1,20 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
     <title>Analyze PacBio CCSs &#8212; Deep mutational scanning of SARS-CoV-2 Omicron BA.2 spike using a barcoded lentiviral platform  documentation</title>
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="_static/alabaster.css" />
     <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-    <script src="_static/jquery.js"></script>
-    <script src="_static/underscore.js"></script>
     <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Build PacBio consensus sequences" href="build_pacbio_consensus.html" />
@@ -293,7 +292,7 @@ div.rendered_html tbody tr:hover {
 }
 </style>
 <section id="Analyze-PacBio-CCSs">
-<h1>Analyze PacBio CCSs<a class="headerlink" href="#Analyze-PacBio-CCSs" title="Permalink to this headline">¶</a></h1>
+<h1>Analyze PacBio CCSs<a class="headerlink" href="#Analyze-PacBio-CCSs" title="Permalink to this heading">¶</a></h1>
 <p>This notebook analyzes the PacBio CCSs that have been previously aligned and parsed with <a class="reference external" href="https://jbloomlab.github.io/alignparse/">alignparse</a>.</p>
 <p>Import Python modules:</p>
 <div class="nbinput nblast docutils container">
@@ -392,7 +391,7 @@ div.rendered_html tbody tr:hover {
 </div></div>
 </div>
 <section id="Stats-on-CCS-alignments">
-<h2>Stats on CCS alignments<a class="headerlink" href="#Stats-on-CCS-alignments" title="Permalink to this headline">¶</a></h2>
+<h2>Stats on CCS alignments<a class="headerlink" href="#Stats-on-CCS-alignments" title="Permalink to this heading">¶</a></h2>
 <p>Read and plot the alignment stats from running <code class="docutils literal notranslate"><span class="pre">alignparse</span></code> on the PacBio CCSs:</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
@@ -430,33 +429,24 @@ div.rendered_html tbody tr:hover {
 </pre></div>
 </div>
 </div>
-<div class="nboutput docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area stderr docutils container">
-<div class="highlight"><pre>
-/fh/fast/bloom_j/computational_notebooks/bdadonai/2022/vep_dms/SARS-CoV-2_Omicron_BA.2_spike_DMS/.snakemake/conda/0435e0945037e3f24db4d3880bb15230_/lib/python3.10/site-packages/altair/utils/core.py:317: FutureWarning: iteritems is deprecated and will be removed in a future version. Use .items instead.
-  for col_name, dtype in df.dtypes.iteritems():
-</pre></div></div>
-</div>
 <div class="nboutput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
 </pre></div>
 </div>
 <div class="output_area rendered_html docutils container">
-<div id="altair-viz-6fb02e509ece410d94a2e80aaf195149"></div>
+<div id="altair-viz-17755c581a3646d9b753f4fb036da542"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-6fb02e509ece410d94a2e80aaf195149") {
-      outputDiv = document.getElementById("altair-viz-6fb02e509ece410d94a2e80aaf195149");
+    if (outputDiv.id !== "altair-viz-17755c581a3646d9b753f4fb036da542") {
+      outputDiv = document.getElementById("altair-viz-17755c581a3646d9b753f4fb036da542");
     }
     const paths = {
-      "vega": "https://cdn.jsdelivr.net/npm//vega@5?noext",
-      "vega-lib": "https://cdn.jsdelivr.net/npm//vega-lib?noext",
-      "vega-lite": "https://cdn.jsdelivr.net/npm//vega-lite@5.2.0?noext",
-      "vega-embed": "https://cdn.jsdelivr.net/npm//vega-embed@6?noext",
+      "vega": "https://cdn.jsdelivr.net/npm/vega@5?noext",
+      "vega-lib": "https://cdn.jsdelivr.net/npm/vega-lib?noext",
+      "vega-lite": "https://cdn.jsdelivr.net/npm/vega-lite@5.2.0?noext",
+      "vega-embed": "https://cdn.jsdelivr.net/npm/vega-embed@6?noext",
     };
 
     function maybeLoadScript(lib, version) {
@@ -496,12 +486,12 @@ div.rendered_html tbody tr:hover {
         .catch(showError)
         .then(() => displayChart(vegaEmbed));
     }
-  })({"config": {"view": {"continuousWidth": 400, "continuousHeight": 300}}, "data": {"name": "data-e6697a23799a0205f41d02251fd32883"}, "mark": "bar", "encoding": {"facet": {"columns": 2, "field": "pacbioRun", "title": null, "type": "nominal"}, "tooltip": [{"field": "category", "type": "nominal"}, {"field": "count", "type": "quantitative"}, {"field": "pacbioRun", "type": "nominal"}, {"field": "library", "type": "nominal"}], "x": {"field": "count", "type": "quantitative"}, "y": {"axis": {"title": null}, "field": "category", "type": "nominal"}}, "height": 75, "resolve": {"scale": {"x": "independent", "y": "independent"}}, "width": 250, "$schema": "https://vega.github.io/schema/vega-lite/v5.2.0.json", "datasets": {"data-e6697a23799a0205f41d02251fd32883": [{"category": "aligned PacBio_amplicon", "count": 2672923, "pacbioRun": "Lib-1_220629", "library": "Lib-1"}, {"category": "filtered PacBio_amplicon", "count": 175199, "pacbioRun": "Lib-1_220629", "library": "Lib-1"}, {"category": "unmapped", "count": 19379, "pacbioRun": "Lib-1_220629", "library": "Lib-1"}, {"category": "aligned PacBio_amplicon", "count": 3060344, "pacbioRun": "Lib-2_220629", "library": "Lib-2"}, {"category": "filtered PacBio_amplicon", "count": 205667, "pacbioRun": "Lib-2_220629", "library": "Lib-2"}, {"category": "unmapped", "count": 33533, "pacbioRun": "Lib-2_220629", "library": "Lib-2"}]}}, {"mode": "vega-lite"});
+  })({"config": {"view": {"continuousWidth": 300, "continuousHeight": 300}}, "data": {"name": "data-e6697a23799a0205f41d02251fd32883"}, "mark": "bar", "encoding": {"facet": {"columns": 2, "field": "pacbioRun", "title": null, "type": "nominal"}, "tooltip": [{"field": "category", "type": "nominal"}, {"field": "count", "type": "quantitative"}, {"field": "pacbioRun", "type": "nominal"}, {"field": "library", "type": "nominal"}], "x": {"field": "count", "type": "quantitative"}, "y": {"axis": {"title": null}, "field": "category", "type": "nominal"}}, "height": 75, "resolve": {"scale": {"x": "independent", "y": "independent"}}, "width": 250, "$schema": "https://vega.github.io/schema/vega-lite/v5.2.0.json", "datasets": {"data-e6697a23799a0205f41d02251fd32883": [{"category": "aligned PacBio_amplicon", "count": 2672923, "pacbioRun": "Lib-1_220629", "library": "Lib-1"}, {"category": "filtered PacBio_amplicon", "count": 175199, "pacbioRun": "Lib-1_220629", "library": "Lib-1"}, {"category": "unmapped", "count": 19379, "pacbioRun": "Lib-1_220629", "library": "Lib-1"}, {"category": "aligned PacBio_amplicon", "count": 3060344, "pacbioRun": "Lib-2_220629", "library": "Lib-2"}, {"category": "filtered PacBio_amplicon", "count": 205667, "pacbioRun": "Lib-2_220629", "library": "Lib-2"}, {"category": "unmapped", "count": 33533, "pacbioRun": "Lib-2_220629", "library": "Lib-2"}]}}, {"mode": "vega-lite"});
 </script></div>
 </div>
 </section>
 <section id="Visualize-target-to-which-reads-are-being-aligned">
-<h2>Visualize target to which reads are being aligned<a class="headerlink" href="#Visualize-target-to-which-reads-are-being-aligned" title="Permalink to this headline">¶</a></h2>
+<h2>Visualize target to which reads are being aligned<a class="headerlink" href="#Visualize-target-to-which-reads-are-being-aligned" title="Permalink to this heading">¶</a></h2>
 <p>Draw images of the target we’re parsing:</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
@@ -530,7 +520,7 @@ div.rendered_html tbody tr:hover {
 </div>
 </section>
 <section id="Why-were-some-CCSs-filtered?">
-<h2>Why were some CCSs filtered?<a class="headerlink" href="#Why-were-some-CCSs-filtered?" title="Permalink to this headline">¶</a></h2>
+<h2>Why were some CCSs filtered?<a class="headerlink" href="#Why-were-some-CCSs-filtered?" title="Permalink to this heading">¶</a></h2>
 <p>Plot the number of CCSs filtered for each reason:</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
@@ -600,33 +590,24 @@ div.rendered_html tbody tr:hover {
 </pre></div>
 </div>
 </div>
-<div class="nboutput docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area stderr docutils container">
-<div class="highlight"><pre>
-/fh/fast/bloom_j/computational_notebooks/bdadonai/2022/vep_dms/SARS-CoV-2_Omicron_BA.2_spike_DMS/.snakemake/conda/0435e0945037e3f24db4d3880bb15230_/lib/python3.10/site-packages/altair/utils/core.py:317: FutureWarning: iteritems is deprecated and will be removed in a future version. Use .items instead.
-  for col_name, dtype in df.dtypes.iteritems():
-</pre></div></div>
-</div>
 <div class="nboutput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
 </pre></div>
 </div>
 <div class="output_area rendered_html docutils container">
-<div id="altair-viz-69b3e8554ea94687b2c186b253802a36"></div>
+<div id="altair-viz-1ebba8b4b1614b1286cdcae9ba91f534"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-69b3e8554ea94687b2c186b253802a36") {
-      outputDiv = document.getElementById("altair-viz-69b3e8554ea94687b2c186b253802a36");
+    if (outputDiv.id !== "altair-viz-1ebba8b4b1614b1286cdcae9ba91f534") {
+      outputDiv = document.getElementById("altair-viz-1ebba8b4b1614b1286cdcae9ba91f534");
     }
     const paths = {
-      "vega": "https://cdn.jsdelivr.net/npm//vega@5?noext",
-      "vega-lib": "https://cdn.jsdelivr.net/npm//vega-lib?noext",
-      "vega-lite": "https://cdn.jsdelivr.net/npm//vega-lite@5.2.0?noext",
-      "vega-embed": "https://cdn.jsdelivr.net/npm//vega-embed@6?noext",
+      "vega": "https://cdn.jsdelivr.net/npm/vega@5?noext",
+      "vega-lib": "https://cdn.jsdelivr.net/npm/vega-lib?noext",
+      "vega-lite": "https://cdn.jsdelivr.net/npm/vega-lite@5.2.0?noext",
+      "vega-embed": "https://cdn.jsdelivr.net/npm/vega-embed@6?noext",
     };
 
     function maybeLoadScript(lib, version) {
@@ -666,12 +647,12 @@ div.rendered_html tbody tr:hover {
         .catch(showError)
         .then(() => displayChart(vegaEmbed));
     }
-  })({"config": {"view": {"continuousWidth": 400, "continuousHeight": 300}}, "data": {"name": "data-4bffe47efde6922ab8ffcf7dabe16c57"}, "mark": "bar", "encoding": {"color": {"field": "is_aligned", "type": "nominal"}, "facet": {"columns": 2, "field": "pacbioRun", "title": null, "type": "nominal"}, "tooltip": [{"field": "pacbioRun", "type": "nominal"}, {"field": "filter_reason", "type": "nominal"}, {"field": "count", "type": "quantitative"}, {"field": "total_counts", "type": "quantitative"}, {"field": "frac_counts", "type": "quantitative"}], "x": {"field": "count", "type": "quantitative"}, "y": {"axis": {"title": null}, "field": "filter_reason", "type": "nominal"}}, "height": 75, "resolve": {"scale": {"x": "independent", "y": "independent"}}, "transform": [{"filter": "(datum.frac_counts > 0.01)"}, {"calculate": "(datum.filter_reason === 'aligned')", "as": "is_aligned"}], "width": 250, "$schema": "https://vega.github.io/schema/vega-lite/v5.2.0.json", "datasets": {"data-4bffe47efde6922ab8ffcf7dabe16c57": [{"pacbioRun": "Lib-1_220629", "filter_reason": "barcode clip3", "count": 1256, "total_counts": 2848122, "frac_counts": 0.000440992345131283}, {"pacbioRun": "Lib-1_220629", "filter_reason": "barcode mutation_nt_count", "count": 31126, "total_counts": 2848122, "frac_counts": 0.010928604884200888}, {"pacbioRun": "Lib-1_220629", "filter_reason": "gene clip3", "count": 11178, "total_counts": 2848122, "frac_counts": 0.003924691428246402}, {"pacbioRun": "Lib-1_220629", "filter_reason": "gene mutation_nt_count", "count": 39330, "total_counts": 2848122, "frac_counts": 0.013809099469755861}, {"pacbioRun": "Lib-1_220629", "filter_reason": "query_clip3", "count": 9525, "total_counts": 2848122, "frac_counts": 0.0033443089867639096}, {"pacbioRun": "Lib-1_220629", "filter_reason": "query_clip5", "count": 14801, "total_counts": 2848122, "frac_counts": 0.005196757723159331}, {"pacbioRun": "Lib-1_220629", "filter_reason": "termini3 clip3", "count": 4136, "total_counts": 2848122, "frac_counts": 0.0014521849836488746}, {"pacbioRun": "Lib-1_220629", "filter_reason": "termini3 mutation_nt_count", "count": 13906, "total_counts": 2848122, "frac_counts": 0.004882515566397788}, {"pacbioRun": "Lib-1_220629", "filter_reason": "termini5 clip5", "count": 21094, "total_counts": 2848122, "frac_counts": 0.007406283860031277}, {"pacbioRun": "Lib-1_220629", "filter_reason": "termini5 mutation_nt_count", "count": 16867, "total_counts": 2848122, "frac_counts": 0.0059221479978736865}, {"pacbioRun": "Lib-1_220629", "filter_reason": "variant_tag3 mutation_nt_count", "count": 9220, "total_counts": 2848122, "frac_counts": 0.0032372208774764564}, {"pacbioRun": "Lib-1_220629", "filter_reason": "variant_tag5 mutation_nt_count", "count": 2760, "total_counts": 2848122, "frac_counts": 0.0009690596119126919}, {"pacbioRun": "Lib-2_220629", "filter_reason": "barcode clip3", "count": 1271, "total_counts": 3266011, "frac_counts": 0.0003891597425728205}, {"pacbioRun": "Lib-2_220629", "filter_reason": "barcode mutation_nt_count", "count": 36863, "total_counts": 3266011, "frac_counts": 0.011286857270229647}, {"pacbioRun": "Lib-2_220629", "filter_reason": "gene clip3", "count": 14027, "total_counts": 3266011, "frac_counts": 0.004294841627906336}, {"pacbioRun": "Lib-2_220629", "filter_reason": "gene mutation_nt_count", "count": 44335, "total_counts": 3266011, "frac_counts": 0.013574663404379225}, {"pacbioRun": "Lib-2_220629", "filter_reason": "query_clip3", "count": 12716, "total_counts": 3266011, "frac_counts": 0.0038934345291549845}, {"pacbioRun": "Lib-2_220629", "filter_reason": "query_clip5", "count": 22359, "total_counts": 3266011, "frac_counts": 0.00684596591989433}, {"pacbioRun": "Lib-2_220629", "filter_reason": "termini3 clip3", "count": 4175, "total_counts": 3266011, "frac_counts": 0.0012783178011341663}, {"pacbioRun": "Lib-2_220629", "filter_reason": "termini3 mutation_nt_count", "count": 15331, "total_counts": 3266011, "frac_counts": 0.004694105439326445}, {"pacbioRun": "Lib-2_220629", "filter_reason": "termini5 clip5", "count": 25681, "total_counts": 3266011, "frac_counts": 0.007863108850521324}, {"pacbioRun": "Lib-2_220629", "filter_reason": "termini5 mutation_nt_count", "count": 17113, "total_counts": 3266011, "frac_counts": 0.005239725157079997}, {"pacbioRun": "Lib-2_220629", "filter_reason": "variant_tag3 mutation_nt_count", "count": 5915, "total_counts": 3266011, "frac_counts": 0.001811077794900262}, {"pacbioRun": "Lib-2_220629", "filter_reason": "variant_tag5 mutation_nt_count", "count": 5881, "total_counts": 3266011, "frac_counts": 0.001800667542148511}, {"pacbioRun": "Lib-1_220629", "filter_reason": "aligned", "count": 2672923, "total_counts": 2848122, "frac_counts": 0.9384861322654016}, {"pacbioRun": "Lib-2_220629", "filter_reason": "aligned", "count": 3060344, "total_counts": 3266011, "frac_counts": 0.9370280749207519}]}}, {"mode": "vega-lite"});
+  })({"config": {"view": {"continuousWidth": 300, "continuousHeight": 300}}, "data": {"name": "data-4bffe47efde6922ab8ffcf7dabe16c57"}, "mark": "bar", "encoding": {"color": {"field": "is_aligned", "type": "nominal"}, "facet": {"columns": 2, "field": "pacbioRun", "title": null, "type": "nominal"}, "tooltip": [{"field": "pacbioRun", "type": "nominal"}, {"field": "filter_reason", "type": "nominal"}, {"field": "count", "type": "quantitative"}, {"field": "total_counts", "type": "quantitative"}, {"field": "frac_counts", "type": "quantitative"}], "x": {"field": "count", "type": "quantitative"}, "y": {"axis": {"title": null}, "field": "filter_reason", "type": "nominal"}}, "height": 75, "resolve": {"scale": {"x": "independent", "y": "independent"}}, "transform": [{"filter": "(datum.frac_counts > 0.01)"}, {"calculate": "(datum.filter_reason === 'aligned')", "as": "is_aligned"}], "width": 250, "$schema": "https://vega.github.io/schema/vega-lite/v5.2.0.json", "datasets": {"data-4bffe47efde6922ab8ffcf7dabe16c57": [{"pacbioRun": "Lib-1_220629", "filter_reason": "barcode clip3", "count": 1256, "total_counts": 2848122, "frac_counts": 0.000440992345131283}, {"pacbioRun": "Lib-1_220629", "filter_reason": "barcode mutation_nt_count", "count": 31126, "total_counts": 2848122, "frac_counts": 0.010928604884200888}, {"pacbioRun": "Lib-1_220629", "filter_reason": "gene clip3", "count": 11178, "total_counts": 2848122, "frac_counts": 0.003924691428246402}, {"pacbioRun": "Lib-1_220629", "filter_reason": "gene mutation_nt_count", "count": 39330, "total_counts": 2848122, "frac_counts": 0.013809099469755861}, {"pacbioRun": "Lib-1_220629", "filter_reason": "query_clip3", "count": 9525, "total_counts": 2848122, "frac_counts": 0.0033443089867639096}, {"pacbioRun": "Lib-1_220629", "filter_reason": "query_clip5", "count": 14801, "total_counts": 2848122, "frac_counts": 0.005196757723159331}, {"pacbioRun": "Lib-1_220629", "filter_reason": "termini3 clip3", "count": 4136, "total_counts": 2848122, "frac_counts": 0.0014521849836488746}, {"pacbioRun": "Lib-1_220629", "filter_reason": "termini3 mutation_nt_count", "count": 13906, "total_counts": 2848122, "frac_counts": 0.004882515566397788}, {"pacbioRun": "Lib-1_220629", "filter_reason": "termini5 clip5", "count": 21094, "total_counts": 2848122, "frac_counts": 0.007406283860031277}, {"pacbioRun": "Lib-1_220629", "filter_reason": "termini5 mutation_nt_count", "count": 16867, "total_counts": 2848122, "frac_counts": 0.0059221479978736865}, {"pacbioRun": "Lib-1_220629", "filter_reason": "variant_tag3 mutation_nt_count", "count": 9220, "total_counts": 2848122, "frac_counts": 0.0032372208774764564}, {"pacbioRun": "Lib-1_220629", "filter_reason": "variant_tag5 mutation_nt_count", "count": 2760, "total_counts": 2848122, "frac_counts": 0.0009690596119126919}, {"pacbioRun": "Lib-2_220629", "filter_reason": "barcode clip3", "count": 1271, "total_counts": 3266011, "frac_counts": 0.0003891597425728205}, {"pacbioRun": "Lib-2_220629", "filter_reason": "barcode mutation_nt_count", "count": 36863, "total_counts": 3266011, "frac_counts": 0.011286857270229647}, {"pacbioRun": "Lib-2_220629", "filter_reason": "gene clip3", "count": 14027, "total_counts": 3266011, "frac_counts": 0.004294841627906336}, {"pacbioRun": "Lib-2_220629", "filter_reason": "gene mutation_nt_count", "count": 44335, "total_counts": 3266011, "frac_counts": 0.013574663404379225}, {"pacbioRun": "Lib-2_220629", "filter_reason": "query_clip3", "count": 12716, "total_counts": 3266011, "frac_counts": 0.0038934345291549845}, {"pacbioRun": "Lib-2_220629", "filter_reason": "query_clip5", "count": 22359, "total_counts": 3266011, "frac_counts": 0.00684596591989433}, {"pacbioRun": "Lib-2_220629", "filter_reason": "termini3 clip3", "count": 4175, "total_counts": 3266011, "frac_counts": 0.0012783178011341663}, {"pacbioRun": "Lib-2_220629", "filter_reason": "termini3 mutation_nt_count", "count": 15331, "total_counts": 3266011, "frac_counts": 0.004694105439326445}, {"pacbioRun": "Lib-2_220629", "filter_reason": "termini5 clip5", "count": 25681, "total_counts": 3266011, "frac_counts": 0.007863108850521324}, {"pacbioRun": "Lib-2_220629", "filter_reason": "termini5 mutation_nt_count", "count": 17113, "total_counts": 3266011, "frac_counts": 0.005239725157079997}, {"pacbioRun": "Lib-2_220629", "filter_reason": "variant_tag3 mutation_nt_count", "count": 5915, "total_counts": 3266011, "frac_counts": 0.001811077794900262}, {"pacbioRun": "Lib-2_220629", "filter_reason": "variant_tag5 mutation_nt_count", "count": 5881, "total_counts": 3266011, "frac_counts": 0.001800667542148511}, {"pacbioRun": "Lib-1_220629", "filter_reason": "aligned", "count": 2672923, "total_counts": 2848122, "frac_counts": 0.9384861322654016}, {"pacbioRun": "Lib-2_220629", "filter_reason": "aligned", "count": 3060344, "total_counts": 3266011, "frac_counts": 0.9370280749207519}]}}, {"mode": "vega-lite"});
 </script></div>
 </div>
 </section>
 <section id="Get-CCSs-that-align-to-the-amplicon">
-<h2>Get CCSs that align to the amplicon<a class="headerlink" href="#Get-CCSs-that-align-to-the-amplicon" title="Permalink to this headline">¶</a></h2>
+<h2>Get CCSs that align to the amplicon<a class="headerlink" href="#Get-CCSs-that-align-to-the-amplicon" title="Permalink to this heading">¶</a></h2>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
 </pre></div>
@@ -785,7 +766,7 @@ Writing to results/process_ccs/CCSs_aligned_to_amplicon.csv
       &copy;Bernadeta Dadonaite and Jesse Bloom (2022).
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.3.2</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 6.1.3</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.13</a>
       
       |
