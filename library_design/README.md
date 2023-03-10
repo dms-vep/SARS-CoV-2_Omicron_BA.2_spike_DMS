@@ -15,8 +15,7 @@ The file [results/aggregated_mutations.csv](results/aggregated_mutations.csv) in
 ## Scripts
 - [scripts](./scripts) subdirectory contains scripts for generating data. Scripts work as follows:
   - `spike_positive_selection_sites.py` script uses SARS-CoV-2 spike protein selection data (as described in [this](https://www.medrxiv.org/content/10.1101/2021.06.21.21259286v1.full) paper) to filter for positions in spike that are undergoing positive selection. 
-  - `filter_and_align_gisaid.py` uses `GISAID_data/spikeprot0724.fasta` sequences to align all SARS-CoV-2 spike sequences deposited in GISAID as of July-26-2021 
-  - `spike_alignment_counts.py`  extracts all mutations in GISAID spike alignments relative too Wuhan-1 sequence.
+  - `spike_alignment_counts.py`  extracts all mutations in GISAID spike alignments relative too Wuhan-1 sequence using data from [CoVsurver](https://mendel.bii.a-star.edu.sg/METHODS/corona/current/MUTATIONS/hCoV-19_Human_2019_WuhanWIV04/hcov19_Spike_mutations_table.html).
   - `spike_mutcounts.py` counts the number of independently reoccurring mutations on SARS-CoV-2 phylogenetic tree available from [UShER](https://github.com/yatisht/usher).
   - `2021Jan_create_primers.py` and `create_primers_del.py` are scripts that create random or specific amino acid change primers, respectively. 
 
