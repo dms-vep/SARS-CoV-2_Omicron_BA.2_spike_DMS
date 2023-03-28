@@ -52,6 +52,9 @@ prob_escape_min_neut_standard_frac: 0.0001
 # counts and this fraction of total counts in no-antibody sample:
 prob_escape_min_no_antibody_counts: 20
 prob_escape_min_no_antibody_frac: 0.000001  # make smaller for large libraries, say 0.1 / (library size)
+prob_escape_min_antibody_counts: 100
+prob_escape_min_antibody_frac: 0.0001 # make smaller for large libraries, say 2 / (library size)
+prob_escape_uncensored_max: 5  # if not set, default to 5
 # when averaging antibody escape values, take the "median" or "mean"?
 escape_avg_method: median
 
@@ -68,7 +71,7 @@ muteffects_avg_method: median
 # keyword arguments to `polyclonal.plot.lineplot_and_heatmap` for plotting functional effects
 muteffects_plot_kwargs:
   addtl_slider_stats:
-    times_seen: 3
+    times_seen: 6
   heatmap_max_at_least: 1
   heatmap_min_at_least: -1
   init_floor_at_zero: False
