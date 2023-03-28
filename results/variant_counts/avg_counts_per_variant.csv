@@ -25,7 +25,7 @@ Lib-1,2022-11-03_thaw-3_antibody_405C_0.002148_1,65.2,20,True,no
 Lib-1,2022-11-03_thaw-3_antibody_405C_0.006444_1,53.5,20,True,no
 Lib-1,2022-11-03_thaw-3_antibody_405C_0.019332_1,55.2,20,True,no
 Lib-1,2022-11-03_thaw-3_no-antibody_control_1,63.6,20,True,no
-Lib-1,2023-01-05_thaw-4_antibody_360C_0.026952_1,63.7,20,True,no
+Lib-1,2023-01-05_thaw-4_antibody_360C_0.026952_1,63.7,20,True,yes
 Lib-1,2023-01-05_thaw-4_antibody_360C_0.053904_1,66.9,20,True,no
 Lib-1,2023-01-05_thaw-4_antibody_360C_0.107808_1,66.1,20,True,no
 Lib-1,2023-01-05_thaw-4_antibody_361C_0.037272_1,99.1,20,True,no
@@ -72,7 +72,7 @@ Lib-2,2022-11-03_thaw-3_antibody_407C_0.018181818_1,79.0,20,True,no
 Lib-2,2022-11-03_thaw-3_antibody_407C_0.036363636_1,46.4,20,True,no
 Lib-2,2022-11-03_thaw-3_antibody_407C_0.069090909_1,51.6,20,True,no
 Lib-2,2022-11-03_thaw-3_no-antibody_control_1,72.2,20,True,no
-Lib-2,2023-01-14_thaw-4_antibody_360C_0.026952_1,108.0,20,True,no
+Lib-2,2023-01-14_thaw-4_antibody_360C_0.026952_1,108.0,20,True,yes
 Lib-2,2023-01-14_thaw-4_antibody_360C_0.053904_1,147.5,20,True,no
 Lib-2,2023-01-14_thaw-4_antibody_360C_0.107808_1,156.8,20,True,no
 Lib-2,2023-01-14_thaw-4_antibody_361C_0.037272_1,154.0,20,True,no
