@@ -30,7 +30,6 @@ results/antibody_selections/*
 !results/antibody_selections/antibody_selection_groups.csv
 !results/prob_escape
 results/prob_escape/*
-!results/prob_escape/*.csv
 !results/site_numbering
 results/site_numbering/*
 !results/site_numbering/site_numbering_map.csv
