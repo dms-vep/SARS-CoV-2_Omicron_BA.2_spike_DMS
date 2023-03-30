@@ -49,7 +49,7 @@ date,virus_batch,library,sample_type,antibody,antibody_concentration,replicate,f
 2022-11-03,thaw-3,Lib-1,no-antibody_control,,,1,/fh/fast/bloom_j/SR/ngs/illumina/bdadonai/221104_VH00319_292_AACCLVWM5/Unaligned/Project_bdadonai/no_mAb_A_thaw3_S11_R1_001.fastq.gz,,
 2022-11-03,thaw-3,Lib-2,no-antibody_control,,,1,/fh/fast/bloom_j/SR/ngs/illumina/bdadonai/221104_VH00319_292_AACCLVWM5/Unaligned/Project_bdadonai/no_mAb_B_thaw3_S1_R1_001.fastq.gz,,
 2023-01-05,thaw-4,Lib-1,no-antibody_control,,,1,/fh/fast/bloom_j/SR/ngs/illumina/bdadonai/230104_VH00699_243_AACH7CGM5/Unaligned/Project_bdadonai/BA2_libA_noAB_S1_R1_001.fastq.gz,,
-2023-01-05,thaw-4,Lib-1,antibody,360C,0.026952,1,/fh/fast/bloom_j/SR/ngs/illumina/bdadonai/230104_VH00699_243_AACH7CGM5/Unaligned/Project_bdadonai/BA2_libA_360C_1_S2_R1_001.fastq.gz,yes,excluding because no selection
+2023-01-05,thaw-4,Lib-1,antibody,360C,0.026952,1,/fh/fast/bloom_j/SR/ngs/illumina/bdadonai/230104_VH00699_243_AACH7CGM5/Unaligned/Project_bdadonai/BA2_libA_360C_1_S2_R1_001.fastq.gz,,
 2023-01-05,thaw-4,Lib-1,antibody,360C,0.053904,1,/fh/fast/bloom_j/SR/ngs/illumina/bdadonai/230104_VH00699_243_AACH7CGM5/Unaligned/Project_bdadonai/BA2_libA_360C_2_S3_R1_001.fastq.gz,,
 2023-01-05,thaw-4,Lib-1,antibody,360C,0.107808,1,/fh/fast/bloom_j/SR/ngs/illumina/bdadonai/230104_VH00699_243_AACH7CGM5/Unaligned/Project_bdadonai/BA2_libA_360C_3_S4_R1_001.fastq.gz,,
 2023-01-05,thaw-4,Lib-1,antibody,361C,0.037272,1,/fh/fast/bloom_j/SR/ngs/illumina/bdadonai/230104_VH00699_243_AACH7CGM5/Unaligned/Project_bdadonai/BA2_libA_361C_1_S5_R1_001.fastq.gz,,
@@ -65,7 +65,7 @@ date,virus_batch,library,sample_type,antibody,antibody_concentration,replicate,f
 2023-01-05,thaw-4,Lib-1,antibody,400C,0.085032,1,/fh/fast/bloom_j/SR/ngs/illumina/bdadonai/230104_VH00699_243_AACH7CGM5/Unaligned/Project_bdadonai/BA2_libA_400C_2_S15_R1_001.fastq.gz,,
 2023-01-05,thaw-4,Lib-1,antibody,400C,0.170064,1,/fh/fast/bloom_j/SR/ngs/illumina/bdadonai/230104_VH00699_243_AACH7CGM5/Unaligned/Project_bdadonai/BA2_libA_400C_3_S16_R1_001.fastq.gz,,
 2023-01-14,thaw-4,Lib-2,no-antibody_control,,,1,/fh/fast/bloom_j/SR/ngs/illumina/bdadonai/230113_VH00699_249_AAAWKNFHV/Unaligned/Project_bdadonai/BA2_1_S9_R1_001.fastq.gz,,
-2023-01-14,thaw-4,Lib-2,antibody,360C,0.026952,1,/fh/fast/bloom_j/SR/ngs/illumina/bdadonai/230113_VH00699_249_AAAWKNFHV/Unaligned/Project_bdadonai/BA2_2_S10_R1_001.fastq.gz,yes,excluding because no selection
+2023-01-14,thaw-4,Lib-2,antibody,360C,0.026952,1,/fh/fast/bloom_j/SR/ngs/illumina/bdadonai/230113_VH00699_249_AAAWKNFHV/Unaligned/Project_bdadonai/BA2_2_S10_R1_001.fastq.gz,,
 2023-01-14,thaw-4,Lib-2,antibody,360C,0.053904,1,/fh/fast/bloom_j/SR/ngs/illumina/bdadonai/230113_VH00699_249_AAAWKNFHV/Unaligned/Project_bdadonai/BA2_3_S11_R1_001.fastq.gz,,
 2023-01-14,thaw-4,Lib-2,antibody,360C,0.107808,1,/fh/fast/bloom_j/SR/ngs/illumina/bdadonai/230113_VH00699_249_AAAWKNFHV/Unaligned/Project_bdadonai/BA2_4_S12_R1_001.fastq.gz,,
 2023-01-14,thaw-4,Lib-2,antibody,361C,0.037272,1,/fh/fast/bloom_j/SR/ngs/illumina/bdadonai/230113_VH00699_249_AAAWKNFHV/Unaligned/Project_bdadonai/BA2_5_S13_R1_001.fastq.gz,,
