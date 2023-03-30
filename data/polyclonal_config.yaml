@@ -5,7 +5,7 @@ overall_default: &overall_default
   min_epitope_activity_to_include: 0.2
   plot_kwargs:
     addtl_slider_stats:
-      times_seen: 3
+      times_seen: 6
       functional effect: -1.25
     slider_binding_range_kwargs:
       n_models:
@@ -27,6 +27,7 @@ mAb_default: &mAb_default
     reg_escape_weight: 0.1
     reg_spread_weight: 0.25
     reg_activity_weight: 1.0
+    reg_spatial2_weight: 0.000001
 
 # default configuration of polyclonal sera
 sera_default: &sera_default
@@ -36,6 +37,7 @@ sera_default: &sera_default
     reg_escape_weight: 0.1
     reg_spread_weight: 0.25
     reg_activity_weight: 1.0
+  
 
 # define configuration for specific monoclonal antibodies, merging above defaults
 COV3560:
