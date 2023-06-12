@@ -6,14 +6,6 @@ For the actual code, see https://github.com/dms-vep/SARS-CoV-2_Omicron_BA.2_spik
 
 Study by Bernadeta Dadonaite and Jesse Bloom.
 
-Workflow
---------
-Below is the rulegraph for the `snakemake <https://snakemake.readthedocs.io/>`_ workflow.
-Click :download:`here <../../results/docs_source/filegraph.svg>` for the more detailed filegraph.
-
-.. image:: ../../results/docs_source/rulegraph.svg
-   :width: 800
-
 Analysis notebooks
 ------------------
 Many of the plots in these notebooks are interactive, so try mousing over points for
@@ -29,9 +21,6 @@ details, using dropdowns, etc.
    fit_globalepistasis
    avg_muteffects
    analyze_variant_counts
-   analyze_prob_escape
-   fit_polyclonal
-   avg_antibody_escape
 
 Data files
 ----------
@@ -45,31 +34,10 @@ Data files
 - `mutation effects for each functional selection <https://github.com/dms-vep/SARS-CoV-2_Omicron_BA.2_spike_DMS/blob/main/./results/globalepistasis_fits>`_
 - `mutation functional effects replicate average (observed phenotype) <https://github.com/dms-vep/SARS-CoV-2_Omicron_BA.2_spike_DMS/blob/main/./results/muteffects_functional/muteffects_observed.csv>`_
 - `mutation functional effects replicate average (latent phenotype) <https://github.com/dms-vep/SARS-CoV-2_Omicron_BA.2_spike_DMS/blob/main/./results/muteffects_functional/muteffects_latent.csv>`_
-- `antibody selection experiments <https://github.com/dms-vep/SARS-CoV-2_Omicron_BA.2_spike_DMS/blob/main/./results/prob_escape/antibody_selections.csv>`_
-- `antibody escape values <https://github.com/dms-vep/SARS-CoV-2_Omicron_BA.2_spike_DMS/blob/main/./results/antibody_escape>`_
 - `sequential to reference site numbering <https://github.com/dms-vep/SARS-CoV-2_Omicron_BA.2_spike_DMS/blob/main/./results/site_numbering/site_numbering_map.csv>`_
 
 Interactive plots of mutation functional effects
 ------------------------------------------------
 - `Observed phenotype effects <muteffects_observed_heatmap.html>`_
 - `Latent phenotype effects <muteffects_latent_heatmap.html>`_
-
-Interactive plots of mutation antibody escape
----------------------------------------------
-- `360C escape plot <360C_escape_plot.html>`_
-- `361C escape plot <361C_escape_plot.html>`_
-- `362C escape plot <362C_escape_plot.html>`_
-- `364C escape plot <364C_escape_plot.html>`_
-- `379C escape plot <379C_escape_plot.html>`_
-- `394C escape plot <394C_escape_plot.html>`_
-- `400C escape plot <400C_escape_plot.html>`_
-- `405C escape plot <405C_escape_plot.html>`_
-- `407C escape plot <407C_escape_plot.html>`_
-- `C68.215 escape plot <C68.215_escape_plot.html>`_
-- `COV3560 escape plot <COV3560_escape_plot.html>`_
-- `COV3561 escape plot <COV3561_escape_plot.html>`_
-- `COV3566 escape plot <COV3566_escape_plot.html>`_
-- `COV3600 escape plot <COV3600_escape_plot.html>`_
-- `COV3619 escape plot <COV3619_escape_plot.html>`_
-- `COV3731 escape plot <COV3731_escape_plot.html>`_
 

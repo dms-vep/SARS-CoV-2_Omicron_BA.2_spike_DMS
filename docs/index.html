@@ -36,12 +36,6 @@
 <p>This page documents the data analysis.
 For the actual code, see <a class="reference external" href="https://github.com/dms-vep/SARS-CoV-2_Omicron_BA.2_spike_DMS">https://github.com/dms-vep/SARS-CoV-2_Omicron_BA.2_spike_DMS</a></p>
 <p>Study by Bernadeta Dadonaite and Jesse Bloom.</p>
-<section id="workflow">
-<h2>Workflow<a class="headerlink" href="#workflow" title="Permalink to this heading">¶</a></h2>
-<p>Below is the rulegraph for the <a class="reference external" href="https://snakemake.readthedocs.io/">snakemake</a> workflow.
-Click <a class="reference download internal" download="" href="_downloads/6cbfe888b02d630f814435fced571fc6/filegraph.svg"><code class="xref download docutils literal notranslate"><span class="pre">here</span></code></a> for the more detailed filegraph.</p>
-<a class="reference internal image-reference" href="_images/rulegraph.svg"><img alt="_images/rulegraph.svg" src="_images/rulegraph.svg" width="800" /></a>
-</section>
 <section id="analysis-notebooks">
 <h2>Analysis notebooks<a class="headerlink" href="#analysis-notebooks" title="Permalink to this heading">¶</a></h2>
 <p>Many of the plots in these notebooks are interactive, so try mousing over points for
@@ -55,9 +49,6 @@ details, using dropdowns, etc.</p>
 <li class="toctree-l1"><a class="reference internal" href="fit_globalepistasis.html">Fit global epistasis models</a></li>
 <li class="toctree-l1"><a class="reference internal" href="avg_muteffects.html">Functional effects of mutations across replicates</a></li>
 <li class="toctree-l1"><a class="reference internal" href="analyze_variant_counts.html">Counts of variants</a></li>
-<li class="toctree-l1"><a class="reference internal" href="analyze_prob_escape.html">Probabilities of escape and neutralization in antibody selections</a></li>
-<li class="toctree-l1"><a class="reference internal" href="fit_polyclonal.html">Fit <code class="docutils literal notranslate"><span class="pre">polyclonal</span></code> models</a></li>
-<li class="toctree-l1"><a class="reference internal" href="avg_antibody_escape.html">Antibody-escape averaged across replicates</a></li>
 </ul>
 </div>
 </section>
@@ -74,8 +65,6 @@ details, using dropdowns, etc.</p>
 <li><p><a class="reference external" href="https://github.com/dms-vep/SARS-CoV-2_Omicron_BA.2_spike_DMS/blob/main/./results/globalepistasis_fits">mutation effects for each functional selection</a></p></li>
 <li><p><a class="reference external" href="https://github.com/dms-vep/SARS-CoV-2_Omicron_BA.2_spike_DMS/blob/main/./results/muteffects_functional/muteffects_observed.csv">mutation functional effects replicate average (observed phenotype)</a></p></li>
 <li><p><a class="reference external" href="https://github.com/dms-vep/SARS-CoV-2_Omicron_BA.2_spike_DMS/blob/main/./results/muteffects_functional/muteffects_latent.csv">mutation functional effects replicate average (latent phenotype)</a></p></li>
-<li><p><a class="reference external" href="https://github.com/dms-vep/SARS-CoV-2_Omicron_BA.2_spike_DMS/blob/main/./results/prob_escape/antibody_selections.csv">antibody selection experiments</a></p></li>
-<li><p><a class="reference external" href="https://github.com/dms-vep/SARS-CoV-2_Omicron_BA.2_spike_DMS/blob/main/./results/antibody_escape">antibody escape values</a></p></li>
 <li><p><a class="reference external" href="https://github.com/dms-vep/SARS-CoV-2_Omicron_BA.2_spike_DMS/blob/main/./results/site_numbering/site_numbering_map.csv">sequential to reference site numbering</a></p></li>
 </ul>
 </section>
@@ -84,27 +73,6 @@ details, using dropdowns, etc.</p>
 <ul class="simple">
 <li><p><a class="reference external" href="muteffects_observed_heatmap.html">Observed phenotype effects</a></p></li>
 <li><p><a class="reference external" href="muteffects_latent_heatmap.html">Latent phenotype effects</a></p></li>
-</ul>
-</section>
-<section id="interactive-plots-of-mutation-antibody-escape">
-<h2>Interactive plots of mutation antibody escape<a class="headerlink" href="#interactive-plots-of-mutation-antibody-escape" title="Permalink to this heading">¶</a></h2>
-<ul class="simple">
-<li><p><a class="reference external" href="360C_escape_plot.html">360C escape plot</a></p></li>
-<li><p><a class="reference external" href="361C_escape_plot.html">361C escape plot</a></p></li>
-<li><p><a class="reference external" href="362C_escape_plot.html">362C escape plot</a></p></li>
-<li><p><a class="reference external" href="364C_escape_plot.html">364C escape plot</a></p></li>
-<li><p><a class="reference external" href="379C_escape_plot.html">379C escape plot</a></p></li>
-<li><p><a class="reference external" href="394C_escape_plot.html">394C escape plot</a></p></li>
-<li><p><a class="reference external" href="400C_escape_plot.html">400C escape plot</a></p></li>
-<li><p><a class="reference external" href="405C_escape_plot.html">405C escape plot</a></p></li>
-<li><p><a class="reference external" href="407C_escape_plot.html">407C escape plot</a></p></li>
-<li><p><a class="reference external" href="C68.215_escape_plot.html">C68.215 escape plot</a></p></li>
-<li><p><a class="reference external" href="COV3560_escape_plot.html">COV3560 escape plot</a></p></li>
-<li><p><a class="reference external" href="COV3561_escape_plot.html">COV3561 escape plot</a></p></li>
-<li><p><a class="reference external" href="COV3566_escape_plot.html">COV3566 escape plot</a></p></li>
-<li><p><a class="reference external" href="COV3600_escape_plot.html">COV3600 escape plot</a></p></li>
-<li><p><a class="reference external" href="COV3619_escape_plot.html">COV3619 escape plot</a></p></li>
-<li><p><a class="reference external" href="COV3731_escape_plot.html">COV3731 escape plot</a></p></li>
 </ul>
 </section>
 </section>
