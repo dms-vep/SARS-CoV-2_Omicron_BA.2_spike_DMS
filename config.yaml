@@ -17,7 +17,7 @@ github_user: dms-vep
 github_branch: main  # main branch for repo, assume renamed from master -> main
 description: Deep mutational scanning of SARS-CoV-2 Omicron BA.2 spike using a barcoded lentiviral platform
 year: 2022
-authors: Bernadeta Dadonaite and Jesse Bloom
+authors: Bernadeta Dadonaite and Jesse Bloom (see [Haddox et al, 2023](https://doi.org/10.1101/2023.07.31.551037) for citation)
 
 # ----------------------------------------------------------------------------
 # Parameters for analysis

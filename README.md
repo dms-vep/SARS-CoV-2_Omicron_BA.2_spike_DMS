@@ -1,5 +1,6 @@
 # Deep mutational scanning of SARS-CoV-2 Omicron BA.2 spike using a barcoded lentiviral platform
 Study by Bernadeta Dadonaite and Jesse Bloom.
+See [Haddox et al (2023)](https://doi.org/10.1101/2023.07.31.551037) for citation.
 
 For documentation of the analysis, see [https://dms-vep.github.io/SARS-CoV-2_Omicron_BA.2_spike_DMS/](https://dms-vep.github.io/SARS-CoV-2_Omicron_BA.2_spike_DMS/).
 
